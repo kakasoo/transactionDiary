@@ -5,7 +5,6 @@ import { join } from 'path';
 
 declare const module: any;
 
-console.log('here : ', __dirname);
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
 
