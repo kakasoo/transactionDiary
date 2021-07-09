@@ -5,6 +5,9 @@
 # Ddatabase
 output
 
+# configuartion
+.env
+
 # Logs
 logs
 *.log
