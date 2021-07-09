@@ -4,6 +4,7 @@
 
 # Ddatabase
 output
+ormconfig.json
 
 # configuartion
 .env
