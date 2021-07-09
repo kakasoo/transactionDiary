@@ -5,4 +5,5 @@ export class CreateGroupDto extends PickType(Groups, [
   'name',
   'password',
   'visible',
+  'groupPic',
 ] as const) {}

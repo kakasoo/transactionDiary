@@ -1,4 +1,9 @@
-import { PartialType } from '@nestjs/mapped-types';
-import { CreateGroupDto } from './create-group.dto';
+import { PickType } from '@nestjs/swagger';
+import { Groups } from '../entities/group.entity';
 
-export class UpdateGroupDto extends PartialType(CreateGroupDto) {}
+export class UpdateGroupDto extends PickType(Groups, [
+  'name',
+  'password',
+  'visible',
+  'groupPic',
+] as const) {}
