@@ -18,7 +18,7 @@ export class GroupController {
   constructor(private readonly groupService: GroupService) {}
 
   @ApiBody({
-    type: [CreateGroupDto],
+    type: CreateGroupDto,
   })
   @Post()
   create(@Body() createGroupDto: CreateGroupDto) {
