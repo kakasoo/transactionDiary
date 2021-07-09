@@ -2,6 +2,7 @@ import { NestFactory } from '@nestjs/core';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { AppModule } from './app.module';
 import { join } from 'path';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 declare const module: any;
 
@@ -11,6 +12,15 @@ async function bootstrap() {
   app.useStaticAssets(join(__dirname, '..', 'src', 'client'));
   app.setBaseViewsDir(join(__dirname, '..', 'src', 'views'));
   app.setViewEngine('hbs');
+
+  const config = new DocumentBuilder()
+    .setTitle('transaction-diary API')
+    .setDescription('How to use transaction-diary API?')
+    .setVersion('1.0')
+    .addTag('교환일기')
+    .build();
+  const document = SwaggerModule.createDocument(app, config);
+  SwaggerModule.setup('api', app, document);
 
   await app.listen(3000);
 
