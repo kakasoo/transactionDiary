@@ -2,6 +2,9 @@
 /dist
 /node_modules
 
+# Ddatabase
+output
+
 # Logs
 logs
 *.log
