@@ -12,12 +12,19 @@ export class GroupService {
   ) {}
 
   async create(createGroupDto: CreateGroupDto) {
+    // const group = await this.userRepository.findOne({ where: { id } });
+    // if (!group) {
+    //   throw new Error('이미 존재하는 그룹입니다.');
+    // }
+
     // NOTE : 그룹의 비밀번호가 유저의 비밀번호와 유사할 경우를 대비하여 hash한다.
     // hashedPassword = await bcrypt.hash(password, 12);
     // this.userRepository.save({
     //   name,
     //   password,
     // })
+
+    return '유저 생성 성공.';
   }
 
   async findAll() {
@@ -27,10 +34,6 @@ export class GroupService {
 
   async findOne(id: number) {
     const group = await this.userRepository.findOne({ where: { id } });
-    if (!group) {
-      // TODO : 이미 존재하는 유저라고 Error를 뱉는다.
-      return;
-    }
     return group;
   }
 
