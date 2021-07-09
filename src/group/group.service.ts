@@ -4,6 +4,7 @@ import { Repository } from 'typeorm';
 import { CreateGroupDto } from './dto/create-group.dto';
 import { UpdateGroupDto } from './dto/update-group.dto';
 import { Groups } from './entities/group.entity';
+import bcrypt from 'bcrypt';
 
 @Injectable()
 export class GroupService {
@@ -12,19 +13,18 @@ export class GroupService {
   ) {}
 
   async create(createGroupDto: CreateGroupDto) {
-    // const group = await this.userRepository.findOne({ where: { id } });
-    // if (!group) {
-    //   throw new Error('이미 존재하는 그룹입니다.');
-    // }
+    const { name, password, groupPic, visible } = createGroupDto;
 
     // NOTE : 그룹의 비밀번호가 유저의 비밀번호와 유사할 경우를 대비하여 hash한다.
-    // hashedPassword = await bcrypt.hash(password, 12);
-    // this.userRepository.save({
-    //   name,
-    //   password,
-    // })
+    const hashedPassword = await bcrypt.hash(password, 12);
+    const createdUser = await this.userRepository.save({
+      name,
+      password: hashedPassword,
+      groupPic,
+      visible,
+    });
 
-    return '유저 생성 성공.';
+    return createdUser;
   }
 
   async findAll() {

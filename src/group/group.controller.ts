@@ -10,11 +10,16 @@ import {
 import { GroupService } from './group.service';
 import { CreateGroupDto } from './dto/create-group.dto';
 import { UpdateGroupDto } from './dto/update-group.dto';
+import { ApiBody, ApiTags } from '@nestjs/swagger';
 
+@ApiTags('GROUPS')
 @Controller('api/groups')
 export class GroupController {
   constructor(private readonly groupService: GroupService) {}
 
+  @ApiBody({
+    type: [CreateGroupDto],
+  })
   @Post()
   create(@Body() createGroupDto: CreateGroupDto) {
     return this.groupService.create(createGroupDto);
