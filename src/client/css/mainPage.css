@@ -1,0 +1,67 @@
+body {
+  margin: 0px 0px 0px 0px;
+}
+
+#banner {
+}
+
+#bannerTopMargin {
+  min-height: 50px;
+  align-items: center;
+}
+
+#defaultButtons {
+  float: right;
+  margin-top: 15px;
+  margin-right: 100px;
+}
+
+#bannerImgFrame {
+  margin: 0px 0px 0px 0px;
+}
+
+#bannerImg {
+  width: 100%;
+  height: 800px;
+  background: green;
+}
+
+#loginModal {
+  position: absolute;
+  top: calc(50% - 250px);
+  left: calc(50% - 250px);
+
+  border: 1px solid black;
+  background-color: white;
+
+  width: 500px;
+  height: 500px;
+  border-radius: 30px;
+}
+
+#innerLoginModal {
+  margin: 20px 20px 20px 20px;
+}
+
+#loginModalHead {
+  font-size: xx-large;
+  text-shadow: black 1px 1px 1px;
+}
+
+.loginModalLabel {
+  display: inline-block;
+  width: 100px;
+}
+
+.loginInput {
+  width: calc(100% - 106px);
+  height: 30px;
+  margin: 5px 0px 15px 0px;
+}
+
+.loginSubmitButton {
+  height: 30px;
+  width: 100%;
+
+  margin: 10px 0px 10px 0px;
+}

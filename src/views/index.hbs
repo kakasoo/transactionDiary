@@ -1,9 +1,54 @@
-<html>
+<html lang='ko'>
   <head>
     <meta charset='utf-8' />
-    <title>App</title>
+    <title>함께 만드는 교환 일기</title>
+    <link href='/css/mainPage.css' rel='stylesheet' />
   </head>
   <body>
-    {{message}}
+    <header id='banner'>
+      <div id='bannerTopMargin'>
+        <div id='defaultButtons'>
+          <button id='loginButton'>Login</button>
+        </div>
+      </div>
+      <figure id='bannerImgFrame'>
+        {{! <img src='' alt='banner image' /> }}
+        <div id='bannerImg'></div>
+      </figure>
+    </header>
+    {{!-- {{message}} --}}
+
+    <div id='loginModal'>
+      <div id='innerLoginModal'>
+        <h2 id='loginModalHead'>Login</h2>
+        {{! TODO : login URL 경로를 변경할 것. }}
+        <form action='/api/users'>
+          <div id='adress'>
+            <label class='loginModalLabel' for='adress'>adress</label>
+            <input
+              id='inputOfAdress'
+              class='loginInput'
+              type='email'
+              name='adress'
+              placeholder='이메일을 입력해주세요'
+            />
+          </div>
+          <div>
+            <label class='loginModalLabel' for='password'>password</label>
+            <input
+              id='inputOfPassword'
+              class='loginInput'
+              type='password'
+              name='password'
+              placeholder='패스워드를 입력해주세요'
+            />
+          </div>
+          <button class='loginSubmitButton' type='submit'>login</button>
+        </form>
+        <button class='naver loginSubmitButton' onclick=''>naver</button>
+        <button class='gmail loginSubmitButton' onclick=''>gmail</button>
+        <button class='github loginSubmitButton' onclick=''>github</button>
+      </div>
+    </div>
   </body>
 </html>
