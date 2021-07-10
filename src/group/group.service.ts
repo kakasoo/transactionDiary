@@ -37,11 +37,20 @@ export class GroupService {
     return group;
   }
 
-  update(id: number, updateGroupDto: UpdateGroupDto) {
-    return `This action updates a #${id} group`;
+  async update(id: number, updateGroupDto: UpdateGroupDto) {
+    if (updateGroupDto.password) {
+      updateGroupDto.password = await bcrypt.hash(updateGroupDto.password, 12);
+    }
+    const updatedGroup = this.userRepository.update(id, updateGroupDto);
+    return updatedGroup;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} group`;
+  async remove(id: number) {
+    const groupToRemove = await this.userRepository.findOne({ where: { id } });
+    if (groupToRemove) {
+      const softDeleted = await this.userRepository.softRemove(groupToRemove);
+      return softDeleted;
+    }
+    return null;
   }
 }

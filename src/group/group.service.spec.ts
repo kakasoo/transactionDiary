@@ -29,11 +29,11 @@ describe('GroupService', () => {
     service = module.get<GroupService>(GroupService);
   });
 
-  it('그룹 서비스가 정의되어 있습니다.', () => {
+  it('서비스가 정의되어 있습니다.', () => {
     expect(service).toBeDefined();
   });
 
-  it('그룹이 추가되었습니다.', async () => {
+  it('단일 그룹이 추가되었습니다.', async () => {
     const groupData: CreateGroupDto = {
       name: 'kakasoo',
       password: 'password',
@@ -52,7 +52,8 @@ describe('GroupService', () => {
     expect(bcrypt.compare(groupData.password, password)).resolves.toBe(true);
   });
 
-  it.todo('그룹이 조회되었습니다.');
-  it.todo('그룹이 수정되었습니다.');
-  it.todo('그룹이 삭제되었습니다.');
+  it.todo('전체 그룹이 조회되었습니다.');
+  it.todo('단일 그룹이 조회되었습니다.');
+  it.todo('그룹 정보가 수정되었습니다.');
+  it.todo('그룹 정보가 삭제되었습니다.');
 });
