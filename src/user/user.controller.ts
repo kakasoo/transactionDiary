@@ -11,6 +11,7 @@ import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { ApiTags } from '@nestjs/swagger';
+import { LoginUserDto } from './dto/login-user.dto';
 
 @ApiTags('USERS')
 @Controller('api/users')
@@ -23,7 +24,7 @@ export class UserController {
   }
 
   @Post()
-  signIn(@Body() loginUserDto: { adress: string; password: string }) {
+  signIn(@Body() loginUserDto: LoginUserDto) {
     return this.userService.signIn(loginUserDto);
   }
 

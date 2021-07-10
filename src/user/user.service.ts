@@ -5,6 +5,7 @@ import { Repository } from 'typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import * as bcrypt from 'bcrypt';
+import { LoginUserDto } from './dto/login-user.dto';
 
 @Injectable()
 export class UserService {
@@ -24,8 +25,22 @@ export class UserService {
     });
   }
 
-  async signIn(loginUserDto: { adress: string; password: string }) {
-    return 'OK';
+  async signIn(loginUserDto: LoginUserDto) {
+    const { adress, password } = loginUserDto;
+    const user = await this.userRepository.findOne({
+      where: { adress },
+    });
+
+    if (!user) {
+      throw new Error('adress에 해당하는 user가 없습니다.');
+    }
+
+    const isRightPassword = await bcrypt.compare(password, user.password);
+    if (!isRightPassword) {
+      throw new Error('password가 일치하지 않습니다.');
+    }
+
+    return user;
   }
 
   async findAll() {
@@ -34,7 +49,7 @@ export class UserService {
   }
 
   async findOne(id: number) {
-    const users = await this.userRepository.find({
+    const users = await this.userRepository.findOne({
       where: { id },
     });
     return users;
