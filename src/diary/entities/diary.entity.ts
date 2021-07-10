@@ -20,6 +20,11 @@ export class Dairies {
   @PrimaryGeneratedColumn({ type: 'int', name: 'ID' })
   id: number;
 
+  @ApiProperty({
+    name: 'userId',
+    description: '작성자',
+    example: '1',
+  })
   @Column('int', { name: 'USER_ID' })
   userId: number;
 

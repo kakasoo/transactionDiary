@@ -1,4 +1,9 @@
-import { PartialType } from '@nestjs/mapped-types';
-import { CreateDiaryDto } from './create-diary.dto';
+import { PickType } from '@nestjs/swagger';
+import { Dairies } from '../entities/diary.entity';
 
-export class UpdateDiaryDto extends PartialType(CreateDiaryDto) {}
+export class UpdateDiaryDto extends PickType(Dairies, [
+  'userId',
+  'title',
+  'content',
+  'hashtag',
+] as const) {}
