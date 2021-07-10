@@ -27,6 +27,19 @@ export class GroupService {
     return createdUser;
   }
 
+  async createMyselfGroup(createGroupDto: CreateGroupDto & { userId: number }) {
+    const { name, groupPic, visible, userId } = createGroupDto;
+    // NOTE : 유저 생성 시 내게 쓰기 그룹이 1개 생성됨.
+    const hashedPassword = await bcrypt.hash(String(userId), 12);
+
+    this.userRepository.save({
+      name,
+      groupPic,
+      visible,
+      password: hashedPassword,
+    });
+  }
+
   async findAll() {
     const groups = await this.userRepository.find();
     return groups;

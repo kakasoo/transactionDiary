@@ -25,6 +25,13 @@ export class GroupController {
     return this.groupService.create(createGroupDto);
   }
 
+  @Post()
+  createMyselfGroup(
+    @Body() CreateGroupDto: CreateGroupDto & { userId: number },
+  ) {
+    return this.groupService.createMyselfGroup(CreateGroupDto);
+  }
+
   @Get()
   findAll() {
     return this.groupService.findAll();
