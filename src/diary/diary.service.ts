@@ -32,7 +32,7 @@ export class DiaryService {
   }
 
   async remove(id: number) {
-    const deletedDiary = await this.diaryRepository.delete(id);
+    const deletedDiary = await this.diaryRepository.softDelete(id);
     return deletedDiary;
   }
 }

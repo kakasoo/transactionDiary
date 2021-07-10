@@ -62,11 +62,7 @@ export class GroupService {
   }
 
   async remove(id: number) {
-    const groupToRemove = await this.groupRepository.findOne({ where: { id } });
-    if (groupToRemove) {
-      const softDeleted = await this.groupRepository.softRemove(groupToRemove);
-      return softDeleted;
-    }
-    return null;
+    const softDeleted = await this.groupRepository.softDelete(id);
+    return softDeleted;
   }
 }
