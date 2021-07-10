@@ -55,8 +55,12 @@ export class UserService {
     return users;
   }
 
-  update(id: number, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`;
+  async update(id: number, updateUserDto: UpdateUserDto) {
+    if (updateUserDto.password) {
+      updateUserDto.password = await bcrypt.hash(updateUserDto.password, 12);
+    }
+    const updatedUser = this.userRepository.update(id, updateUserDto);
+    return updatedUser;
   }
 
   remove(id: number) {
