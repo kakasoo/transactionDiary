@@ -24,12 +24,20 @@ export class UserService {
     });
   }
 
-  findAll() {
-    return `This action returns all user`;
+  async signIn(loginUserDto: { adress: string; password: string }) {
+    return 'OK';
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} user`;
+  async findAll() {
+    const users = await this.userRepository.find();
+    return users;
+  }
+
+  async findOne(id: number) {
+    const users = await this.userRepository.find({
+      where: { id },
+    });
+    return users;
   }
 
   update(id: number, updateUserDto: UpdateUserDto) {

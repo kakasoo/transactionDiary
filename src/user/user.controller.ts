@@ -18,8 +18,13 @@ export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @Post()
-  create(@Body() createUserDto: CreateUserDto) {
+  signUp(@Body() createUserDto: CreateUserDto) {
     return this.userService.create(createUserDto);
+  }
+
+  @Post()
+  signIn(@Body() loginUserDto: { adress: string; password: string }) {
+    return this.userService.signIn(loginUserDto);
   }
 
   @Get()
