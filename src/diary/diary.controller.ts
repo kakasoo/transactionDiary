@@ -7,12 +7,13 @@ import {
   Param,
   Delete,
 } from '@nestjs/common';
-import { ApiParam, ApiProperty } from '@nestjs/swagger';
+import { ApiParam, ApiProperty, ApiTags } from '@nestjs/swagger';
 import { DiaryService } from './diary.service';
 import { CreateDiaryDto } from './dto/create-diary.dto';
 import { UpdateDiaryDto } from './dto/update-diary.dto';
 
-@Controller('diary')
+@ApiTags('DIARIES')
+@Controller('api/diary')
 export class DiaryController {
   constructor(private readonly diaryService: DiaryService) {}
 
