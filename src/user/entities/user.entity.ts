@@ -1,4 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { IsOptional, IsString, Length } from 'class-validator';
 import {
   Column,
   Entity,
@@ -18,6 +19,8 @@ export class Users {
   @PrimaryGeneratedColumn({ type: 'int', name: 'ID' })
   id: number;
 
+  @Length(0, 45)
+  @IsString()
   @ApiProperty({
     name: 'adress',
     description: '이메일 형식이 아니어도 되며, 공백을 제외한 모든 문자 허용',
@@ -26,6 +29,8 @@ export class Users {
   @Column('varchar', { name: 'ADRESS', unique: true, length: 45 })
   adress: string;
 
+  @Length(0, 45)
+  @IsString()
   @ApiProperty({
     name: 'password',
     description: '유저의 비밀번호',
@@ -34,6 +39,8 @@ export class Users {
   @Column('varchar', { name: 'PASSWORD', unique: true, length: 45 })
   password: string;
 
+  @Length(0, 45)
+  @IsString()
   @ApiProperty({
     name: 'nickname',
     description: '유저의 프로필에 띄울 이름, 닉네임을 지칭',
@@ -42,6 +49,8 @@ export class Users {
   @Column('varchar', { name: 'NICKNAME', length: 45 })
   nickname: string;
 
+  @IsOptional()
+  @IsString()
   @ApiProperty({
     name: 'userPic',
     description: '프로필 사진 경로를 저장',
