@@ -13,7 +13,7 @@ import { CreateDiaryDto } from './dto/create-diary.dto';
 import { UpdateDiaryDto } from './dto/update-diary.dto';
 
 @ApiTags('DIARIES')
-@Controller('api/diary')
+@Controller('api/diaries')
 export class DiaryController {
   constructor(private readonly diaryService: DiaryService) {}
 
