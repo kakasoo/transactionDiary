@@ -1,1 +1,78 @@
-export class User {}
+import { ApiProperty } from '@nestjs/swagger';
+import {
+  Column,
+  Entity,
+  Index,
+  JoinTable,
+  ManyToMany,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+import { Dairies } from '../../diary/entities/diary.entity';
+import { Groups } from '../../group/entities/group.entity';
+
+@Index('USER_ID_UNIQUE', ['adress'], { unique: true })
+@Index('PASSWORD_UNIQUE', ['password'], { unique: true })
+@Entity('USERS', { schema: 'mydb' })
+export class Users {
+  @PrimaryGeneratedColumn({ type: 'int', name: 'ID' })
+  id: number;
+
+  @ApiProperty({
+    name: 'adress',
+    description: '이메일 형식이 아니어도 되며, 공백을 제외한 모든 문자 허용',
+    example: 'kscodebase@gmail.com',
+  })
+  @Column('varchar', { name: 'ADRESS', unique: true, length: 45 })
+  adress: string;
+
+  @ApiProperty({
+    name: 'password',
+    description: '유저의 비밀번호',
+    example: '1234567890@',
+  })
+  @Column('varchar', { name: 'PASSWORD', unique: true, length: 45 })
+  password: string;
+
+  @ApiProperty({
+    name: 'nickname',
+    description: '유저의 프로필에 띄울 이름, 닉네임을 지칭',
+    example: 'kakasoo',
+  })
+  @Column('varchar', { name: 'NICKNAME', length: 45 })
+  nickname: string;
+
+  @ApiProperty({
+    name: 'userPic',
+    description: '프로필 사진 경로를 저장',
+  })
+  @Column('longtext', { name: 'USER_PIC', nullable: true })
+  userPic: string | null;
+
+  @Column('datetime', {
+    name: 'CREATED_AT',
+    default: () => 'CURRENT_TIMESTAMP',
+  })
+  createdAt: Date;
+
+  @Column('datetime', {
+    name: 'UPDATED_AT',
+    default: () => 'CURRENT_TIMESTAMP',
+  })
+  updatedAt: Date;
+
+  @Column('datetime', { name: 'DELETED_AT', nullable: true })
+  deletedAt: Date | null;
+
+  @OneToMany(() => Dairies, (dairies) => dairies.user)
+  dairies: Dairies[];
+
+  @ManyToMany(() => Groups, (groups) => groups.users)
+  @JoinTable({
+    name: 'USER_GROUPS',
+    joinColumns: [{ name: 'USERS_ID', referencedColumnName: 'id' }],
+    inverseJoinColumns: [{ name: 'GROUPS_ID', referencedColumnName: 'id' }],
+    schema: 'mydb',
+  })
+  groups: Groups[];
+}
