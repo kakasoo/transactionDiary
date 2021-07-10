@@ -26,8 +26,9 @@ export class DiaryService {
     return diary;
   }
 
-  update(id: number, updateDiaryDto: UpdateDiaryDto) {
-    return `This action updates a #${id} diary`;
+  async update(id: number, updateDiaryDto: UpdateDiaryDto) {
+    const updatedDiary = await this.diaryRepository.update(id, updateDiaryDto);
+    return updatedDiary;
   }
 
   remove(id: number) {
