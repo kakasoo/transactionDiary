@@ -11,13 +11,14 @@ export class DiaryService {
     @InjectRepository(Dairies) private diaryRepository: Repository<Dairies>,
   ) {}
 
-  create(createDiaryDto: CreateDiaryDto) {
-    const diary = this.diaryRepository.create(createDiaryDto);
+  async create(createDiaryDto: CreateDiaryDto) {
+    const diary = await this.diaryRepository.create(createDiaryDto);
     return diary;
   }
 
-  findAll() {
-    return `This action returns all diary`;
+  async findAll() {
+    const diaries = await this.diaryRepository.find();
+    return diaries;
   }
 
   findOne(id: number) {
