@@ -47,6 +47,9 @@ export class GroupService {
 
   async findOne(id: number) {
     const group = await this.groupRepository.findOne({ where: { id } });
+    if (!group) {
+      throw new Error('id에 해당하는 group이 없습니다.');
+    }
     return group;
   }
 
