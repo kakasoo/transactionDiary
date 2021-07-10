@@ -26,6 +26,7 @@ export class Dairies {
     name: 'userId',
     description: '작성자',
     example: '1',
+    required: true,
   })
   @Column('int', { name: 'USER_ID' })
   userId: number;
@@ -36,6 +37,7 @@ export class Dairies {
     name: 'title',
     description: '일기 제목',
     example: '오늘 내가 한 일',
+    required: true,
   })
   @Column('varchar', { name: 'TITLE', length: 45 })
   title: string;
@@ -46,6 +48,7 @@ export class Dairies {
     name: 'content',
     description: '일기 내용, 글자 수 제한 없음',
     example: '오늘 나는 밥을 먹었다.',
+    required: false,
   })
   @Column('longtext', { name: 'CONTENT', nullable: true })
   content: string | null;
@@ -56,6 +59,7 @@ export class Dairies {
     name: 'hashtag',
     description: '일기 해시 태그',
     example: '#내가 #오늘 한 일 #밥',
+    required: false,
   })
   @Column('longtext', { name: 'HASHTAG', nullable: true })
   hashtag: string | null;
