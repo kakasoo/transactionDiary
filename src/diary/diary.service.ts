@@ -31,7 +31,8 @@ export class DiaryService {
     return updatedDiary;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} diary`;
+  async remove(id: number) {
+    const deletedDiary = await this.diaryRepository.delete(id);
+    return deletedDiary;
   }
 }
