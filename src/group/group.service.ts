@@ -9,7 +9,7 @@ import * as bcrypt from 'bcrypt';
 @Injectable()
 export class GroupService {
   constructor(
-    @InjectRepository(Groups) private userRepository: Repository<Groups>,
+    @InjectRepository(Groups) private groupRepository: Repository<Groups>,
   ) {}
 
   async create(createGroupDto: CreateGroupDto) {
@@ -17,14 +17,14 @@ export class GroupService {
     // NOTE : 그룹의 비밀번호가 유저의 비밀번호와 유사할 경우를 대비하여 hash한다.
     const hashedPassword = await bcrypt.hash(password, 12);
 
-    const createdUser = await this.userRepository.save({
+    const createdGroup = await this.groupRepository.save({
       name,
       password: hashedPassword,
       groupPic,
       visible,
     });
 
-    return createdUser;
+    return createdGroup;
   }
 
   async createMyselfGroup(createGroupDto: CreateGroupDto & { userId: number }) {
@@ -32,7 +32,7 @@ export class GroupService {
     // NOTE : 유저 생성 시 내게 쓰기 그룹이 1개 생성됨.
     const hashedPassword = await bcrypt.hash(String(userId), 12);
 
-    this.userRepository.save({
+    this.groupRepository.save({
       name,
       groupPic,
       visible,
@@ -41,12 +41,12 @@ export class GroupService {
   }
 
   async findAll() {
-    const groups = await this.userRepository.find();
+    const groups = await this.groupRepository.find();
     return groups;
   }
 
   async findOne(id: number) {
-    const group = await this.userRepository.findOne({ where: { id } });
+    const group = await this.groupRepository.findOne({ where: { id } });
     return group;
   }
 
@@ -54,14 +54,14 @@ export class GroupService {
     if (updateGroupDto.password) {
       updateGroupDto.password = await bcrypt.hash(updateGroupDto.password, 12);
     }
-    const updatedGroup = this.userRepository.update(id, updateGroupDto);
+    const updatedGroup = this.groupRepository.update(id, updateGroupDto);
     return updatedGroup;
   }
 
   async remove(id: number) {
-    const groupToRemove = await this.userRepository.findOne({ where: { id } });
+    const groupToRemove = await this.groupRepository.findOne({ where: { id } });
     if (groupToRemove) {
-      const softDeleted = await this.userRepository.softRemove(groupToRemove);
+      const softDeleted = await this.groupRepository.softRemove(groupToRemove);
       return softDeleted;
     }
     return null;
