@@ -13,6 +13,7 @@ import { Users } from '../../user/entities/user.entity';
 import { Comments } from '../../comment/entities/comment.entity';
 import { Groups } from '../../group/entities/group.entity';
 import { ApiProperty } from '@nestjs/swagger';
+import { IsInt, IsOptional, IsString, Length } from 'class-validator';
 
 @Index('fk_diaries_users_idx', ['userId'], {})
 @Entity('DAIRIES', { schema: 'mydb' })
@@ -20,6 +21,7 @@ export class Dairies {
   @PrimaryGeneratedColumn({ type: 'int', name: 'ID' })
   id: number;
 
+  @IsInt()
   @ApiProperty({
     name: 'userId',
     description: '작성자',
@@ -28,6 +30,8 @@ export class Dairies {
   @Column('int', { name: 'USER_ID' })
   userId: number;
 
+  @Length(0, 45)
+  @IsString()
   @ApiProperty({
     name: 'title',
     description: '일기 제목',
@@ -36,6 +40,8 @@ export class Dairies {
   @Column('varchar', { name: 'TITLE', length: 45 })
   title: string;
 
+  @IsOptional()
+  @IsString()
   @ApiProperty({
     name: 'content',
     description: '일기 내용, 글자 수 제한 없음',
@@ -44,6 +50,8 @@ export class Dairies {
   @Column('longtext', { name: 'CONTENT', nullable: true })
   content: string | null;
 
+  @IsOptional()
+  @IsString()
   @ApiProperty({
     name: 'hashtag',
     description: '일기 해시 태그',
