@@ -21,7 +21,7 @@ export class UserController {
   @ApiBody({
     type: CreateUserDto,
   })
-  @Post()
+  @Post('sign-up')
   signUp(@Body() createUserDto: CreateUserDto) {
     return this.userService.create(createUserDto);
   }
@@ -29,7 +29,7 @@ export class UserController {
   @ApiBody({
     type: LoginUserDto,
   })
-  @Post()
+  @Post('login')
   signIn(@Body() loginUserDto: LoginUserDto) {
     return this.userService.signIn(loginUserDto);
   }

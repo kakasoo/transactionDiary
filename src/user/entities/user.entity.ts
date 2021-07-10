@@ -25,6 +25,7 @@ export class Users {
     name: 'adress',
     description: '이메일 형식이 아니어도 되며, 공백을 제외한 모든 문자 허용',
     example: 'kscodebase@gmail.com',
+    required: true,
   })
   @Column('varchar', { name: 'ADRESS', unique: true, length: 45 })
   adress: string;
@@ -35,6 +36,7 @@ export class Users {
     name: 'password',
     description: '유저의 비밀번호',
     example: '1234567890@',
+    required: true,
   })
   @Column('varchar', { name: 'PASSWORD', unique: true, length: 45 })
   password: string;
@@ -45,6 +47,7 @@ export class Users {
     name: 'nickname',
     description: '유저의 프로필에 띄울 이름, 닉네임을 지칭',
     example: 'kakasoo',
+    required: true,
   })
   @Column('varchar', { name: 'NICKNAME', length: 45 })
   nickname: string;
@@ -54,6 +57,8 @@ export class Users {
   @ApiProperty({
     name: 'userPic',
     description: '프로필 사진 경로를 저장',
+    example: 'url 경로',
+    required: false,
   })
   @Column('longtext', { name: 'USER_PIC', nullable: true })
   userPic: string | null;
