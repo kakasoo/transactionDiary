@@ -9,7 +9,7 @@ export class CreateInitialData implements Seeder {
       .createQueryBuilder()
       .insert()
       .into(Groups)
-      .values([{ id: 1, name: 'developer' }])
+      .values([{ id: 1, name: 'everybody' }])
       .execute();
 
     // NOTE : seeding으로 만든 data는 production에 절대 유입되지 않도록 한다.
