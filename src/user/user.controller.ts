@@ -6,6 +6,7 @@ import {
   Patch,
   Param,
   Delete,
+  Render,
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -29,9 +30,11 @@ export class UserController {
   @ApiBody({
     type: LoginUserDto,
   })
+  @Render('index')
   @Post('login')
-  signIn(@Body() loginUserDto: LoginUserDto) {
-    return this.userService.signIn(loginUserDto);
+  async signIn(@Body() loginUserDto: LoginUserDto) {
+    const user = await this.userService.signIn(loginUserDto);
+    return { message: user.nickname };
   }
 
   @Get()
