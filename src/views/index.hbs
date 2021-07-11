@@ -2,7 +2,8 @@
   <head>
     <meta charset='utf-8' />
     <title>함께 만드는 교환 일기</title>
-    <link href='/css/mainPage.css' rel='stylesheet' />
+    <link href='/css/main/index.css' rel='stylesheet' />
+    <script src='/javascripts/main/login.js'></script>
   </head>
   <body>
     <header id='banner'>
@@ -16,13 +17,13 @@
         <div id='bannerImg'></div>
       </figure>
     </header>
-    {{!-- {{message}} --}}
+    {{message}}
 
     <div id='loginModal'>
       <div id='innerLoginModal'>
         <h2 id='loginModalHead'>Login</h2>
         {{! TODO : login URL 경로를 변경할 것. }}
-        <form action='/api/users'>
+        <form action='/api/users/login' method='POST'>
           <div id='adress'>
             <label class='loginModalLabel' for='adress'>adress</label>
             <input
