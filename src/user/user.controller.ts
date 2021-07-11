@@ -16,6 +16,7 @@ import { ApiBody, ApiOperation, ApiParam, ApiTags } from '@nestjs/swagger';
 import { LocalAuthGuard } from 'src/auth/local-auth.guard';
 import { LoginUserDto } from './dto/login-user.dto';
 import { AuthService } from 'src/auth/auth.service';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 
 @ApiTags('USERS')
 @Controller('api/users')
@@ -57,6 +58,12 @@ export class UserController {
     return this.userService.findAll();
   }
 
+  @UseGuards(JwtAuthGuard)
+  @Get('profile')
+  getMyPage(@Request() req) {
+    return req.user;
+  }
+
   @ApiOperation({ summary: '단일 유저 조회' })
   @ApiParam({
     name: 'id',
@@ -92,7 +99,4 @@ export class UserController {
   remove(@Param('id') id: string) {
     return this.userService.remove(+id);
   }
-}
-function Render(arg0: string) {
-  throw new Error('Function not implemented.');
 }
