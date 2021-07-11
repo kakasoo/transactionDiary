@@ -38,19 +38,19 @@ export class Groups {
 
   @IsOptional()
   @IsString()
-  @Length(0, 45)
+  @Length(0, 100)
   @ApiProperty({
     example: '1234567890@',
     description: '그룹 비밀번호',
     required: false,
   })
-  @Column('varchar', { name: 'PASSWORD', nullable: true, length: 45 })
+  @Column('varchar', { name: 'PASSWORD', nullable: true, length: 100 })
   password: string | null;
 
   @IsOptional()
   @IsString()
   @ApiProperty({
-    example: 'https://kscodebase.tistory.com/*.jpeg',
+    example: 'url 경로',
     description: '그룹 프로필 이미지',
     required: false,
   })
