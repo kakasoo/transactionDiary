@@ -15,11 +15,15 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { ApiBody, ApiOperation, ApiParam, ApiTags } from '@nestjs/swagger';
 import { LocalAuthGuard } from 'src/auth/local-auth.guard';
 import { LoginUserDto } from './dto/login-user.dto';
+import { AuthService } from 'src/auth/auth.service';
 
 @ApiTags('USERS')
 @Controller('api/users')
 export class UserController {
-  constructor(private readonly userService: UserService) {}
+  constructor(
+    private readonly userService: UserService,
+    private readonly authService: AuthService,
+  ) {}
 
   @ApiOperation({ summary: '회원가입' })
   @ApiBody({
@@ -43,7 +47,8 @@ export class UserController {
   @UseGuards(LocalAuthGuard)
   @Post('login')
   logIn(@Request() req: Request & { user: any }) {
-    return req.user;
+    // return req.user;
+    return this.authService.login(req.user);
   }
 
   @ApiOperation({ summary: '모든 유저 조회' })
