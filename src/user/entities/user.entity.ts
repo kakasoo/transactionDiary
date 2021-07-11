@@ -30,7 +30,7 @@ export class Users {
   @Column('varchar', { name: 'ADRESS', unique: true, length: 45 })
   adress: string;
 
-  @Length(0, 45)
+  @Length(0, 100)
   @IsString()
   @ApiProperty({
     name: 'password',
@@ -38,7 +38,7 @@ export class Users {
     example: '1234567890@',
     required: true,
   })
-  @Column('varchar', { name: 'PASSWORD', unique: true, length: 45 })
+  @Column('varchar', { name: 'PASSWORD', unique: true, length: 100 })
   password: string;
 
   @Length(0, 45)
