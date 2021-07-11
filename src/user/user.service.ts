@@ -25,23 +25,23 @@ export class UserService {
     });
   }
 
-  async signIn(loginUserDto: LoginUserDto): Promise<Users> {
-    const { adress, password } = loginUserDto;
-    const user = await this.userRepository.findOne({
-      where: { adress },
-    });
+  // async signIn(loginUserDto: LoginUserDto): Promise<Users> {
+  //   const { adress, password } = loginUserDto;
+  //   const user = await this.userRepository.findOne({
+  //     where: { adress },
+  //   });
 
-    if (!user) {
-      throw new HttpException('adress에 해당하는 user가 없습니다.', 400);
-    }
+  //   if (!user) {
+  //     throw new HttpException('adress에 해당하는 user가 없습니다.', 400);
+  //   }
 
-    const isRightPassword = await bcrypt.compare(password, user.password);
-    if (!isRightPassword) {
-      throw new HttpException('password가 일치하지 않습니다.', 400);
-    }
+  //   const isRightPassword = await bcrypt.compare(password, user.password);
+  //   if (!isRightPassword) {
+  //     throw new HttpException('password가 일치하지 않습니다.', 400);
+  //   }
 
-    return user;
-  }
+  //   return user;
+  // }
 
   async findAll() {
     const users = await this.userRepository.find();

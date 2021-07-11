@@ -6,12 +6,14 @@ import {
   Patch,
   Param,
   Delete,
-  Render,
+  UseGuards,
+  Request,
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { ApiBody, ApiOperation, ApiParam, ApiTags } from '@nestjs/swagger';
+import { LocalAuthGuard } from 'src/auth/local-auth.guard';
 import { LoginUserDto } from './dto/login-user.dto';
 
 @ApiTags('USERS')
@@ -28,15 +30,20 @@ export class UserController {
     return this.userService.create(createUserDto);
   }
 
+  // @Post('login')
+  // async signIn(@Body() loginUserDto: LoginUserDto) {
+  //   const user = await this.userService.signIn(loginUserDto);
+  //   return { message: user.nickname };
+  // }
+
   @ApiOperation({ summary: '로그인' })
   @ApiBody({
     type: LoginUserDto,
   })
-  @Render('index')
+  @UseGuards(LocalAuthGuard)
   @Post('login')
-  async signIn(@Body() loginUserDto: LoginUserDto) {
-    const user = await this.userService.signIn(loginUserDto);
-    return { message: user.nickname };
+  logIn(@Request() req: Request & { user: any }) {
+    return req.user;
   }
 
   @ApiOperation({ summary: '모든 유저 조회' })
@@ -80,4 +87,7 @@ export class UserController {
   remove(@Param('id') id: string) {
     return this.userService.remove(+id);
   }
+}
+function Render(arg0: string) {
+  throw new Error('Function not implemented.');
 }

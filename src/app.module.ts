@@ -12,12 +12,14 @@ import { Users } from './user/entities/user.entity';
 import { Comments } from './comment/entities/comment.entity';
 import { Dairies } from './diary/entities/diary.entity';
 import { Groups } from './group/entities/group.entity';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
     }),
+    AuthModule,
     UserModule,
     DiaryModule,
     GroupModule,
