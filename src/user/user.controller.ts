@@ -11,7 +11,7 @@ import {
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { ApiBody, ApiParam, ApiTags } from '@nestjs/swagger';
+import { ApiBody, ApiOperation, ApiParam, ApiTags } from '@nestjs/swagger';
 import { LoginUserDto } from './dto/login-user.dto';
 
 @ApiTags('USERS')
@@ -19,6 +19,7 @@ import { LoginUserDto } from './dto/login-user.dto';
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
+  @ApiOperation({ summary: '회원가입' })
   @ApiBody({
     type: CreateUserDto,
   })
@@ -27,6 +28,7 @@ export class UserController {
     return this.userService.create(createUserDto);
   }
 
+  @ApiOperation({ summary: '로그인' })
   @ApiBody({
     type: LoginUserDto,
   })
@@ -37,11 +39,13 @@ export class UserController {
     return { message: user.nickname };
   }
 
+  @ApiOperation({ summary: '모든 유저 조회' })
   @Get()
   findAll() {
     return this.userService.findAll();
   }
 
+  @ApiOperation({ summary: '단일 유저 조회' })
   @ApiParam({
     name: 'id',
     description: '유저의 index ( ID )',
@@ -52,6 +56,7 @@ export class UserController {
     return this.userService.findOne(+id);
   }
 
+  @ApiOperation({ summary: '유저 정보 수정' })
   @ApiBody({
     type: UpdateUserDto,
   })
@@ -65,6 +70,7 @@ export class UserController {
     return this.userService.update(+id, updateUserDto);
   }
 
+  @ApiOperation({ summary: '유저 정보 삭제' })
   @ApiParam({
     name: 'id',
     description: '유저의 index ( ID )',
