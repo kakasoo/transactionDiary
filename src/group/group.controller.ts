@@ -10,13 +10,14 @@ import {
 import { GroupService } from './group.service';
 import { CreateGroupDto } from './dto/create-group.dto';
 import { UpdateGroupDto } from './dto/update-group.dto';
-import { ApiBody, ApiParam, ApiTags } from '@nestjs/swagger';
+import { ApiBody, ApiOperation, ApiParam, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('GROUPS')
 @Controller('api/groups')
 export class GroupController {
   constructor(private readonly groupService: GroupService) {}
 
+  @ApiOperation({ summary: '그룹 추가' })
   @ApiBody({
     type: CreateGroupDto,
   })
@@ -25,6 +26,7 @@ export class GroupController {
     return this.groupService.create(createGroupDto);
   }
 
+  @ApiOperation({ summary: '각 유저에 대한 내게 쓰기 그룹 추가' })
   @ApiBody({
     type: CreateGroupDto,
   })
@@ -35,11 +37,13 @@ export class GroupController {
     return this.groupService.createMyselfGroup(CreateGroupDto);
   }
 
+  @ApiOperation({ summary: '모든 그룹 조회' })
   @Get()
   findAll() {
     return this.groupService.findAll();
   }
 
+  @ApiOperation({ summary: '단일 그룹 조회' })
   @ApiParam({
     name: 'id',
     description: '그룹의 index ( ID )',
@@ -50,6 +54,7 @@ export class GroupController {
     return this.groupService.findOne(+id);
   }
 
+  @ApiOperation({ summary: '그룹 정보 수정' })
   @ApiBody({
     type: UpdateGroupDto,
   })
@@ -63,6 +68,7 @@ export class GroupController {
     return this.groupService.update(+id, updateGroupDto);
   }
 
+  @ApiOperation({ summary: '그룹 정보 삭제' })
   @ApiParam({
     name: 'id',
     description: '그룹의 index ( ID )',
