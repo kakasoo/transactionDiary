@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Users } from './entities/user.entity';
 import { Repository } from 'typeorm';
@@ -32,12 +32,12 @@ export class UserService {
     });
 
     if (!user) {
-      throw new Error('adress에 해당하는 user가 없습니다.');
+      throw new HttpException('adress에 해당하는 user가 없습니다.', 400);
     }
 
     const isRightPassword = await bcrypt.compare(password, user.password);
     if (!isRightPassword) {
-      throw new Error('password가 일치하지 않습니다.');
+      throw new HttpException('password가 일치하지 않습니다.', 400);
     }
 
     return user;
