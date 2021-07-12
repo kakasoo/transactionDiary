@@ -17,7 +17,7 @@ dotenv.config();
     PassportModule.register({ session: false }),
     TypeOrmModule.forFeature([Users]),
     JwtModule.register({
-      secretOrPrivateKey: (function () {
+      secret: (function () {
         const key = process.env.JWT_SECRET;
         if (!key) {
           throw new Error('JWT private Key가 없습니다.');

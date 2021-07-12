@@ -23,32 +23,38 @@
       <div id='innerLoginModal'>
         <h2 id='loginModalHead'>Login</h2>
         {{! TODO : login URL 경로를 변경할 것. }}
-        <form action='/api/users/login' method='POST'>
-          <div id='adress'>
-            <label class='loginModalLabel' for='adress'>adress</label>
-            <input
-              id='inputOfAdress'
-              class='loginInput'
-              type='email'
-              name='adress'
-              placeholder='이메일을 입력해주세요'
-            />
-          </div>
-          <div>
-            <label class='loginModalLabel' for='password'>password</label>
-            <input
-              id='inputOfPassword'
-              class='loginInput'
-              type='password'
-              name='password'
-              placeholder='패스워드를 입력해주세요'
-            />
-          </div>
-          <button class='loginSubmitButton' type='submit'>login</button>
-        </form>
-        <button class='naver loginSubmitButton' onclick=''>naver</button>
-        <button class='gmail loginSubmitButton' onclick=''>gmail</button>
-        <button class='github loginSubmitButton' onclick=''>github</button>
+        {{! <form action='/api/users/login' method='POST'> }}
+        <div id='adress'>
+          <label class='loginModalLabel' for='adress'>adress</label>
+          <input
+            id='inputOfAdress'
+            class='loginInput'
+            type='email'
+            name='adress'
+            placeholder='이메일을 입력해주세요'
+            value='kscodebase@gmail.com'
+          />
+        </div>
+        <div>
+          <label class='loginModalLabel' for='password'>password</label>
+          <input
+            id='inputOfPassword'
+            class='loginInput'
+            type='password'
+            name='password'
+            placeholder='패스워드를 입력해주세요'
+            value='1234567890'
+          />
+        </div>
+        <button
+          id='localLogin'
+          class='loginSubmitButton'
+          onclick='localLogin()'
+        >login</button>
+        {{! </form> }}
+        <button class='naver loginSubmitButton'>naver</button>
+        <button class='gmail loginSubmitButton'>gmail</button>
+        <button class='github loginSubmitButton'>github</button>
       </div>
     </div>
   </body>
