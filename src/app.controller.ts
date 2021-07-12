@@ -6,8 +6,8 @@ export class AppController {
   constructor(private readonly appService: AppService) {}
 
   @Get()
-  @Render('index')
+  @Render('intro')
   root() {
-    return { message: 'hi' };
+    // return { message: 'hi' };
   }
 }
