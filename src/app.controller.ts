@@ -10,4 +10,10 @@ export class AppController {
   root() {
     // return { message: 'hi' };
   }
+
+  @Get('main')
+  @Render('main')
+  main() {
+    // return {message : 'hi' };
+  }
 }

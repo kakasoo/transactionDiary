@@ -41,7 +41,10 @@ async function localLogin() {
   if (loginResponse.ok) {
     const { access_token } = await loginResponse.json();
     document.cookie = `auth=${access_token}`;
+    window.location.href = '/main';
     return true;
   }
+
+  alert('로그인에 실패하였습니다.');
   return false;
 }
