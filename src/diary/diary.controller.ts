@@ -6,8 +6,11 @@ import {
   Patch,
   Param,
   Delete,
+  Req,
+  UseGuards,
 } from '@nestjs/common';
 import { ApiOperation, ApiParam, ApiProperty, ApiTags } from '@nestjs/swagger';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { DiaryService } from './diary.service';
 import { CreateDiaryDto } from './dto/create-diary.dto';
 import { UpdateDiaryDto } from './dto/update-diary.dto';
@@ -28,9 +31,11 @@ export class DiaryController {
 
   // TODO : 각 유저가 조회할 수 있는 목록만을 가져오게 수정해야 한다.
   @ApiOperation({ summary: '모든 일기 조회' })
+  @UseGuards(JwtAuthGuard)
   @Get()
-  findAll() {
-    return this.diaryService.findAll();
+  findAll(@Req() req) {
+    const userId = req.user.id;
+    return this.diaryService.findAll(userId);
   }
 
   @ApiOperation({ summary: '단일 일기 조회' })

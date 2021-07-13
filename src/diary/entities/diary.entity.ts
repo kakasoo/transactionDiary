@@ -89,8 +89,8 @@ export class Dairies {
   @ManyToMany(() => Groups, (groups) => groups.dairies)
   @JoinTable({
     name: 'DIARY_GROUPS',
-    joinColumns: [{ name: 'DAIRIES_ID', referencedColumnName: 'id' }],
-    inverseJoinColumns: [{ name: 'GROUPS_ID', referencedColumnName: 'id' }],
+    joinColumns: [{ name: 'DAIRY_ID', referencedColumnName: 'id' }],
+    inverseJoinColumns: [{ name: 'GROUP_ID', referencedColumnName: 'id' }],
     schema: 'mydb',
   })
   groups: Groups[];
