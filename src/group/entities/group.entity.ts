@@ -1,4 +1,5 @@
 import {
+  BaseEntity,
   Column,
   CreateDateColumn,
   DeleteDateColumn,
@@ -21,7 +22,7 @@ import {
 
 @Index('ID_UNIQUE', ['id'], { unique: true })
 @Entity('GROUPS', { schema: 'mydb' })
-export class Groups {
+export class Groups extends BaseEntity {
   @PrimaryGeneratedColumn({ type: 'int', name: 'ID' })
   id: number;
 
@@ -66,6 +67,11 @@ export class Groups {
   })
   @Column('tinyint', { name: 'VISIBLE', default: () => "'1'" })
   visible: number;
+
+  @IsOptional()
+  @IsInt()
+  @Column('tinyint', { name: 'READONLY', default: () => "'0'" })
+  readonly: number;
 
   @CreateDateColumn({ name: 'CREATED_AT' })
   createdAt: Date;
