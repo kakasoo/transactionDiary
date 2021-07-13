@@ -1,6 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsOptional, IsString, Length } from 'class-validator';
 import {
+  BaseEntity,
   Column,
   Entity,
   Index,
@@ -13,9 +14,8 @@ import { Dairies } from '../../diary/entities/diary.entity';
 import { Groups } from '../../group/entities/group.entity';
 
 @Index('USER_ID_UNIQUE', ['adress'], { unique: true })
-@Index('PASSWORD_UNIQUE', ['password'], { unique: true })
 @Entity('USERS', { schema: 'mydb' })
-export class Users {
+export class Users extends BaseEntity {
   @PrimaryGeneratedColumn({ type: 'int', name: 'ID' })
   id: number;
 
@@ -38,7 +38,7 @@ export class Users {
     example: '1234567890@',
     required: true,
   })
-  @Column('varchar', { name: 'PASSWORD', unique: true, length: 100 })
+  @Column('varchar', { name: 'PASSWORD', length: 100 })
   password: string;
 
   @Length(0, 45)
@@ -84,8 +84,8 @@ export class Users {
   @ManyToMany(() => Groups, (groups) => groups.users)
   @JoinTable({
     name: 'USER_GROUPS',
-    joinColumns: [{ name: 'USERS_ID', referencedColumnName: 'id' }],
-    inverseJoinColumns: [{ name: 'GROUPS_ID', referencedColumnName: 'id' }],
+    joinColumns: [{ name: 'USER_ID', referencedColumnName: 'id' }],
+    inverseJoinColumns: [{ name: 'GROUP_ID', referencedColumnName: 'id' }],
     schema: 'mydb',
   })
   groups: Groups[];
