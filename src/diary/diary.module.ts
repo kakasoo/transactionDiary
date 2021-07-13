@@ -8,5 +8,6 @@ import { Dairies } from './entities/diary.entity';
   imports: [TypeOrmModule.forFeature([Dairies])],
   controllers: [DiaryController],
   providers: [DiaryService],
+  exports: [DiaryService],
 })
 export class DiaryModule {}

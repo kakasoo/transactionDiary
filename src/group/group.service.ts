@@ -27,12 +27,14 @@ export class GroupService {
     return createdGroup;
   }
 
-  async createMyselfGroup(createGroupDto: CreateGroupDto & { userId: number }) {
+  async createMyselfGroup(
+    createGroupDto: CreateGroupDto & { userId: number },
+  ): Promise<Groups> {
     const { name, groupPic, visible, userId } = createGroupDto;
     // NOTE : 유저 생성 시 내게 쓰기 그룹이 1개 생성됨.
     const hashedPassword = await bcrypt.hash(String(userId), 12);
 
-    this.groupRepository.save({
+    return this.groupRepository.save({
       name,
       groupPic,
       visible,

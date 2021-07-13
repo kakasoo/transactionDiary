@@ -12,6 +12,7 @@ export class DiaryService {
   ) {}
 
   async create(createDiaryDto: CreateDiaryDto) {
+    // TODO : 자동으로 내게 쓰기 그룹에 가입되게 해야 한다.
     const diary = await this.diaryRepository.create(createDiaryDto);
     return diary;
   }
