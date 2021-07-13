@@ -17,13 +17,21 @@ import { LocalAuthGuard } from 'src/auth/local-auth.guard';
 import { LoginUserDto } from './dto/login-user.dto';
 import { AuthService } from 'src/auth/auth.service';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
+import { DiaryService } from 'src/diary/diary.service';
+import { GroupService } from 'src/group/group.service';
+import { Users } from './entities/user.entity';
+import { Groups } from 'src/group/entities/group.entity';
+import * as bcrypt from 'bcrypt';
+import { getConnection, getManager } from 'typeorm';
 
 @ApiTags('USERS')
 @Controller('api/users')
 export class UserController {
   constructor(
     private readonly userService: UserService,
-    private readonly authService: AuthService,
+    private readonly groupService: GroupService,
+    private readonly diaryService: DiaryService,
+    private readonly authService: AuthService, // private readonly userGroupService: UserGroupService,
   ) {}
 
   @ApiOperation({ summary: '회원가입' })
@@ -31,15 +39,27 @@ export class UserController {
     type: CreateUserDto,
   })
   @Post('sign-up')
-  signUp(@Body() createUserDto: CreateUserDto) {
-    return this.userService.create(createUserDto);
-  }
+  async signUp(@Body() createUserDto: CreateUserDto) {
+    const { adress, password, nickname, userPic } = createUserDto;
+    const hashedPassword = await bcrypt.hash(password, 12);
 
-  // @Post('login')
-  // async signIn(@Body() loginUserDto: LoginUserDto) {
-  //   const user = await this.userService.signIn(loginUserDto);
-  //   return { message: user.nickname };
-  // }
+    const group = new Groups();
+    group.name = '내게쓰기';
+    group.password = hashedPassword;
+    group.readonly = 0;
+
+    const user = new Users();
+    user.adress = adress;
+    user.password = hashedPassword;
+    user.nickname = nickname;
+    user.userPic = userPic;
+    user.groups = [group];
+
+    await getManager().transaction(async (transactionEntityManager) => {
+      await transactionEntityManager.save(group);
+      await transactionEntityManager.save(user);
+    });
+  }
 
   @ApiOperation({ summary: '로그인' })
   @ApiBody({
