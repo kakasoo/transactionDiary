@@ -18,6 +18,7 @@ function getLoginModal() {
   changeZIndex(loginModal);
 }
 
+// TODO : password에서 enter 누를 시에 동작하게 해야 한다.
 async function localLogin() {
   const adress = document.getElementById('inputOfAdress').value;
   const password = document.getElementById('inputOfPassword').value;

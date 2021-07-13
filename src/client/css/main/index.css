@@ -1,0 +1,8 @@
+body {
+  margin: 0px 0px 0px 0px;
+  max-height: 100%;
+}
+
+main#note {
+  border: 1px solid black;
+}
