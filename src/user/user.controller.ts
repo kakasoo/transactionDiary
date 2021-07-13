@@ -17,20 +17,17 @@ import { LocalAuthGuard } from 'src/auth/local-auth.guard';
 import { LoginUserDto } from './dto/login-user.dto';
 import { AuthService } from 'src/auth/auth.service';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
-import { DiaryService } from 'src/diary/diary.service';
-import { GroupService } from 'src/group/group.service';
 import { Users } from './entities/user.entity';
 import { Groups } from 'src/group/entities/group.entity';
 import * as bcrypt from 'bcrypt';
-import { getConnection, getManager } from 'typeorm';
+import { getManager } from 'typeorm';
+import { Dairies } from 'src/diary/entities/diary.entity';
 
 @ApiTags('USERS')
 @Controller('api/users')
 export class UserController {
   constructor(
     private readonly userService: UserService,
-    private readonly groupService: GroupService,
-    private readonly diaryService: DiaryService,
     private readonly authService: AuthService, // private readonly userGroupService: UserGroupService,
   ) {}
 
@@ -55,9 +52,16 @@ export class UserController {
     user.userPic = userPic;
     user.groups = [group];
 
+    const diary = new Dairies();
+    diary.title = '오신 것을 환영합니다!';
+    diary.content = '좋은 문화를 만들어요!';
+    diary.user = user;
+    diary.groups = [group];
+
     await getManager().transaction(async (transactionEntityManager) => {
       await transactionEntityManager.save(group);
       await transactionEntityManager.save(user);
+      await transactionEntityManager.save(diary);
     });
   }
 
