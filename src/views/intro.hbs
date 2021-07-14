@@ -11,6 +11,10 @@
     <header id='banner'>
       <div id='bannerTopMargin'>
         <div id='defaultButtons'>
+          <button
+            id='mainButton'
+            onclick="window.location = '/main'"
+          >Diary</button>
           <button id='loginButton' onclick='getLoginModal()'>Login</button>
         </div>
       </div>
@@ -24,8 +28,6 @@
     <div id='loginModal' class='modalOuter'>
       <div id='innerLoginModal' class='modalInner'>
         <h2 id='loginModalHead'>Login</h2>
-        {{! TODO : login URL 경로를 변경할 것. }}
-        {{! <form action='/api/users/login' method='POST'> }}
         <div id='adress'>
           <label class='loginModalLabel' for='adress'>adress</label>
           <input
@@ -53,7 +55,6 @@
           class='loginSubmitButton'
           onclick='localLogin()'
         >login</button>
-        {{! </form> }}
         <button class='naver loginSubmitButton'>naver</button>
         <button class='gmail loginSubmitButton'>gmail</button>
         <button class='github loginSubmitButton'>github</button>
