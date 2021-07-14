@@ -1,7 +1,7 @@
 import { PickType } from '@nestjs/swagger';
-import { Dairies } from '../entities/diary.entity';
+import { Diaries } from '../entities/diary.entity';
 
-export class CreateDiaryDto extends PickType(Dairies, [
+export class CreateDiaryDto extends PickType(Diaries, [
   'userId',
   'title',
   'content',

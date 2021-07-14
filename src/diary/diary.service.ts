@@ -3,12 +3,12 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { getConnection, Repository } from 'typeorm';
 import { CreateDiaryDto } from './dto/create-diary.dto';
 import { UpdateDiaryDto } from './dto/update-diary.dto';
-import { Dairies } from './entities/diary.entity';
+import { Diaries } from './entities/diary.entity';
 
 @Injectable()
 export class DiaryService {
   constructor(
-    @InjectRepository(Dairies) private diaryRepository: Repository<Dairies>,
+    @InjectRepository(Diaries) private diaryRepository: Repository<Diaries>,
   ) {}
 
   async create(createDiaryDto: CreateDiaryDto) {
@@ -22,9 +22,9 @@ export class DiaryService {
     const connection = getConnection();
 
     const diary = await connection.manager.query(`
-    SELECT \`DG\`.\`DAIRY_ID\`, \`DG\`.\`GROUP_ID\`, \`UG\`.\`USER_ID\`, \`D\`.\`TITLE\`, \`D\`.\`CONTENT\`, \`D\`.\`UPDATED_AT\`, \`D\`.\`HASHTAG\`
+    SELECT \`DG\`.\`DIARY_ID\`, \`DG\`.\`GROUP_ID\`, \`UG\`.\`USER_ID\`, \`D\`.\`TITLE\`, \`D\`.\`CONTENT\`, \`D\`.\`UPDATED_AT\`, \`D\`.\`HASHTAG\`
       FROM \`DIARY_GROUPS\` AS \`DG\` LEFT OUTER JOIN \`USER_GROUPS\` AS \`UG\` ON \`DG\`.\`GROUP_ID\` = \`UG\`.\`GROUP_ID\`
-      JOIN DAIRIES AS \`D\` WHERE \`UG\`.USER_ID = ${userId};`);
+      JOIN DIARIES AS \`D\` WHERE \`UG\`.USER_ID = ${userId};`);
 
     return diary;
   }

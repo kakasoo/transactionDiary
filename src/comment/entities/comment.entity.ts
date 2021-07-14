@@ -7,10 +7,10 @@ import {
   OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { Dairies } from '../../diary/entities/diary.entity';
+import { Diaries } from '../../diary/entities/diary.entity';
 
 @Index('PARENT_UNIQUE', ['parent'], { unique: true })
-@Index('fk_COMMENTS_DAIRIES1_idx', ['dairyId'], {})
+@Index('fk_COMMENTS_DIARIES1_idx', ['diaryId'], {})
 @Index('fk_COMMENTS_COMMENTS1_idx', ['parent'], {})
 @Entity('COMMENTS', { schema: 'mydb' })
 export class Comments {
@@ -20,8 +20,8 @@ export class Comments {
   @Column('int', { name: 'USER_ID' })
   userId: number;
 
-  @Column('int', { name: 'DAIRY_ID' })
-  dairyId: number;
+  @Column('int', { name: 'DIARY_ID' })
+  diaryId: number;
 
   @Column('int', { name: 'PARENT', nullable: true, unique: true })
   parent: number | null;
@@ -57,10 +57,10 @@ export class Comments {
   @OneToOne(() => Comments, (comments) => comments.parent2)
   comments: Comments;
 
-  @ManyToOne(() => Dairies, (dairies) => dairies.comments, {
+  @ManyToOne(() => Diaries, (diaries) => diaries.comments, {
     onDelete: 'NO ACTION',
     onUpdate: 'NO ACTION',
   })
-  @JoinColumn([{ name: 'DAIRY_ID', referencedColumnName: 'id' }])
-  dairy: Dairies;
+  @JoinColumn([{ name: 'DIARY_ID', referencedColumnName: 'id' }])
+  diary: Diaries;
 }

@@ -7,10 +7,10 @@ import { AuthModule } from 'src/auth/auth.module';
 import { GroupService } from 'src/group/group.service';
 import { DiaryService } from 'src/diary/diary.service';
 import { Groups } from 'src/group/entities/group.entity';
-import { Dairies } from 'src/diary/entities/diary.entity';
+import { Diaries } from 'src/diary/entities/diary.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Users, Groups, Dairies]), AuthModule],
+  imports: [TypeOrmModule.forFeature([Users, Groups, Diaries]), AuthModule],
   controllers: [UserController],
   providers: [UserService, GroupService, DiaryService],
 })

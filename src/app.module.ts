@@ -10,7 +10,7 @@ import { ConfigModule } from '@nestjs/config';
 
 import { Users } from './user/entities/user.entity';
 import { Comments } from './comment/entities/comment.entity';
-import { Dairies } from './diary/entities/diary.entity';
+import { Diaries } from './diary/entities/diary.entity';
 import { Groups } from './group/entities/group.entity';
 
 @Module({
@@ -27,7 +27,7 @@ import { Groups } from './group/entities/group.entity';
       username: process.env.DB_USERNAME,
       password: process.env.DB_PASSWORD,
       database: process.env.DB_DATABASE,
-      entities: [Users, Comments, Dairies, Groups],
+      entities: [Users, Comments, Diaries, Groups],
       synchronize: false, // NOTE : 개발 환경에서만 사용합니다.
       charset: 'utf8mb4',
       logging: true, // NOTE : 개발 시에는 logging을 켜놓는 것이 좋다. ( hot-reloading 으로 인한 지연 방지 )

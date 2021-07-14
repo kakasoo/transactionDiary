@@ -16,8 +16,8 @@ import { ApiProperty } from '@nestjs/swagger';
 import { IsInt, IsOptional, IsString, Length } from 'class-validator';
 
 @Index('fk_diaries_users_idx', ['userId'], {})
-@Entity('DAIRIES', { schema: 'mydb' })
-export class Dairies {
+@Entity('DIARIES', { schema: 'mydb' })
+export class Diaries {
   @PrimaryGeneratedColumn({ type: 'int', name: 'ID' })
   id: number;
 
@@ -76,20 +76,20 @@ export class Dairies {
   @Column('datetime', { name: 'DELETED_AT', nullable: true })
   deletedAt: Date | null;
 
-  @ManyToOne(() => Users, (users) => users.dairies, {
+  @ManyToOne(() => Users, (users) => users.diaries, {
     onDelete: 'NO ACTION',
     onUpdate: 'NO ACTION',
   })
   @JoinColumn([{ name: 'USER_ID', referencedColumnName: 'id' }])
   user: Users;
 
-  @OneToMany(() => Comments, (comments) => comments.dairy)
+  @OneToMany(() => Comments, (comments) => comments.diary)
   comments: Comments[];
 
-  @ManyToMany(() => Groups, (groups) => groups.dairies)
+  @ManyToMany(() => Groups, (groups) => groups.diaries)
   @JoinTable({
     name: 'DIARY_GROUPS',
-    joinColumns: [{ name: 'DAIRY_ID', referencedColumnName: 'id' }],
+    joinColumns: [{ name: 'DIARY_ID', referencedColumnName: 'id' }],
     inverseJoinColumns: [{ name: 'GROUP_ID', referencedColumnName: 'id' }],
     schema: 'mydb',
   })

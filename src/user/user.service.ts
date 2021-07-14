@@ -6,7 +6,7 @@ import { CreateUserDto } from '../user/dto/create-user.dto';
 import { UpdateUserDto } from '../user/dto/update-user.dto';
 import * as bcrypt from 'bcrypt';
 import { Groups } from 'src/group/entities/group.entity';
-import { Dairies } from 'src/diary/entities/diary.entity';
+import { Diaries } from 'src/diary/entities/diary.entity';
 
 @Injectable()
 export class UserService {
@@ -30,7 +30,7 @@ export class UserService {
     user.userPic = userPic;
     user.groups = [group];
 
-    const diary = new Dairies();
+    const diary = new Diaries();
     diary.title = '오신 것을 환영합니다!';
     diary.content = '좋은 문화를 만들어요!';
     diary.user = user;

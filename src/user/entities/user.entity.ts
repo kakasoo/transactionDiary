@@ -10,7 +10,7 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { Dairies } from '../../diary/entities/diary.entity';
+import { Diaries } from '../../diary/entities/diary.entity';
 import { Groups } from '../../group/entities/group.entity';
 
 @Index('USER_ID_UNIQUE', ['adress'], { unique: true })
@@ -78,8 +78,8 @@ export class Users extends BaseEntity {
   @Column('datetime', { name: 'DELETED_AT', nullable: true })
   deletedAt: Date | null;
 
-  @OneToMany(() => Dairies, (dairies) => dairies.user)
-  dairies: Dairies[];
+  @OneToMany(() => Diaries, (diaries) => diaries.user)
+  diaries: Diaries[];
 
   @ManyToMany(() => Groups, (groups) => groups.users)
   @JoinTable({

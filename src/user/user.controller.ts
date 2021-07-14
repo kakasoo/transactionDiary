@@ -21,7 +21,7 @@ import { Users } from './entities/user.entity';
 import { Groups } from 'src/group/entities/group.entity';
 import * as bcrypt from 'bcrypt';
 import { getManager } from 'typeorm';
-import { Dairies } from 'src/diary/entities/diary.entity';
+import { Diaries } from 'src/diary/entities/diary.entity';
 
 @ApiTags('USERS')
 @Controller('api/users')

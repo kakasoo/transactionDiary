@@ -10,7 +10,7 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 import { Users } from '../../user/entities/user.entity';
-import { Dairies } from '../../diary/entities/diary.entity';
+import { Diaries } from '../../diary/entities/diary.entity';
 import { ApiProperty } from '@nestjs/swagger';
 import {
   IsInt,
@@ -85,6 +85,6 @@ export class Groups extends BaseEntity {
   @ManyToMany(() => Users, (users) => users.groups)
   users: Users[];
 
-  @ManyToMany(() => Dairies, (dairies) => dairies.groups)
-  dairies: Dairies[];
+  @ManyToMany(() => Diaries, (diaries) => diaries.groups)
+  diaries: Diaries[];
 }
