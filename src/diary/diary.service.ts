@@ -22,9 +22,8 @@ export class DiaryService {
     const connection = getConnection();
 
     const diary = await connection.manager.query(`
-    SELECT \`DG\`.\`DIARY_ID\`, \`DG\`.\`GROUP_ID\`, \`UG\`.\`USER_ID\`, \`D\`.\`TITLE\`, \`D\`.\`CONTENT\`, \`D\`.\`UPDATED_AT\`, \`D\`.\`HASHTAG\`
-      FROM \`DIARY_GROUPS\` AS \`DG\` LEFT OUTER JOIN \`USER_GROUPS\` AS \`UG\` ON \`DG\`.\`GROUP_ID\` = \`UG\`.\`GROUP_ID\`
-      JOIN DIARIES AS \`D\` WHERE \`UG\`.USER_ID = ${userId};`);
+    SELECT \`DG\`.\`DIARY_ID\`, \`DG\`.\`GROUP_ID\`, \`UG\`.\`USER_ID\`, \`D\`.\`TITLE\`, \`D\`.\`CONTENT\`, \`D\`.\`UPDATED_AT\`, \`D\`.\`HASHTAG\`, \`G\`.\`NAME\` FROM \`DIARY_GROUPS\` AS \`DG\` LEFT OUTER JOIN \`USER_GROUPS\` AS \`UG\` ON \`DG\`.\`GROUP_ID\` = \`UG\`.\`GROUP_ID\` JOIN \`DIARIES\` AS \`D\` JOIN \`GROUPS\` AS \`G\` WHERE \`UG\`.\`USER_ID\` = ${userId};
+    `);
 
     return diary;
   }
