@@ -2,8 +2,13 @@ function makeCardLine(partOfDiaries) {
   const cardLine = document.createElement('section');
   for (const diary of partOfDiaries) {
     const { DIARY_ID, GROUP_ID, TITLE, CONTENT, UPDATED_AT } = diary;
+    console.log(diary);
 
     const card = document.createElement('div');
+
+    // function of detailDiary.js
+    card.onclick = getDetailDiaryModal;
+    card.id = `card${DIARY_ID}`;
     card.className = 'card';
     card.innerHTML = `
     <div class = 'innerCard'>

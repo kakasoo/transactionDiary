@@ -2,6 +2,7 @@
   <head>
     <meta charset='utf-8' />
     <title>함께 만드는 교환 일기</title>
+    <link href='/css/common.css' rel='stylesheet' />
     <link href='/css/intro/index.css' rel='stylesheet' />
     <script src='/javascripts/util.js'></script>
     <script src='/javascripts/intro/login.js'></script>
@@ -20,8 +21,8 @@
     </header>
     {{message}}
 
-    <div id='loginModal'>
-      <div id='innerLoginModal'>
+    <div id='loginModal' class='modalOuter'>
+      <div id='innerLoginModal' class='modalInner'>
         <h2 id='loginModalHead'>Login</h2>
         {{! TODO : login URL 경로를 변경할 것. }}
         {{! <form action='/api/users/login' method='POST'> }}

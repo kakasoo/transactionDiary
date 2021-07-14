@@ -1,0 +1,14 @@
+.modalOuter {
+  position: absolute;
+
+  border: 1px solid black;
+  background-color: white;
+
+  /* modal 창을 숨기기 위해 투명도를 높이고, 맨 뒤로 보낸다. */
+  opacity: 0;
+  z-index: -10;
+}
+
+.modalInner {
+  margin: 20px 20px 20px 20px;
+}

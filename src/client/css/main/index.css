@@ -25,3 +25,12 @@ div.card {
 .innerCard {
   padding: 10px;
 }
+
+#diaryModal {
+  top: calc(50% - 400px);
+  left: calc(50% - 400px);
+
+  width: 800px;
+  height: 800px;
+  border-radius: 30px;
+}
