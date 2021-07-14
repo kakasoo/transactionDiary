@@ -5,7 +5,14 @@ function makeCardLine(partOfDiaries) {
 
     const card = document.createElement('div');
     // function of detailDiary.js
-    card.onclick = getDetailDiaryModal;
+    card.onclick = getDetailDiaryModal(
+      DIARY_ID,
+      GROUP_ID,
+      TITLE,
+      CONTENT,
+      UPDATED_AT,
+    );
+
     card.id = `card${DIARY_ID}`;
     card.className = 'card';
     card.innerHTML = `
