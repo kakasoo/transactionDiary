@@ -1,13 +1,3 @@
-function getAuthCookie() {
-  const cookies = document.cookie.split(';').map((cookie) => {
-    const [key, value] = cookie.split('=');
-    return { key, value };
-  });
-  const [authCookie] = cookies.filter((cookie) => cookie.key === 'auth');
-
-  return authCookie;
-}
-
 function makeCardLine(partOfDiaries) {
   const cardLine = document.createElement('section');
   for (const diary of partOfDiaries) {
@@ -38,6 +28,7 @@ function sortDiariesByTime(diaries) {
 }
 
 async function getMyDiary() {
+  // function of util.js
   const authCookie = getAuthCookie();
 
   const response = await fetch('/api/diaries', {
