@@ -1,9 +1,44 @@
-async function getMyDiary() {
+function getAuthCookie() {
   const cookies = document.cookie.split(';').map((cookie) => {
     const [key, value] = cookie.split('=');
     return { key, value };
   });
   const [authCookie] = cookies.filter((cookie) => cookie.key === 'auth');
+
+  return authCookie;
+}
+
+function makeCardLine(partOfDiaries) {
+  const cardLine = document.createElement('section');
+  for (const diary of partOfDiaries) {
+    const { DIARY_ID, GROUP_ID, TITLE, CONTENT, UPDATED_AT } = diary;
+
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.innerHTML = `
+    <div class = 'innerCard'>
+      <h2>${TITLE}</h2>
+      <p>${CONTENT}</p>
+    </div>
+    `;
+
+    cardLine.appendChild(card);
+  }
+  return cardLine;
+}
+
+function sortDiariesByTime(diaries) {
+  const note = document.getElementById('note');
+  const CARD_NUM = 5;
+
+  while (diaries.length) {
+    const cardLine = makeCardLine(diaries.splice(0, CARD_NUM));
+    note.appendChild(cardLine);
+  }
+}
+
+async function getMyDiary() {
+  const authCookie = getAuthCookie();
 
   const response = await fetch('/api/diaries', {
     method: 'GET',
@@ -14,10 +49,9 @@ async function getMyDiary() {
   });
   const diaries = await response.json();
 
-  const note = document.getElementById('note');
-  for (const a of diaries) {
-    const diary = document.createElement('div');
-    note.appendChild(diary);
+  if (diaries[Symbol.iterator]) {
+    sortDiariesByTime(diaries);
   }
 }
+
 getMyDiary();

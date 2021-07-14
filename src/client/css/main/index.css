@@ -1,8 +1,27 @@
 body {
   margin: 0px 0px 0px 0px;
+  padding: 0px 10% 0px 10%;
   max-height: 100%;
 }
 
 main#note {
   border: 1px solid black;
+}
+
+div.card {
+  border: 1px solid red;
+  border-radius: 15px;
+  margin: 10px;
+
+  max-width: 300px;
+  max-height: 300px;
+  width: 300px;
+  height: 300px;
+
+  min-width: 100px;
+  min-height: 100px;
+}
+
+.innerCard {
+  padding: 10px;
 }
