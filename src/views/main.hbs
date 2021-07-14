@@ -9,6 +9,21 @@
     <script src='/javascripts/main/diary.js'></script>
   </head>
   <body>
+
+    <div id='searchSection'>
+      <label id='appTitle' for='search'>교환일기</label>
+      <input
+        id='search'
+        name='search'
+        placeholder='일기 내용을 검색해보세요!'
+      />
+      <button id='searchButton'>검색</button>
+
+      <div id='sortButtons'>
+        <button class='sortButton'>sort by time</button>
+        <button class='sortButton'>sort by group</button>
+      </div>
+    </div>
     <main id='note'></main>
 
     <div id='diaryModal' class='diaryModal modalOuter'>

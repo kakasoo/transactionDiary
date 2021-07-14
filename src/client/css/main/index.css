@@ -4,6 +4,43 @@ body {
   max-height: 100%;
 }
 
+#sortButtons {
+  float: right;
+  width: 180px;
+  height: 26px;
+}
+
+#appTitle {
+  width: 150px;
+  height: 26px;
+}
+
+#search {
+  width: calc(100% - 320px);
+  height: 26px;
+}
+
+#searchButton {
+  margin: 0px 0px 0px 0px;
+
+  width: 50px;
+  height: 26px;
+
+  border: 0px;
+  background-color: transparent;
+}
+
+.sortButton {
+  border: 0px;
+  background-color: transparent;
+  height: 26px;
+}
+
+.sortButton:hover {
+  color: blueviolet;
+  cursor: pointer;
+}
+
 main#note {
   border: 1px solid black;
 }
