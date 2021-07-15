@@ -13,8 +13,31 @@ export class DiaryService {
 
   async create(createDiaryDto: CreateDiaryDto) {
     // TODO : 자동으로 내게 쓰기 그룹에 가입되게 해야 한다.
+    // return diary;
+    const { userId, groupIds } = createDiaryDto;
+
     const diary = await this.diaryRepository.create(createDiaryDto);
-    return diary;
+    const diaryId = diary.id;
+
+    if (diary) {
+      const connection = getConnection();
+
+      // NOTE : 유저가 속한 내게 쓰기 그룹을 찾아서, groupIds에 추가한다.
+      const myselfGroup = await connection.manager.query(`
+        SELECT \`UG\`.\`GROUP_ID\` FROM \`USER_GROUPS\` AS \`UG\` LEFT OUTER JOIN \`GROUPS\` AS \`G\`
+        ON \`UG\`.\`GROUP_ID\` = \`G\`.\`ID\`
+        WHERE \`G\`.\`READONLY\` = 0 AND \`UG\`.\`USER_ID\` = ${userId};
+      `);
+      groupIds.push(myselfGroup);
+
+      for (const groupId of groupIds) {
+        await connection.manager.query(`
+          INSERT INTO DIARY_GROUPS(DIARY_ID, GROUP_ID) VALUES (${diaryId}, ${groupId});
+        `);
+      }
+
+      return diary;
+    }
   }
 
   async findAll(userId) {
@@ -22,7 +45,11 @@ export class DiaryService {
     const connection = getConnection();
 
     const diary = await connection.manager.query(`
-    SELECT \`DG\`.\`DIARY_ID\`, \`DG\`.\`GROUP_ID\`, \`UG\`.\`USER_ID\`, \`D\`.\`TITLE\`, \`D\`.\`CONTENT\`, \`D\`.\`UPDATED_AT\`, \`D\`.\`HASHTAG\`, \`G\`.\`NAME\` FROM \`DIARY_GROUPS\` AS \`DG\` LEFT OUTER JOIN \`USER_GROUPS\` AS \`UG\` ON \`DG\`.\`GROUP_ID\` = \`UG\`.\`GROUP_ID\` JOIN \`DIARIES\` AS \`D\` JOIN \`GROUPS\` AS \`G\` WHERE \`UG\`.\`USER_ID\` = ${userId};
+    SELECT \`DG\`.\`DIARY_ID\`, \`DG\`.\`GROUP_ID\`, \`UG\`.\`USER_ID\`, \`D\`.\`TITLE\`, \`D\`.\`CONTENT\`, \`D\`.\`UPDATED_AT\`, \`D\`.\`HASHTAG\`, \`G\`.\`NAME\`
+      FROM \`DIARY_GROUPS\` AS \`DG\`
+      LEFT OUTER JOIN \`USER_GROUPS\` AS \`UG\` ON \`DG\`.\`GROUP_ID\` = \`UG\`.\`GROUP_ID\` 
+      JOIN \`DIARIES\` AS \`D\` JOIN \`GROUPS\` AS \`G\`
+      WHERE \`UG\`.\`USER_ID\` = ${userId};
     `);
 
     return diary;

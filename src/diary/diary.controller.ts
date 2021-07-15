@@ -24,6 +24,7 @@ export class DiaryController {
   @ApiProperty({
     type: CreateDiaryDto,
   })
+  @UseGuards(JwtAuthGuard)
   @Post()
   create(@Body() createDiaryDto: CreateDiaryDto) {
     return this.diaryService.create(createDiaryDto);
