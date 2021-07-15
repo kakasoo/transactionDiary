@@ -8,13 +8,15 @@ body {
   margin: 10px 0px 10px 0px;
 }
 
-#appTitle {
+.inputLabel {
   width: 150px;
   height: 26px;
+
+  display: inline-block;
 }
 
 #search {
-  width: calc(100% - 400px);
+  width: calc(100% - 480px);
   height: 26px;
 }
 
@@ -80,4 +82,20 @@ div.card {
   height: 100%;
 
   border: 1px solid red;
+}
+
+/*
+** writeDiaryModal
+*/
+
+#writeDiaryForm {
+  padding: 30px;
+}
+
+.writeInput {
+  width: calc(100% - 210px);
+}
+
+#writeContent {
+  min-height: 80%;
 }

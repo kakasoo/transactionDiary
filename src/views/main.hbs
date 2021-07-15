@@ -13,7 +13,7 @@
   <body>
 
     <div id='searchSection'>
-      <label id='appTitle' for='search'>교환일기</label>
+      <label id='appTitle' class='inPutLabel' for='search'>교환일기</label>
       <input
         id='search'
         name='search'
@@ -40,10 +40,36 @@
 
     <div id='writeDiaryModal' class='diaryModal modalOuter'>
       <div id='innerDiaryModal' class='modalInner'>
-        <h2>제목 : <span id='diaryTitle'></span></h2>
-        <h2>날짜 : <span id='diaryDate'></span></h2>
-        <h2>내용 : </h2>
-        <span id='diaryContent'></span>
+        <div id='writeDiaryForm'>
+          <div>
+            <label class='inputLabel' for='writeTitle'>제목 : </label>
+            <input
+              id='writeTitle'
+              class='writeInput'
+              type='text'
+              name='writeTitle'
+            />
+          </div>
+          <div>
+            <label class='inputLabel' for='writeDate'>날짜 : </label>
+            <input
+              id='writeDate'
+              class='writeInput'
+              type='date'
+              name='writeDate'
+            />
+          </div>
+          <div>
+            <label class='inputLabel' for='writeContent'>내용 : </label>
+            <input
+              id='writeContent'
+              class='writeInput'
+              type='text'
+              name='writeContent'
+            />
+          </div>
+          <button id='completeWriting'>작성 완료</button>
+        </div>
       </div>
     </div>
 
