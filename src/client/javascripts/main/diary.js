@@ -30,7 +30,7 @@ function makeCardLine(partOfDiaries) {
 function sortDiariesByTime(diaries) {
   // NOTE : 그룹 별로 가져온 다이어리를 시간 순으로 정렬하기 위해, 중복된 일기를 제거한다.
 
-  diaries = diaries.reduce((acc, current) => {
+  const diariesData = diaries.reduce((acc, current) => {
     if (acc.findIndex(({ id }) => id === current.id) === -1) {
       acc.push(current);
     }
@@ -40,8 +40,8 @@ function sortDiariesByTime(diaries) {
   const note = document.getElementById('note');
   const CARD_NUM = 5;
 
-  while (diaries.length) {
-    const cardLine = makeCardLine(diaries.splice(0, CARD_NUM));
+  while (diariesData.length) {
+    const cardLine = makeCardLine(diariesData.splice(0, CARD_NUM));
     note.appendChild(cardLine);
   }
 }
