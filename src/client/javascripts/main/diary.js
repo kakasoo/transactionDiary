@@ -1,5 +1,14 @@
+const deduplicate = (acc, current) => {
+  if (acc.findIndex(({ id }) => id === current.id) === -1) {
+    acc.push(current);
+  }
+  return acc;
+};
+
 class Diary {
   constructor() {
+    this.detailDiaryModal = new DetailDiary();
+    this.writeDiaryModal = new WriteDiary();
     this.getMyDiary();
   }
 
@@ -10,7 +19,7 @@ class Diary {
 
       const card = document.createElement('div');
       // function of detailDiary.js
-      card.onclick = getDetailDiaryModal(
+      card.onclick = this.detailDiaryModal.getDetailDiaryModal(
         DIARY_ID,
         GROUP_ID,
         TITLE,
@@ -34,14 +43,7 @@ class Diary {
 
   sortDiariesByTime(diaries) {
     // NOTE : 그룹 별로 가져온 다이어리를 시간 순으로 정렬하기 위해, 중복된 일기를 제거한다.
-
-    const diariesData = diaries.reduce((acc, current) => {
-      if (acc.findIndex(({ id }) => id === current.id) === -1) {
-        acc.push(current);
-      }
-      return acc;
-    }, []);
-
+    const diariesData = diaries.reduce(deduplicate, []);
     const note = document.getElementById('note');
     const CARD_NUM = 5;
 
