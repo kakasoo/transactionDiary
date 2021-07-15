@@ -17,8 +17,10 @@ class DetailDiary {
       const modalBackgroundColor = modalBackground.style.background;
       if (modalBackgroundColor === 'transparent' || !modalBackgroundColor) {
         modalBackground.style.background = 'black';
+        modalBackground.style.zIndex = 5;
       } else {
         modalBackground.style.background = 'transparent';
+        modalBackground.style.zIndex = -10;
       }
 
       document.getElementById('diaryTitle').innerText = title;

@@ -4,6 +4,16 @@ function getLoginModal() {
   // functions of util.js
   changeOpacity(loginModal);
   changeZIndex(loginModal);
+
+  const modalBackground = document.getElementById('modalBackground');
+  const modalBackgroundColor = modalBackground.style.background;
+  if (modalBackgroundColor === 'transparent' || !modalBackgroundColor) {
+    modalBackground.style.background = 'black';
+    modalBackground.style.zIndex = 5;
+  } else {
+    modalBackground.style.background = 'transparent';
+    modalBackground.style.zIndex = -10;
+  }
 }
 
 // TODO : password에서 enter 누를 시에 동작하게 해야 한다.
