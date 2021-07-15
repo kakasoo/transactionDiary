@@ -11,24 +11,27 @@ export class DiaryService {
     @InjectRepository(Diaries) private diaryRepository: Repository<Diaries>,
   ) {}
 
-  async create(createDiaryDto: CreateDiaryDto) {
+  async create(createDiaryDto: CreateDiaryDto, userId: number) {
     // TODO : 자동으로 내게 쓰기 그룹에 가입되게 해야 한다.
     // return diary;
-    const { userId, groupIds } = createDiaryDto;
+    const { groupIds } = createDiaryDto;
+    createDiaryDto.userId = userId;
 
-    const diary = await this.diaryRepository.create(createDiaryDto);
+    const diary = await this.diaryRepository.save(createDiaryDto);
     const diaryId = diary.id;
 
     if (diary) {
       const connection = getConnection();
 
       // NOTE : 유저가 속한 내게 쓰기 그룹을 찾아서, groupIds에 추가한다.
-      const myselfGroup = await connection.manager.query(`
+      const [myselfGroup] = await connection.manager.query(`
         SELECT \`UG\`.\`GROUP_ID\` FROM \`USER_GROUPS\` AS \`UG\` LEFT OUTER JOIN \`GROUPS\` AS \`G\`
         ON \`UG\`.\`GROUP_ID\` = \`G\`.\`ID\`
-        WHERE \`G\`.\`READONLY\` = 0 AND \`UG\`.\`USER_ID\` = ${userId};
-      `);
-      groupIds.push(myselfGroup);
+        WHERE \`G\`.\`READONLY\` = 0 AND \`UG\`.\`USER_ID\` = ${userId}
+        LIMIT 1;
+        `);
+
+      groupIds.push(myselfGroup.GROUP_ID);
 
       for (const groupId of groupIds) {
         await connection.manager.query(`

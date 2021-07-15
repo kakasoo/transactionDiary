@@ -26,8 +26,9 @@ export class DiaryController {
   })
   @UseGuards(JwtAuthGuard)
   @Post()
-  create(@Body() createDiaryDto: CreateDiaryDto) {
-    return this.diaryService.create(createDiaryDto);
+  create(@Body() createDiaryDto: CreateDiaryDto, @Req() req) {
+    const userId = req.user.id;
+    return this.diaryService.create(createDiaryDto, userId);
   }
 
   // TODO : 각 유저가 조회할 수 있는 목록만을 가져오게 수정해야 한다.

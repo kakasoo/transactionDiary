@@ -1,7 +1,10 @@
 class WriteDiary {
   constructor() {
     this.writeButton = document.getElementById('write');
+    this.completeButton = document.getElementById('completeWriting');
+
     this.writeButton.onclick = this.getWriteDiaryModal();
+    this.completeButton.onclick = this.postDiary();
   }
 
   getWriteDiaryModal() {
@@ -12,12 +15,39 @@ class WriteDiary {
       // functions of util.js
       changeOpacity(writeDiaryModal);
       changeZIndex(writeDiaryModal);
+    };
+  }
 
-      //   // NOTE : modal이 켜지는 경우에 한하여 렌더링 시작.
-      //   if (zIndex === -10 || !zIndex) {
-      //     // renderDiaryContent(diaryId, groupId, title, content, updatedAt);
-      //     return;
-      //   }
+  postDiary() {
+    return async function () {
+      const title = document.getElementById('writeTitle').value;
+      const createdAt = document.getElementById('writeDate').value;
+      const content = document.getElementById('writeContent').value;
+
+      if (!title && !createdAt && !content) {
+        alert('빈칸을 모두 채워주세요!');
+        return;
+      }
+
+      const authCookie = getAuthCookie();
+
+      const response = await fetch('/api/diaries', {
+        method: 'POST',
+        headers: {
+          'Content-type': 'application/json',
+          Authorization: `Bearer ${authCookie.value}`,
+        },
+        body: JSON.stringify({
+          title: title,
+          createdAt: createdAt,
+          content: content,
+          hashtag: '',
+          groupIds: [],
+        }),
+      });
+
+      const body = await response.json();
+      console.log(body);
     };
   }
 }
