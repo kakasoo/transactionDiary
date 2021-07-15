@@ -15,6 +15,10 @@ class SearchBar {
         if (TITLE.includes(searched)) {
           return true;
         }
+
+        if (CONTENT.includes(search)) {
+          return true;
+        }
       });
 
       const note = document.getElementById('note');
