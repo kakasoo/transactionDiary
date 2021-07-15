@@ -31,7 +31,7 @@ class WriteDiary {
 
       const authCookie = getAuthCookie();
 
-      await fetch('/api/diaries', {
+      const response = await fetch('/api/diaries', {
         method: 'POST',
         headers: {
           'Content-type': 'application/json',
@@ -45,6 +45,10 @@ class WriteDiary {
           groupIds: [],
         }),
       });
+
+      if (response.ok) {
+        window.location.reload();
+      }
     };
   }
 }
