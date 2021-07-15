@@ -1,13 +1,11 @@
 body {
   margin: 0px 0px 0px 0px;
-  padding: 0px 10% 0px 10%;
+  padding: 0px 20% 0px 20%;
   max-height: 100%;
 }
 
-#sortButtons {
-  float: right;
-  width: 180px;
-  height: 26px;
+#searchSection {
+  margin: 10px 0px 10px 0px;
 }
 
 #appTitle {
@@ -16,18 +14,23 @@ body {
 }
 
 #search {
-  width: calc(100% - 320px);
+  width: calc(100% - 400px);
   height: 26px;
 }
 
 #searchButton {
-  margin: 0px 0px 0px 0px;
-
   width: 50px;
   height: 26px;
 
+  padding: 0px;
   border: 0px;
   background-color: transparent;
+}
+
+#sortButtons {
+  float: right;
+  width: 260px;
+  height: 26px;
 }
 
 .sortButton {
