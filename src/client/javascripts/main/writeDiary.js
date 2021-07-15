@@ -15,6 +15,14 @@ class WriteDiary {
       // functions of util.js
       changeOpacity(writeDiaryModal);
       changeZIndex(writeDiaryModal);
+
+      const modalBackground = document.getElementById('modalBackground');
+      const modalBackgroundColor = modalBackground.style.background;
+      if (modalBackgroundColor === 'transparent' || !modalBackgroundColor) {
+        modalBackground.style.background = 'black';
+      } else {
+        modalBackground.style.background = 'transparent';
+      }
     };
   }
 
