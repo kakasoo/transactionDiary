@@ -1,5 +1,5 @@
 const deduplicate = (acc, current) => {
-  if (acc.findIndex(({ id }) => id === current.id) === -1) {
+  if (acc.findIndex(({ DIARY_ID }) => DIARY_ID === current.DIARY_ID) === -1) {
     acc.push(current);
   }
   return acc;
