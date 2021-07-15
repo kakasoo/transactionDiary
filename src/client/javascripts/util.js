@@ -1,3 +1,10 @@
+function deduplicate(acc, current) {
+  if (acc.findIndex(({ DIARY_ID }) => DIARY_ID === current.DIARY_ID) === -1) {
+    acc.push(current);
+  }
+  return acc;
+}
+
 function getAuthCookie() {
   const cookies = document.cookie.split(';').map((cookie) => {
     const [key, value] = cookie.split('=');

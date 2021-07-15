@@ -2,6 +2,8 @@ body {
   margin: 0px 0px 0px 0px;
   padding: 0px 20% 0px 20%;
   max-height: 100%;
+
+  overflow: hidden;
 }
 
 #searchSection {
@@ -48,8 +50,9 @@ body {
 }
 
 main#note {
-  border: 1px solid black;
   min-width: 560px;
+  max-height: 800px;
+  overflow-y: scroll;
 }
 
 div.card {

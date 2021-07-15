@@ -1,3 +1,4 @@
 window.onload = () => {
-  new Diary();
+  const diary = new Diary();
+  const searchBar = new SearchBar(diary);
 };
