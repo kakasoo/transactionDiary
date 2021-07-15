@@ -8,6 +8,19 @@ function getAuthCookie() {
   return authCookie;
 }
 
+async function getResourceByUrl(url) {
+  const authCookie = getAuthCookie();
+  const response = await fetch(url, {
+    method: 'GET',
+    credentials: 'same-origin',
+    headers: {
+      Authorization: `Bearer ${authCookie.value}`,
+    },
+  });
+  const resource = await response.json();
+  return resource;
+}
+
 function changeOpacity(element) {
   const opacity = element.style.opacity;
   element.style.opacity = opacity ? '' : 1;

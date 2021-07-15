@@ -21,7 +21,3 @@ class WriteDiary {
     };
   }
 }
-
-window.onload = () => {
-  new WriteDiary();
-};
