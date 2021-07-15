@@ -6,6 +6,7 @@ body {
 
 #searchSection {
   margin: 10px 0px 10px 0px;
+  min-width: 560px;
 }
 
 .inputLabel {
@@ -48,6 +49,7 @@ body {
 
 main#note {
   border: 1px solid black;
+  min-width: 560px;
 }
 
 div.card {

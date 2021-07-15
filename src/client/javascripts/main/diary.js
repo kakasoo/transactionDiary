@@ -14,6 +14,7 @@ class Diary {
 
   makeCardLine(partOfDiaries) {
     const cardLine = document.createElement('section');
+    cardLine.style.display = 'flex';
     for (const diary of partOfDiaries) {
       const { DIARY_ID, GROUP_ID, TITLE, CONTENT, UPDATED_AT } = diary;
 
