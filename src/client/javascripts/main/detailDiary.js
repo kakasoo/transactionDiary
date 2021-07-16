@@ -1,6 +1,9 @@
 class DetailDiary {
   constructor() {
     this.detailDiaryModal = document.getElementById('diaryModal');
+    this.closebutton = document.getElementById('closeDetailDiaryModal');
+
+    this.closebutton.onclick = this.getDetailDiaryModal();
   }
 
   getDetailDiaryModal(diaryId, groupId, title, content, updatedAt) {
