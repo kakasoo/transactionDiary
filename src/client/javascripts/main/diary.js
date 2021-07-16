@@ -9,6 +9,16 @@ class Diary {
   makeCardLine(partOfDiaries) {
     const cardLine = document.createElement('section');
     cardLine.style.display = 'flex';
+
+    while (partOfDiaries.length < 5) {
+      partOfDiaries.push({
+        DIARY_ID: null,
+        TITLE: '',
+        CONTENT: '',
+        UPDATED_AT: '',
+      });
+    }
+
     for (const diary of partOfDiaries) {
       const { DIARY_ID, GROUP_ID, TITLE, CONTENT, UPDATED_AT } = diary;
 
