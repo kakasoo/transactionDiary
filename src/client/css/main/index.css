@@ -55,24 +55,6 @@ main#note {
   overflow-y: scroll;
 }
 
-div.card {
-  border: 1px solid red;
-  border-radius: 15px;
-  margin: 10px;
-
-  max-width: 300px;
-  max-height: 300px;
-  width: 300px;
-  height: 300px;
-
-  min-width: 100px;
-  min-height: 100px;
-}
-
-.innerCard {
-  padding: 10px;
-}
-
 .diaryModal {
   top: calc(50% - 400px);
   left: calc(50% - 400px);
