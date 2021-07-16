@@ -31,7 +31,16 @@ export class GroupService {
   async join(userId: number, groupId: number) {
     const connection = getConnection();
 
-    connection.manager.query(`
+    const joined = await connection.manager.query(`
+      SELECT * FROM USER_GROUPS WHERE USER_ID = ${userId} AND GROUP_ID = ${groupId} LIMIT 1;
+    `);
+
+    // NOTE : 이미 가입한 적이 있다면 종료.
+    if (joined.length) {
+      return;
+    }
+
+    await connection.manager.query(`
       INSERT INTO USER_GROUPS(USER_ID, GROUP_ID) VALUES (${userId}, ${groupId});
     `);
   }
