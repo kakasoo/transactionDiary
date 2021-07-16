@@ -28,6 +28,22 @@ async function getResourceByUrl(url) {
   return resource;
 }
 
+async function postDataByUrl(url, data, cookie = true) {
+  const headers = { 'Content-type': 'application/json' };
+
+  if (cookie) {
+    headers['Authorization'] = `bearer ${authCookie.value}`;
+  }
+
+  const response = await fetch(url, {
+    method: 'POST',
+    headers: headers,
+    body: JSON.stringify(data),
+  });
+
+  return response;
+}
+
 function changeOpacity(element) {
   const opacity = element.style.opacity;
   element.style.opacity = opacity ? '' : 1;

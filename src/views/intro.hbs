@@ -6,6 +6,7 @@
     <link href='/css/intro/index.css' rel='stylesheet' />
     <script src='/javascripts/util.js'></script>
     <script src='/javascripts/intro/login.js'></script>
+    <script src='/javascripts/intro/index.js'></script>
   </head>
   <body>
     <header id='banner'>
@@ -15,7 +16,7 @@
             id='mainButton'
             onclick="window.location = '/main'"
           >Diary</button>
-          <button id='loginButton' onclick='getLoginModal()'>Login</button>
+          <button id='loginButton'>Login</button>
         </div>
       </div>
       <figure id='bannerImgFrame'>
@@ -53,11 +54,53 @@
         <button
           id='localLogin'
           class='loginSubmitButton'
-          onclick='localLogin()'
         >login</button>
         <button class='naver loginSubmitButton'>naver</button>
         <button class='gmail loginSubmitButton'>gmail</button>
         <button class='github loginSubmitButton'>github</button>
+      </div>
+    </div>
+
+    <div id='signUpModal' class='modalOuter'>
+      <div id='innerLoginModal' class='modalInner'>
+        <h2 id='signUpModalHead'>Login</h2>
+        <div id='adress'>
+          <label class='signUpModalLabel' for='adress'>adress</label>
+          <input
+            id='inputOfAdress'
+            class='signUpInput'
+            type='email'
+            name='adress'
+            placeholder='이메일을 입력해주세요'
+            value='kscodebase@gmail.com'
+          />
+        </div>
+        <div>
+          <label class='signUpModalLabel' for='password'>password</label>
+          <input
+            id='inputOfPassword'
+            class='signUpInput'
+            type='password'
+            name='password'
+            placeholder='패스워드를 입력해주세요'
+            value='1234567890@'
+          />
+        </div>
+          <label class='signUpModalLabel' for='nickname'>nickname</label>
+          <input
+            id='inputOfNickname'
+            class='signUpInput'
+            type='nickname'
+            name='nickname'
+            placeholder='패스워드를 입력해주세요'
+            value='1234567890@'
+          />
+        </div>
+        <button
+          id='localSignUp'
+          class='signUpSubmitButton'
+          {{!-- onclick='localLogin()' --}}
+        >signUp</button>
       </div>
     </div>
 

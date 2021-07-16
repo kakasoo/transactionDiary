@@ -1,49 +1,54 @@
-function getLoginModal() {
-  const loginModal = document.getElementById('loginModal');
+class LoginModal {
+  constructor() {
+    this.loginButton = document.getElementById('loginButton');
+    this.localLoginButton = document.getElementById('localLogin');
 
-  // functions of util.js
-  changeOpacity(loginModal);
-  changeZIndex(loginModal);
-
-  const modalBackground = document.getElementById('modalBackground');
-  const modalBackgroundColor = modalBackground.style.background;
-  if (modalBackgroundColor === 'transparent' || !modalBackgroundColor) {
-    modalBackground.style.background = 'black';
-    modalBackground.style.zIndex = 5;
-  } else {
-    modalBackground.style.background = 'transparent';
-    modalBackground.style.zIndex = -10;
-  }
-}
-
-// TODO : password에서 enter 누를 시에 동작하게 해야 한다.
-async function localLogin() {
-  const adress = document.getElementById('inputOfAdress').value;
-  const password = document.getElementById('inputOfPassword').value;
-  if (!adress || !password) {
-    // TODO : 경고 문구를 loginModal에서 보여주면 좋을 것 같다.
-    // throw new Error('아이디나 비밀번호를 다시 확인해주세요!');
-    return;
+    this.loginButton.onclick = this.getLoginModal;
+    this.localLoginButton.onclick = this.localLogin;
   }
 
-  const loginResponse = await fetch('/api/users/login', {
-    method: 'POST',
-    headers: {
-      'Content-type': 'application/json',
-    },
-    body: JSON.stringify({
-      adress: adress,
-      password: password,
-    }),
-  });
+  getLoginModal() {
+    const loginModal = document.getElementById('loginModal');
 
-  if (loginResponse.ok) {
-    const { access_token } = await loginResponse.json();
-    document.cookie = `auth=${access_token}`;
-    window.location.href = '/main';
-    return true;
+    // functions of util.js
+    changeOpacity(loginModal);
+    changeZIndex(loginModal);
+
+    const modalBackground = document.getElementById('modalBackground');
+    const modalBackgroundColor = modalBackground.style.background;
+    if (modalBackgroundColor === 'transparent' || !modalBackgroundColor) {
+      modalBackground.style.background = 'black';
+      modalBackground.style.zIndex = 5;
+    } else {
+      modalBackground.style.background = 'transparent';
+      modalBackground.style.zIndex = -10;
+    }
   }
 
-  alert('로그인에 실패하였습니다.');
-  return false;
+  // TODO : password에서 enter 누를 시에 동작하게 해야 한다.
+  async localLogin() {
+    const adress = document.getElementById('inputOfAdress').value;
+    const password = document.getElementById('inputOfPassword').value;
+    if (!adress || !password) {
+      // TODO : 경고 문구를 loginModal에서 보여주면 좋을 것 같다.
+      // throw new Error('아이디나 비밀번호를 다시 확인해주세요!');
+      return;
+    }
+
+    const loginResponse = await postDataByUrl(
+      '/api/users/login',
+      { adress, password },
+      false,
+    );
+
+    if (loginResponse.ok) {
+      const { access_token } = await loginResponse.json();
+      document.cookie = `auth=${access_token}`;
+      window.location.href = '/main';
+      return true;
+    }
+
+    alert('로그인에 실패하였습니다.');
+    return false;
+  }
 }
