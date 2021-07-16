@@ -29,28 +29,37 @@ class SignUpModal {
 
   // TODO : password에서 enter 누를 시에 동작하게 해야 한다.
   async localSignUp() {
-    const adress = document.getElementById('inputOfAdress').value;
-    const password = document.getElementById('inputOfPassword').value;
-    if (!adress || !password) {
+    const adress = document.getElementById('inputOfSignUpAdress').value;
+    const password = document.getElementById('inputOfSignUpPassword').value;
+    const nickname = document.getElementById('inputOfSignUpNickname').value;
+    if (!adress || !password || !nickname) {
       // TODO : 경고 문구를 signUpModal에서 보여주면 좋을 것 같다.
       // throw new Error('아이디나 비밀번호를 다시 확인해주세요!');
       return;
     }
 
     const signUpResponse = await postDataByUrl(
-      '/api/users/signUp',
-      { adress, password },
+      '/api/users/sign-up',
+      { adress, password, nickname },
       false,
     );
 
     if (signUpResponse.ok) {
-      const { access_token } = await signUpResponse.json();
-      document.cookie = `auth=${access_token}`;
-      window.location.href = '/main';
-      return true;
+      const loginResponse = await postDataByUrl(
+        '/api/users/login',
+        { adress, password },
+        false,
+      );
+
+      if (loginResponse.ok) {
+        const { access_token } = await loginResponse.json();
+        document.cookie = `auth=${access_token}`;
+        window.location.href = '/main';
+        return true;
+      }
     }
 
-    alert('로그인에 실패하였습니다.');
+    alert('회원가입에 실패하였습니다.');
     return false;
   }
 }
