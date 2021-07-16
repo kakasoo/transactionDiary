@@ -11,12 +11,14 @@ body {
 #bannerTopMargin {
   min-height: 50px;
   align-items: center;
+
+  padding: 0px 10% 0px 10%;
 }
 
 #defaultButtons {
   float: right;
   margin-top: 15px;
-  margin-right: 100px;
+  /* margin-right: 100px; */
 }
 
 #bannerImgFrame {
