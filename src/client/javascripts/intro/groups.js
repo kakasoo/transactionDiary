@@ -8,10 +8,13 @@ class GroupSection {
 
   joinGroup(groupId) {
     return async function () {
-      console.log(groupId);
-      await postDataByUrl('/api/groups/join', {
-        groupId,
-      });
+      const returned = confirm('해당 그룹에 가입하시겠습니까?');
+
+      if (returned) {
+        await postDataByUrl('/api/groups/join', {
+          groupId,
+        });
+      }
     };
   }
 
