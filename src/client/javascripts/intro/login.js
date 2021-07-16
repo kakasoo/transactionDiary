@@ -2,9 +2,11 @@ class LoginModal {
   constructor() {
     this.loginButton = document.getElementById('loginButton');
     this.localLoginButton = document.getElementById('localLogin');
+    this.closeButton = document.getElementById('closeLoginModal');
 
     this.loginButton.onclick = this.getLoginModal;
     this.localLoginButton.onclick = this.localLogin;
+    this.closeButton.onclick = this.getLoginModal;
   }
 
   getLoginModal() {

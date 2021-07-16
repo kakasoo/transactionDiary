@@ -2,9 +2,11 @@ class SignUpModal {
   constructor() {
     this.signUpButton = document.getElementById('signUpButton');
     this.localSignUpButton = document.getElementById('localSignUp');
+    this.closeButton = document.getElementById('closeSignUpModal');
 
     this.signUpButton.onclick = this.getSignUpModal;
     this.localSignUpButton.onclick = this.localSignUp;
+    this.closeButton.onclick = this.getSignUpModal;
   }
 
   getSignUpModal() {
