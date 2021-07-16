@@ -8,6 +8,7 @@ class GroupSection {
 
   joinGroup(groupId) {
     return async function () {
+      console.log(groupId);
       await postDataByUrl('/api/groups/join', {
         groupId,
       });

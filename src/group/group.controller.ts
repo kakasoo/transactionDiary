@@ -6,11 +6,14 @@ import {
   Patch,
   Param,
   Delete,
+  Req,
+  UseGuards,
 } from '@nestjs/common';
 import { GroupService } from './group.service';
 import { CreateGroupDto } from './dto/create-group.dto';
 import { UpdateGroupDto } from './dto/update-group.dto';
 import { ApiBody, ApiOperation, ApiParam, ApiTags } from '@nestjs/swagger';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 
 @ApiTags('GROUPS')
 @Controller('api/groups')
@@ -36,6 +39,15 @@ export class GroupController {
     @Body() CreateGroupDto: CreateGroupDto & { userId: number },
   ) {
     return this.groupService.createMyselfGroup(CreateGroupDto);
+  }
+
+  @ApiOperation({ summary: '그룹 가입' })
+  @UseGuards(JwtAuthGuard)
+  @Post('join')
+  join(@Body() joinGroupDto, @Req() req) {
+    const { groupId } = joinGroupDto;
+    const userId = req.user.id;
+    return this.groupService.join(userId, groupId);
   }
 
   @ApiOperation({ summary: '모든 그룹 조회' })

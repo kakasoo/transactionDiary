@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { getConnection, Repository } from 'typeorm';
 import { CreateGroupDto } from './dto/create-group.dto';
 import { UpdateGroupDto } from './dto/update-group.dto';
 import { Groups } from './entities/group.entity';
@@ -26,6 +26,14 @@ export class GroupService {
     });
 
     return createdGroup;
+  }
+
+  async join(userId: number, groupId: number) {
+    const connection = getConnection();
+
+    connection.manager.query(`
+      INSERT INTO USER_GROUPS(USER_ID, GROUP_ID) VALUES (${userId}, ${groupId});
+    `);
   }
 
   async createMyselfGroup(
