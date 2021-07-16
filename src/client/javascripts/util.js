@@ -32,6 +32,7 @@ async function postDataByUrl(url, data, cookie = true) {
   const headers = { 'Content-type': 'application/json' };
 
   if (cookie) {
+    const authCookie = getAuthCookie();
     headers['Authorization'] = `bearer ${authCookie.value}`;
   }
 

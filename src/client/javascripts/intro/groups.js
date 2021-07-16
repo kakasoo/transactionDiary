@@ -6,14 +6,30 @@ class GroupSection {
     this.getGroups();
   }
 
+  joinGroup(groupId) {
+    return async function () {
+      await postDataByUrl('/api/groups/join', {
+        groupId,
+      });
+    };
+  }
+
   makeGroupLine(groups) {
     const cardLine = document.createElement('section');
     cardLine.style.display = 'flex';
+
+    while (groups.length < 5) {
+      groups.push({
+        id: null,
+        name: '',
+      });
+    }
 
     for (const group of groups) {
       const { id, name } = group;
 
       const card = document.createElement('div');
+      card.onclick = this.joinGroup(id);
 
       card.id = `card${id}`;
       card.className = 'card';
@@ -29,7 +45,7 @@ class GroupSection {
   }
 
   render() {
-    const GROUP_NUM = 5;
+    const GROUP_NUM = 4;
     const groups = [...this.groupList];
 
     while (groups.length) {
