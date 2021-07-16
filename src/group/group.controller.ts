@@ -44,6 +44,12 @@ export class GroupController {
     return this.groupService.findAll();
   }
 
+  @ApiOperation({ summary: '공개로 되어 있는 모든 그룹 조회' })
+  @Get('visible')
+  findAllVisibleGroups() {
+    return this.groupService.findAllVisibleGroups();
+  }
+
   @ApiOperation({ summary: '단일 그룹 조회' })
   @ApiParam({
     name: 'id',

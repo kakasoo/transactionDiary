@@ -22,6 +22,7 @@ export class GroupService {
       password: hashedPassword,
       groupPic,
       visible,
+      readonly: 0,
     });
 
     return createdGroup;
@@ -37,13 +38,23 @@ export class GroupService {
     return this.groupRepository.save({
       name,
       groupPic,
-      visible,
+      visible: 0,
+      readonly: 1,
       password: hashedPassword,
     });
   }
 
   async findAll() {
     const groups = await this.groupRepository.find();
+    return groups;
+  }
+
+  async findAllVisibleGroups() {
+    const visible = 1;
+    const readonly = 1;
+    const groups = await this.groupRepository.find({
+      where: { visible, readonly },
+    });
     return groups;
   }
 
