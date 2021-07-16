@@ -6,6 +6,7 @@
     <link href='/css/intro/index.css' rel='stylesheet' />
     <script src='/javascripts/util.js'></script>
     <script src='/javascripts/intro/login.js'></script>
+    <script src='/javascripts/intro/signUp.js'></script>
     <script src='/javascripts/intro/index.js'></script>
   </head>
   <body>
@@ -17,6 +18,7 @@
             onclick="window.location = '/main'"
           >Diary</button>
           <button id='loginButton'>Login</button>
+          <button id='signUpButton'>SignUp</button>
         </div>
       </div>
       <figure id='bannerImgFrame'>
@@ -63,7 +65,7 @@
 
     <div id='signUpModal' class='modalOuter'>
       <div id='innerLoginModal' class='modalInner'>
-        <h2 id='signUpModalHead'>Login</h2>
+        <h2 id='signUpModalHead'>SignUp</h2>
         <div id='adress'>
           <label class='signUpModalLabel' for='adress'>adress</label>
           <input
@@ -72,7 +74,6 @@
             type='email'
             name='adress'
             placeholder='이메일을 입력해주세요'
-            value='kscodebase@gmail.com'
           />
         </div>
         <div>
@@ -83,7 +84,6 @@
             type='password'
             name='password'
             placeholder='패스워드를 입력해주세요'
-            value='1234567890@'
           />
         </div>
           <label class='signUpModalLabel' for='nickname'>nickname</label>
@@ -92,8 +92,7 @@
             class='signUpInput'
             type='nickname'
             name='nickname'
-            placeholder='패스워드를 입력해주세요'
-            value='1234567890@'
+            placeholder='닉네임을 입력해주세요'
           />
         </div>
         <button

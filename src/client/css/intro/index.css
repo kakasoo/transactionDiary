@@ -66,3 +66,35 @@ body {
 
   margin: 10px 0px 10px 0px;
 }
+
+#signUpModal {
+  top: calc(50% - 250px);
+  left: calc(50% - 250px);
+
+  width: 500px;
+  height: 500px;
+  border-radius: 30px;
+}
+
+#signUpModalHead {
+  font-size: xx-large;
+  text-shadow: black 1px 1px 1px;
+}
+
+.signUpModalLabel {
+  display: inline-block;
+  width: 100px;
+}
+
+.signUpInput {
+  width: calc(100% - 106px);
+  height: 30px;
+  margin: 5px 0px 15px 0px;
+}
+
+.signUpSubmitButton {
+  height: 30px;
+  width: 100%;
+
+  margin: 10px 0px 10px 0px;
+}
