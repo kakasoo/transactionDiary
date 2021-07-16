@@ -21,7 +21,7 @@ export class UserService {
     const group = new Groups();
     group.name = '내게쓰기';
     group.password = hashedPassword;
-    group.readonly = 0;
+    group.readonly = 1;
 
     const user = new Users();
     user.adress = adress;

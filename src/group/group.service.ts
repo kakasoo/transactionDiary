@@ -51,7 +51,7 @@ export class GroupService {
 
   async findAllVisibleGroups() {
     const visible = 1;
-    const readonly = 1;
+    const readonly = 0;
     const groups = await this.groupRepository.find({
       where: { visible, readonly },
     });
