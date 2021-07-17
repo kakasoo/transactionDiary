@@ -74,6 +74,11 @@ export class UserController {
     return this.userService.findOne(+id);
   }
 
+  @Get(':id/groups')
+  findGroupsOfUser(@Param('id') id: string) {
+    return this.userService.findGroupsOfUser(+id);
+  }
+
   @ApiOperation({ summary: '유저 정보 수정' })
   @ApiBody({
     type: UpdateUserDto,

@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Users } from '../user/entities/user.entity';
-import { getManager, Repository } from 'typeorm';
+import { getConnection, getManager, Repository } from 'typeorm';
 import { CreateUserDto } from '../user/dto/create-user.dto';
 import { UpdateUserDto } from '../user/dto/update-user.dto';
 import * as bcrypt from 'bcrypt';
@@ -55,6 +55,14 @@ export class UserService {
       where: { id },
     });
     return users;
+  }
+
+  async findGroupsOfUser(id: number) {
+    const connection = getConnection();
+    const groups = await connection.manager.query(`
+      SELECT \`GROUP_ID\` AS \`groupId\` FROM \`USER_GROUPS\` WHERE USER_ID = ${id}
+    `);
+    return groups;
   }
 
   async update(id: number, updateUserDto: UpdateUserDto) {
