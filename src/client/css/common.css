@@ -52,3 +52,27 @@ div.card {
 .innerCard {
   padding: 10px;
 }
+
+#appName {
+  float: left;
+  margin: 0px;
+  width: 30%;
+
+  word-wrap: normal;
+  word-break: normal;
+  /* letter-spacing: 1px; */
+  color: black;
+  text-shadow: black 1px 1px 1px;
+}
+
+#appName:hover {
+  cursor: pointer;
+}
+
+.strongText1 {
+  text-shadow: tomato 3px 1px 1px;
+}
+
+.strongText2 {
+  text-shadow: steelblue 3px 1px 1px;
+}

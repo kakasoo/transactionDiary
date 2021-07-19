@@ -14,13 +14,10 @@
   <body>
 
     <div id='searchSection'>
-      <label id='appTitle' class='inPutLabel' for='search'>교환일기</label>
-      <input
-        id='search'
-        name='search'
-        placeholder='일기 내용을 검색해보세요!'
-      />
-      <button id='searchButton'>검색</button>
+      <h1 id='appName' class='mainAppName' onclick="window.location.href='/'">
+        <span class='strongText1'>T</span>ransaction
+        <span class='strongText2'>D</span>iary
+      </h1>
 
       <div id='sortButtons'>
         <button id='byTime' class='sortButton'>sort by time</button>
@@ -28,6 +25,15 @@
         <button id='write' class='sortButton'>일기 쓰기</button>
       </div>
     </div>
+    <div>
+      <input
+        id='search'
+        name='search'
+        placeholder='일기 내용을 검색해보세요!'
+      />
+      <button id='searchButton'>검색</button>
+    </div>
+
     <main id='note'></main>
 
     <div id='diaryModal' class='diaryModal modalOuter'>

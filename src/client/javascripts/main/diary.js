@@ -110,10 +110,18 @@ class Diary {
   async getMyDiary() {
     // function of util.js
     const diaries = await getResourceByUrl('/api/diaries');
-    this.diaryList.push(...diaries);
 
     if (diaries[Symbol.iterator]) {
+      this.diaryList.push(...diaries);
+      if (!this.diaryList.length) {
+        // NOTE : 데이터가 없는 경우
+      }
       this.sortDiariesByTime();
+    } else {
+      // NOTE : get 요청에 실패한 경우.
+      const noDataView = CE('div', 'noData');
+      noDataView.innerText = 'Sorry.';
+      note.appendChild(noDataView);
     }
   }
 }

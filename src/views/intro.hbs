@@ -16,14 +16,15 @@
   <body>
     <header id='banner'>
       <div id='bannerTopMargin'>
-        <h1 id = "appName">
-          <span class="strongText1">T</span>ransaction <span class="strongText2">D</span>iary</h1>
+        <h1 id = "appName"  onclick="window.location.href='/'">
+          <span class="strongText1">T</span>ransaction 
+          <span class="strongText2">D</span>iary
+        </h1>
         <div id='defaultButtons'>
           <button
             id='mainButton' class="bannerTopButtons"
-            onclick="window.location = '/main'"
           >
-            <span class="buttonText">Diary</span>
+            <span class="buttonText" onclick="window.location.href = '/main'">Diary</span>
           </button>
           <button id='loginButton' class="bannerTopButtons">
             <span class="buttonText">Login</span>
