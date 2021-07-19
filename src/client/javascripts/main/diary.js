@@ -3,8 +3,12 @@ class Diary {
     this.detailDiaryModal = new DetailDiary();
     this.writeDiaryModal = new WriteDiary();
 
-    // [this.byTime, this.byGroups] =
-    //   document.getElementsByClassName('sortButton');
+    this.byTime = $('byTime');
+    this.byGroups = $('byGroups');
+
+    this.byTime.onclick = this.sortDiariesByTime.bind(this);
+    this.byGroups.onclick = this.sortDiariesByGroups.bind(this);
+
     this.diaryList = [];
     this.getMyDiary();
   }
@@ -49,22 +53,24 @@ class Diary {
     return cardLine;
   }
 
-  // sortDiaryByGroups(newDiaryArr) {
-  //   const diaries = newDiaryArr ? newDiaryArr : this.diaryList;
+  sortDiariesByGroups() {
+    // NOTE : 그룹 별로 가져온 경우에는 중복을 제거하지 않는다.
+    const note = $('note');
+    while (note.firstChild) {
+      note.removeChild(note.firstChild);
+    }
 
-  //   // NOTE : 그룹 별로 가져온 경우에는 중복을 제거하지 않는다.
-  //   const note = $('note');
-  //   const CARD_NUM = 5;
+    console.log(this.diaryList);
+  }
 
-  //   console.log(diaries);
-  // }
-
-  sortDiariesByTime(newDiaryArr) {
-    const diaries = newDiaryArr ? newDiaryArr : this.diaryList;
+  sortDiariesByTime() {
+    const note = $('note');
+    while (note.firstChild) {
+      note.removeChild(note.firstChild);
+    }
 
     // NOTE : 그룹 별로 가져온 다이어리를 시간 순으로 정렬하기 위해, 중복된 일기를 제거한다.
-    const diariesData = diaries.reduce(deduplicate, []);
-    const note = $('note');
+    const diariesData = this.diaryList.reduce(deduplicate, []);
     const CARD_NUM = 5;
 
     while (diariesData.length) {
