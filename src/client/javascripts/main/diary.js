@@ -10,7 +10,47 @@ class Diary {
     this.byGroups.onclick = this.sortDiariesByGroups.bind(this);
 
     this.diaryList = [];
+    this.diaryGroupNameCache = [];
     this.getMyDiary();
+  }
+
+  // NOTE : 형식을 고민하다 보니 이렇게 됐는데, HTML을 head, body로 구분짓는 것은 좋은 생각 같다.
+  makeCardsGroup(name) {
+    const cardGroup = document.createElement('div');
+    cardGroup.id = name;
+
+    const cardHead = document.createElement('h2');
+    cardHead.innerText = name;
+
+    const cardBody = document.createElement('div');
+
+    cardGroup.append(cardHead, cardBody);
+    return cardGroup;
+  }
+
+  makeCard(diary) {
+    const { DIARY_ID, GROUP_ID, TITLE, CONTENT, UPDATED_AT } = diary;
+
+    const card = document.createElement('div');
+    // function of detailDiary.js
+    card.onclick = this.detailDiaryModal.getDetailDiaryModal(
+      DIARY_ID,
+      GROUP_ID,
+      TITLE,
+      CONTENT,
+      UPDATED_AT,
+    );
+
+    card.id = `card${DIARY_ID}`;
+    card.className = 'card';
+    card.innerHTML = `
+      <div class = 'innerCard'>
+        <h2>${TITLE}</h2>
+        <p>${CONTENT}</p>
+      </div>
+      `;
+
+    return card;
   }
 
   makeCardLine(partOfDiaries) {
@@ -27,27 +67,7 @@ class Diary {
     }
 
     for (const diary of partOfDiaries) {
-      const { DIARY_ID, GROUP_ID, TITLE, CONTENT, UPDATED_AT } = diary;
-
-      const card = document.createElement('div');
-      // function of detailDiary.js
-      card.onclick = this.detailDiaryModal.getDetailDiaryModal(
-        DIARY_ID,
-        GROUP_ID,
-        TITLE,
-        CONTENT,
-        UPDATED_AT,
-      );
-
-      card.id = `card${DIARY_ID}`;
-      card.className = 'card';
-      card.innerHTML = `
-      <div class = 'innerCard'>
-        <h2>${TITLE}</h2>
-        <p>${CONTENT}</p>
-      </div>
-      `;
-
+      const card = this.makeCard(diary);
       cardLine.appendChild(card);
     }
     return cardLine;
@@ -60,7 +80,15 @@ class Diary {
       note.removeChild(note.firstChild);
     }
 
-    console.log(this.diaryList);
+    for (const a of this.diaryList) {
+      if (!this.diaryGroupNameCache.includes(a.NAME)) {
+        const cardsGroup = this.makeCardsGroup(a.NAME);
+        note.appendChild(cardsGroup);
+      }
+
+      const card = this.makeCard(a);
+      $(a.NAME).appendChild(card);
+    }
   }
 
   sortDiariesByTime() {
