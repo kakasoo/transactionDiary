@@ -15,6 +15,10 @@ body {
   text-shadow: black 1px 1px 1px;
 }
 
+#appName:hover {
+  cursor: pointer;
+}
+
 .strongText1 {
   text-shadow: tomato 3px 1px 1px;
 }
