@@ -2,6 +2,9 @@ class Diary {
   constructor() {
     this.detailDiaryModal = new DetailDiary();
     this.writeDiaryModal = new WriteDiary();
+
+    // [this.byTime, this.byGroups] =
+    //   document.getElementsByClassName('sortButton');
     this.diaryList = [];
     this.getMyDiary();
   }
@@ -46,12 +49,22 @@ class Diary {
     return cardLine;
   }
 
+  // sortDiaryByGroups(newDiaryArr) {
+  //   const diaries = newDiaryArr ? newDiaryArr : this.diaryList;
+
+  //   // NOTE : 그룹 별로 가져온 경우에는 중복을 제거하지 않는다.
+  //   const note = $('note');
+  //   const CARD_NUM = 5;
+
+  //   console.log(diaries);
+  // }
+
   sortDiariesByTime(newDiaryArr) {
     const diaries = newDiaryArr ? newDiaryArr : this.diaryList;
 
     // NOTE : 그룹 별로 가져온 다이어리를 시간 순으로 정렬하기 위해, 중복된 일기를 제거한다.
     const diariesData = diaries.reduce(deduplicate, []);
-    const note = document.getElementById('note');
+    const note = $('note');
     const CARD_NUM = 5;
 
     while (diariesData.length) {

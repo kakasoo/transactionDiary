@@ -1,3 +1,7 @@
+function $(id) {
+  return document.getElementById(id);
+}
+
 function deduplicate(acc, current) {
   if (acc.findIndex(({ DIARY_ID }) => DIARY_ID === current.DIARY_ID) === -1) {
     acc.push(current);

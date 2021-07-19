@@ -1,14 +1,14 @@
 class DetailDiary {
   constructor() {
-    this.detailDiaryModal = document.getElementById('diaryModal');
-    this.closebutton = document.getElementById('closeDetailDiaryModal');
+    this.detailDiaryModal = $('diaryModal');
+    this.closebutton = $('closeDetailDiaryModal');
 
     this.closebutton.onclick = this.getDetailDiaryModal();
   }
 
   getDetailDiaryModal(diaryId, groupId, title, content, updatedAt) {
     return function () {
-      const diaryModal = document.getElementById('diaryModal');
+      const diaryModal = $('diaryModal');
 
       // modalBackground.style.
 
@@ -16,7 +16,7 @@ class DetailDiary {
       changeOpacity(diaryModal);
       changeZIndex(diaryModal);
 
-      const modalBackground = document.getElementById('modalBackground');
+      const modalBackground = $('modalBackground');
       const modalBackgroundColor = modalBackground.style.background;
       if (modalBackgroundColor === 'transparent' || !modalBackgroundColor) {
         modalBackground.style.background = 'black';
@@ -26,9 +26,9 @@ class DetailDiary {
         modalBackground.style.zIndex = -10;
       }
 
-      document.getElementById('diaryTitle').innerText = title;
-      document.getElementById('diaryContent').innerText = content;
-      document.getElementById('diaryDate').innerText = updatedAt;
+      $('diaryTitle').innerText = title;
+      $('diaryContent').innerText = content;
+      $('diaryDate').innerText = updatedAt;
 
       return;
     };

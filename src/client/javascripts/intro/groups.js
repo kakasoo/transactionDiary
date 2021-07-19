@@ -1,6 +1,6 @@
 class GroupSection {
   constructor() {
-    this.groupIntro = document.getElementById('groupIntro');
+    this.groupIntro = $('groupIntro');
     this.groupList = [];
 
     this.getGroups();

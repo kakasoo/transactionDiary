@@ -1,6 +1,6 @@
 class Banner {
   constructor() {
-    this.banner = document.getElementById('bannerImg');
+    this.banner = $('bannerImg');
     this.index = 0;
     this.textContents = [
       'Have a happy time.',

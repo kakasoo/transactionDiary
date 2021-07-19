@@ -1,7 +1,7 @@
 class WriteDiary {
   constructor() {
-    this.writeButton = document.getElementById('write');
-    this.completeButton = document.getElementById('completeWriting');
+    this.writeButton = $('write');
+    this.completeButton = $('completeWriting');
 
     this.writeButton.onclick = this.getWriteDiaryModal();
     this.completeButton.onclick = this.postDiary();
@@ -9,14 +9,14 @@ class WriteDiary {
 
   getWriteDiaryModal() {
     return function () {
-      const writeDiaryModal = document.getElementById('writeDiaryModal');
+      const writeDiaryModal = $('writeDiaryModal');
       const zIndex = writeDiaryModal.style.zIndex;
 
       // functions of util.js
       changeOpacity(writeDiaryModal);
       changeZIndex(writeDiaryModal);
 
-      const modalBackground = document.getElementById('modalBackground');
+      const modalBackground = $('modalBackground');
       const modalBackgroundColor = modalBackground.style.background;
       if (modalBackgroundColor === 'transparent' || !modalBackgroundColor) {
         modalBackground.style.background = 'black';
@@ -30,9 +30,9 @@ class WriteDiary {
 
   postDiary() {
     return async function () {
-      const title = document.getElementById('writeTitle').value;
-      const createdAt = document.getElementById('writeDate').value;
-      const content = document.getElementById('writeContent').value;
+      const title = $('writeTitle').value;
+      const createdAt = $('writeDate').value;
+      const content = $('writeContent').value;
 
       if (!title && !createdAt && !content) {
         alert('빈칸을 모두 채워주세요!');

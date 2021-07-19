@@ -1,8 +1,8 @@
 class LoginModal {
   constructor() {
-    this.loginButton = document.getElementById('loginButton');
-    this.localLoginButton = document.getElementById('localLogin');
-    this.closeButton = document.getElementById('closeLoginModal');
+    this.loginButton = $('loginButton');
+    this.localLoginButton = $('localLogin');
+    this.closeButton = $('closeLoginModal');
 
     this.loginButton.onclick = this.getLoginModal;
     this.localLoginButton.onclick = this.localLogin;
@@ -10,13 +10,13 @@ class LoginModal {
   }
 
   getLoginModal() {
-    const loginModal = document.getElementById('loginModal');
+    const loginModal = $('loginModal');
 
     // functions of util.js
     changeOpacity(loginModal);
     changeZIndex(loginModal);
 
-    const modalBackground = document.getElementById('modalBackground');
+    const modalBackground = $('modalBackground');
     const modalBackgroundColor = modalBackground.style.background;
     if (modalBackgroundColor === 'transparent' || !modalBackgroundColor) {
       modalBackground.style.background = 'black';
@@ -29,8 +29,8 @@ class LoginModal {
 
   // TODO : password에서 enter 누를 시에 동작하게 해야 한다.
   async localLogin() {
-    const adress = document.getElementById('inputOfAdress').value;
-    const password = document.getElementById('inputOfPassword').value;
+    const adress = $('inputOfAdress').value;
+    const password = $('inputOfPassword').value;
     if (!adress || !password) {
       // TODO : 경고 문구를 loginModal에서 보여주면 좋을 것 같다.
       // throw new Error('아이디나 비밀번호를 다시 확인해주세요!');
