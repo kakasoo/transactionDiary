@@ -27,7 +27,7 @@ function getAuthCookie() {
 }
 
 function deleteAuthCookie() {
-  console.log(document.cookie);
+  document.cookie = 'auth=;';
 }
 
 async function getResourceByUrl(url) {
