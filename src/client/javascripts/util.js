@@ -2,6 +2,14 @@ function $(id) {
   return document.getElementById(id);
 }
 
+function CE(tag, id) {
+  const element = document.createElement(tag);
+  if (id) {
+    element.id = id;
+  }
+  return element;
+}
+
 function deduplicate(acc, current) {
   if (acc.findIndex(({ DIARY_ID }) => DIARY_ID === current.DIARY_ID) === -1) {
     acc.push(current);
