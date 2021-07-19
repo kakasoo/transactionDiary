@@ -16,7 +16,7 @@ class Banner {
   }
 
   setText(textContent) {
-    const text = document.createElement('h1');
+    const text = CE('h1');
     text.innerText = textContent;
     text.style.height = '300px';
     text.style.lineHeight = '300px';

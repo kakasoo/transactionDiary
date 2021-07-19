@@ -19,10 +19,11 @@ class GroupSection {
   }
 
   makeGroupLine(groups) {
-    const cardLine = document.createElement('section');
+    const cardLine = CE('section');
     cardLine.style.display = 'flex';
+    cardLine.style.width = '100%';
 
-    while (groups.length < 5) {
+    while (groups.length < 4) {
       groups.push({
         id: null,
         name: '',
@@ -32,16 +33,20 @@ class GroupSection {
     for (const group of groups) {
       const { id, name } = group;
 
-      const card = document.createElement('div');
+      const card = CE('div');
       card.onclick = this.joinGroup(id);
 
+      const cardHead = CE('div');
+      cardHead.className = 'groupCardHead';
+
+      const cardBody = CE('div');
+      cardBody.className = 'groupCardBody';
+      cardBody.innerHTML = `<h2 style= "font-size : 20px; font-weight : 300;">${name}</h2>`;
+
       card.id = `card${id}`;
-      card.className = 'card';
-      card.innerHTML = `
-      <div class = 'innerCard'>
-        <h2>${name}</h2>
-      </div>
-      `;
+      card.className = 'groupCard';
+
+      card.append(cardHead, cardBody);
 
       cardLine.appendChild(card);
     }

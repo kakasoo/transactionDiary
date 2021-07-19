@@ -16,13 +16,13 @@ class Diary {
 
   // NOTE : 형식을 고민하다 보니 이렇게 됐는데, HTML을 head, body로 구분짓는 것은 좋은 생각 같다.
   makeCardsGroup(name) {
-    const cardGroup = document.createElement('div');
+    const cardGroup = CE('div');
     cardGroup.id = name;
 
-    const cardHead = document.createElement('h2');
+    const cardHead = CE('h2');
     cardHead.innerText = name;
 
-    const cardBody = document.createElement('div');
+    const cardBody = CE('div');
 
     cardGroup.append(cardHead, cardBody);
     return cardGroup;
@@ -31,7 +31,7 @@ class Diary {
   makeCard(diary) {
     const { DIARY_ID, GROUP_ID, TITLE, CONTENT, UPDATED_AT } = diary;
 
-    const card = document.createElement('div');
+    const card = CE('div');
     // function of detailDiary.js
     card.onclick = this.detailDiaryModal.getDetailDiaryModal(
       DIARY_ID,
@@ -54,7 +54,7 @@ class Diary {
   }
 
   makeCardLine(partOfDiaries) {
-    const cardLine = document.createElement('section');
+    const cardLine = CE('section');
     cardLine.style.display = 'flex';
 
     while (partOfDiaries.length < 5) {
