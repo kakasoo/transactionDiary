@@ -5,7 +5,7 @@ class LoginModal {
     this.closeButton = $('closeLoginModal');
 
     this.authCookie = getAuthCookie();
-    if (this.authCookie) {
+    if (this.authCookie.value) {
       this.loginButton.innerText = 'logout';
       this.loginButton.onclick = deleteAuthCookie;
     } else {
@@ -18,7 +18,7 @@ class LoginModal {
 
   getLoginModal() {
     const authCookie = getAuthCookie();
-    if (authCookie) {
+    if (authCookie.value) {
       // NOTE : 이미 로그인된 상태에서 로그인 모달을 켜지 못하게 한다.
       return;
     }
