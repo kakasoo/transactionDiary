@@ -32,21 +32,23 @@ class GroupSection {
 
     for (const group of groups) {
       const { id, name } = group;
-
       const card = CE('div');
-      card.onclick = this.joinGroup(id);
 
-      const cardHead = CE('div');
-      cardHead.className = 'groupCardHead';
+      if (id) {
+        card.onclick = this.joinGroup(id);
 
-      const cardBody = CE('div');
-      cardBody.className = 'groupCardBody';
-      cardBody.innerHTML = `<h2 style= "font-size : 20px; font-weight : 300;">${name}</h2>`;
+        const cardHead = CE('div');
+        cardHead.className = 'groupCardHead';
 
-      card.id = `card${id}`;
-      card.className = 'groupCard';
+        const cardBody = CE('div');
+        cardBody.className = 'groupCardBody';
+        cardBody.innerHTML = `<h2 style= "font-size : 20px; font-weight : 300;">${name}</h2>`;
 
-      card.append(cardHead, cardBody);
+        card.id = `card${id}`;
+        card.className = 'groupCard';
+
+        card.append(cardHead, cardBody);
+      }
 
       cardLine.appendChild(card);
     }
