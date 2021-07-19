@@ -4,7 +4,14 @@ class LoginModal {
     this.localLoginButton = $('localLogin');
     this.closeButton = $('closeLoginModal');
 
-    this.loginButton.onclick = this.getLoginModal;
+    this.authCookie = getAuthCookie();
+    if (this.authCookie) {
+      this.loginButton.innerText = 'logout';
+      this.loginButton.onclick = deleteAuthCookie;
+    } else {
+      this.loginButton.onclick = this.getLoginModal;
+    }
+
     this.localLoginButton.onclick = this.localLogin;
     this.closeButton.onclick = this.getLoginModal;
   }

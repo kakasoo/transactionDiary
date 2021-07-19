@@ -10,17 +10,24 @@ function deduplicate(acc, current) {
 }
 
 function getAuthCookie() {
-  const cookies = document.cookie.split(';').map((cookie) => {
+  const cookies = document.cookie.split('; ').map((cookie) => {
     const [key, value] = cookie.split('=');
     return { key, value };
   });
   const [authCookie] = cookies.filter((cookie) => cookie.key === 'auth');
-
   return authCookie;
+}
+
+function deleteAuthCookie() {
+  console.log(document.cookie);
 }
 
 async function getResourceByUrl(url) {
   const authCookie = getAuthCookie();
+
+  if (!authCookie) {
+    return;
+  }
   const response = await fetch(url, {
     method: 'GET',
     credentials: 'same-origin',
