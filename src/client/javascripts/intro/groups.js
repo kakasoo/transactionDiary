@@ -42,7 +42,7 @@ class GroupSection {
 
         const cardBody = CE('div');
         cardBody.className = 'groupCardBody';
-        cardBody.innerHTML = `<h2 style= "font-size : 20px; font-weight : 300;">${name}</h2>`;
+        cardBody.innerHTML = `<h2 class ="groupName" style= "font-size : 20px; font-weight : 300;">${name}</h2>`;
 
         card.id = `card${id}`;
         card.className = 'groupCard';
