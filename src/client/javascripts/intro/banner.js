@@ -1,6 +1,21 @@
 class Banner {
   constructor() {
     this.banner = $('bannerImg');
+    this.bannerOriginalWidth = 1920;
+
+    const width = this.banner.style.width || this.banner.clientWidth;
+    this.newFontSize = parseInt((width * 108) / this.bannerOriginalWidth);
+
+    console.log(this.newFontSize);
+
+    window.onresize = () => {
+      const width = this.banner.style.width || this.banner.clientWidth;
+
+      const text = this.banner.firstChild;
+      this.newFontSize = parseInt((width * 108) / this.bannerOriginalWidth);
+      text.style.fontSize = `${this.newFontSize}px`;
+    };
+
     this.index = 0;
     this.textContents = [
       'Have a happy time.',
@@ -23,7 +38,7 @@ class Banner {
     text.style.width = '100%';
     text.style.textAlign = 'center';
     text.style.color = 'white';
-    text.style.fontSize = '108px';
+    text.style.fontSize = `${this.newFontSize}px`;
     text.style.textShadow = 'black 2px 2px 10px';
 
     this.banner.style.display = 'flex';
