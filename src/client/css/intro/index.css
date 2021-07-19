@@ -6,10 +6,12 @@ body {
 }
 
 #bannerTopMargin {
+  min-width: 550px;
   min-height: 50px;
   align-items: center;
 
   padding: 0px 10% 0px 10%;
+  overflow: hidden;
 }
 
 #defaultButtons {

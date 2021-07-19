@@ -57,6 +57,7 @@ div.card {
   float: left;
   margin: 0px;
   width: 30%;
+  min-width: 300px;
 
   word-wrap: normal;
   word-break: normal;
