@@ -66,9 +66,10 @@ class GroupSection {
   }
 
   async getGroups() {
-    const groups = await getResourceByUrl('/api/groups/visible');
-    this.groupList.push(...groups);
-
+    const groups = await getResourceByUrlWithoutAuth('/api/groups/visible');
+    if (groups && groups.length) {
+      this.groupList.push(...groups);
+    }
     this.render();
   }
 }

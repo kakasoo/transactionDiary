@@ -4,15 +4,16 @@ class Banner {
     this.bannerOriginalWidth = 1920;
 
     const width = this.banner.style.width || this.banner.clientWidth;
-    this.newFontSize = parseInt((width * 108) / this.bannerOriginalWidth);
-
-    console.log(this.newFontSize);
+    this.newFontSize = parseInt((width / this.bannerOriginalWidth) * 108);
 
     window.onresize = () => {
       const width = this.banner.style.width || this.banner.clientWidth;
 
       const text = this.banner.firstChild;
-      this.newFontSize = parseInt((width * 108) / this.bannerOriginalWidth);
+      this.newFontSize = parseInt((width / this.bannerOriginalWidth) * 108);
+      // this.banner.style.height = parseInt(
+      //   (width / this.bannerOriginalWidth) * 890,
+      // );
       text.style.fontSize = `${this.newFontSize}px`;
     };
 

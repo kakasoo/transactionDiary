@@ -48,6 +48,15 @@ async function getResourceByUrl(url) {
   return resource;
 }
 
+async function getResourceByUrlWithoutAuth(url) {
+  const response = await fetch(url, {
+    method: 'GET',
+    credentials: 'same-origin',
+  });
+  const resource = await response.json();
+  return resource;
+}
+
 async function postDataByUrl(url, data, cookie = true) {
   const headers = { 'Content-type': 'application/json' };
 

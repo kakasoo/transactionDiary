@@ -5,7 +5,7 @@ class LoginModal {
     this.closeButton = $('closeLoginModal');
 
     this.authCookie = getAuthCookie();
-    if (this.authCookie.value) {
+    if (this.authCookie && this.authCookie.value) {
       this.loginButton.innerText = 'logout';
       this.loginButton.onclick = deleteAuthCookie;
     } else {
