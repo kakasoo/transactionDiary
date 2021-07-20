@@ -41,6 +41,11 @@ class Diary {
     card.id = `card${DIARY_ID}`;
     card.className = 'diaryCard';
 
+    if (!DIARY_ID) {
+      card.style.boxShadow = '';
+      return card;
+    }
+
     // function of detailDiary.js
     card.onclick = this.detailDiaryModal.getDetailDiaryModal(
       DIARY_ID,
@@ -69,7 +74,7 @@ class Diary {
 
     while (partOfDiaries.length < 5) {
       partOfDiaries.push({
-        DIARY_ID: null,
+        DIARY_ID: '',
         TITLE: '',
         CONTENT: '',
         UPDATED_AT: '',
