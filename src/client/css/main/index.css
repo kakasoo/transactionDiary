@@ -92,3 +92,29 @@ main#note {
 #writeContent {
   min-height: 80%;
 }
+
+.diaryCard {
+  margin: 20px 15px;
+
+  width: 25%;
+  height: 350px;
+
+  min-width: 100px;
+  min-height: 100px;
+
+  box-shadow: wheat 4px 4px 5px;
+}
+.diaryCardHead {
+  background-image: url('../../images/rock.jpg');
+  background-size: cover;
+  width: 100%;
+  height: 30%;
+}
+
+.diaryCardBody {
+  width: calc(100% - 40px);
+  margin: 0px 20px;
+  height: auto;
+
+  overflow-y: hidden;
+}

@@ -38,6 +38,9 @@ class Diary {
     const { DIARY_ID, GROUP_ID, TITLE, CONTENT, UPDATED_AT } = diary;
 
     const card = CE('div');
+    card.id = `card${DIARY_ID}`;
+    card.className = 'diaryCard';
+
     // function of detailDiary.js
     card.onclick = this.detailDiaryModal.getDetailDiaryModal(
       DIARY_ID,
@@ -47,14 +50,15 @@ class Diary {
       UPDATED_AT,
     );
 
-    card.id = `card${DIARY_ID}`;
-    card.className = 'card';
-    card.innerHTML = `
-      <div class = 'innerCard'>
-        <h2>${TITLE}</h2>
-        <p>${CONTENT}</p>
-      </div>
-      `;
+    const cardHead = CE('div');
+    cardHead.className = 'diaryCardHead';
+
+    const cardBody = CE('div');
+    cardBody.className = 'diaryCardBody';
+    cardBody.innerHTML = `<h2 class ="diaryName" style= "font-size : 20px; font-weight : 300;">${TITLE}</h2>
+    <span>${CONTENT}</span>`;
+
+    card.append(cardHead, cardBody);
 
     return card;
   }
