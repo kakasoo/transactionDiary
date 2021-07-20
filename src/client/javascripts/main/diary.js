@@ -1,5 +1,11 @@
 class Diary {
   constructor() {
+    this.auth = getAuthCookie();
+    if (!this.auth || !this.auth.value) {
+      window.location.href = '/';
+      alert('로그인을 먼저 해주셔야 합니다.');
+    }
+
     this.detailDiaryModal = new DetailDiary();
     this.writeDiaryModal = new WriteDiary();
 
