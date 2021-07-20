@@ -10,6 +10,12 @@ class GroupSection {
     return async function () {
       const returned = confirm('해당 그룹에 가입하시겠습니까?');
 
+      const auth = getAuthCookie();
+      if (!auth || !auth.value) {
+        alert('로그인을 먼저 해주셔야 합니다.');
+        return;
+      }
+
       if (returned) {
         await postDataByUrl('/api/groups/join', {
           groupId,
