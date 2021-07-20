@@ -18,7 +18,7 @@ class LoginModal {
 
   getLoginModal() {
     const authCookie = getAuthCookie();
-    if (authCookie.value) {
+    if (authCookie && authCookie.value) {
       // NOTE : 이미 로그인된 상태에서 로그인 모달을 켜지 못하게 한다.
       return;
     }
