@@ -29,18 +29,6 @@ export class GroupController {
     return this.groupService.create(createGroupDto);
   }
 
-  // NOTE : 실제 사용은, 다른 controller에서 service를 호출하는 것으로 하지 controller를 통하지 않는다.
-  @ApiOperation({ summary: '각 유저에 대한 내게 쓰기 그룹 추가' })
-  @ApiBody({
-    type: CreateGroupDto,
-  })
-  @Post('/myself')
-  createMyselfGroup(
-    @Body() CreateGroupDto: CreateGroupDto & { userId: number },
-  ) {
-    return this.groupService.createMyselfGroup(CreateGroupDto);
-  }
-
   @ApiOperation({ summary: '그룹 가입' })
   @UseGuards(JwtAuthGuard)
   @Post('join')
