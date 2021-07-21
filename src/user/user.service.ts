@@ -1,48 +1,73 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Users } from '../user/entities/user.entity';
-import { getConnection, getManager, Repository } from 'typeorm';
+import { Connection, getConnection, Repository, Transaction } from 'typeorm';
 import { CreateUserDto } from '../user/dto/create-user.dto';
 import { UpdateUserDto } from '../user/dto/update-user.dto';
 import * as bcrypt from 'bcrypt';
 import { Groups } from 'src/group/entities/group.entity';
 import { Diaries } from 'src/diary/entities/diary.entity';
+import { UserGroups } from 'src/userGroup/entites/userGroup.entity';
+import { DiaryGroups } from 'src/diaryGroup/entites/diaryGroup.entity.ts';
 
 @Injectable()
 export class UserService {
   constructor(
-    @InjectRepository(Users) private userRepository: Repository<Users>,
+    @InjectRepository(Users)
+    private userRepository: Repository<Users>,
+    @InjectRepository(UserGroups)
+    private userGroupRepository: Repository<UserGroups>,
+    @InjectRepository(Groups)
+    private groupRepository: Repository<Groups>,
+    @InjectRepository(Diaries)
+    private diaryRepository: Repository<Diaries>,
+    @InjectRepository(DiaryGroups)
+    private diaryGroupRepository: Repository<DiaryGroups>,
+    private connection: Connection,
   ) {}
 
-  async create(createUserDto: CreateUserDto): Promise<Users> {
+  async create(createUserDto: CreateUserDto) {
     const { adress, password, nickname, userPic } = createUserDto;
-    const hashedPassword = await bcrypt.hash(password, 12);
+    const queryRunner = await getConnection().createQueryRunner();
+    await queryRunner.startTransaction();
 
-    const group = new Groups();
-    group.name = '내게쓰기';
-    group.password = hashedPassword;
-    group.readonly = 1;
+    try {
+      const hashedPassword = await bcrypt.hash(password, 12);
+      const group = await this.groupRepository.save({
+        name: '내게쓰기',
+        password: hashedPassword,
+        readonly: 1,
+      });
 
-    const user = new Users();
-    user.adress = adress;
-    user.password = hashedPassword;
-    user.nickname = nickname;
-    user.userPic = userPic;
-    user.groups = [group];
+      const user = await this.userRepository.save({
+        adress,
+        password: hashedPassword,
+        nickname,
+        userPic,
+      });
 
-    const diary = new Diaries();
-    diary.title = '오신 것을 환영합니다!';
-    diary.content = '좋은 문화를 만들어요!';
-    diary.user = user;
-    diary.groups = [group];
+      const diary = await this.diaryRepository.save({
+        title: '오신 것을 환영합니다.',
+        content: '좋은 문화를 만들어요',
+        userId: user.id,
+      });
 
-    await getManager().transaction(async (transactionEntityManager) => {
-      await transactionEntityManager.save(group);
-      await transactionEntityManager.save(user);
-      await transactionEntityManager.save(diary);
-    });
+      await this.userGroupRepository.save({
+        userId: user.id,
+        groupId: group.id,
+      });
 
-    return user;
+      await this.diaryGroupRepository.save({
+        diaryId: diary.id,
+        groupId: group.id,
+      });
+
+      await queryRunner.commitTransaction();
+    } catch (error) {
+      await queryRunner.rollbackTransaction();
+    } finally {
+      await queryRunner.release();
+    }
   }
 
   async findAll() {
