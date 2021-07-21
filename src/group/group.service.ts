@@ -1,15 +1,19 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { getConnection, Repository } from 'typeorm';
+import { Repository } from 'typeorm';
 import { CreateGroupDto } from './dto/create-group.dto';
 import { UpdateGroupDto } from './dto/update-group.dto';
 import { Groups } from './entities/group.entity';
 import * as bcrypt from 'bcrypt';
+import { UserGroups } from 'src/userGroup/entites/userGroup.entity';
 
 @Injectable()
 export class GroupService {
   constructor(
-    @InjectRepository(Groups) private groupRepository: Repository<Groups>,
+    @InjectRepository(Groups)
+    private groupRepository: Repository<Groups>,
+    @InjectRepository(UserGroups)
+    private userGroupRepository: Repository<UserGroups>,
   ) {}
 
   async create(createGroupDto: CreateGroupDto) {
@@ -29,20 +33,24 @@ export class GroupService {
   }
 
   async join(userId: number, groupId: number) {
-    const connection = getConnection();
+    const joined = await this.userGroupRepository
+      .createQueryBuilder('userGroup')
+      .select()
+      .where({
+        userId,
+        groupId,
+      })
+      .getOne();
 
-    const joined = await connection.manager.query(`
-      SELECT * FROM USER_GROUPS WHERE USER_ID = ${userId} AND GROUP_ID = ${groupId} LIMIT 1;
-    `);
-
-    // NOTE : 이미 가입한 적이 있다면 종료.
-    if (joined.length) {
+    if (joined) {
+      console.log('이미 가입된 그룹입니다.');
       return;
     }
 
-    await connection.manager.query(`
-      INSERT INTO USER_GROUPS(USER_ID, GROUP_ID) VALUES (${userId}, ${groupId});
-    `);
+    await this.userGroupRepository.save({
+      userId,
+      groupId,
+    });
   }
 
   async createMyselfGroup(
