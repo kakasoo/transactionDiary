@@ -28,7 +28,7 @@ export class UserService {
 
   async create(createUserDto: CreateUserDto) {
     const { adress, password, nickname, userPic } = createUserDto;
-    const queryRunner = await getConnection().createQueryRunner();
+    const queryRunner = this.connection.createQueryRunner();
     await queryRunner.startTransaction();
 
     try {
@@ -83,11 +83,12 @@ export class UserService {
   }
 
   async findGroupsOfUser(id: number) {
-    const connection = getConnection();
-    const groups = await connection.manager.query(`
-      SELECT \`GROUP_ID\` AS \`groupId\` FROM \`USER_GROUPS\` WHERE USER_ID = ${id}
-    `);
-    return groups;
+    // NOTE : 특정 데이터를 받아올 때에는 getMany 대신 getRawMany로 한다.
+    return await this.userGroupRepository
+      .createQueryBuilder('userGroups')
+      .select(['GROUP_ID as groupId'])
+      .where({ userId: id })
+      .getRawMany();
   }
 
   async update(id: number, updateUserDto: UpdateUserDto) {
