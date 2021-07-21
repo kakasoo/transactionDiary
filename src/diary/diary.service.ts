@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Get, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { DiaryGroups } from 'src/diaryGroup/entites/diaryGroup.entity.ts';
 import { UserGroups } from 'src/userGroup/entites/userGroup.entity';
@@ -61,17 +61,45 @@ export class DiaryService {
 
   async findAll(userId) {
     // NOTE : 유저가 가입한 그룹을 보고, 그 그룹의 다이어리를 불러온다.
-    const connection = getConnection();
+    const queryRunner = this.connection.createQueryRunner();
+    await queryRunner.startTransaction();
 
-    const diary = await connection.manager.query(`
-    SELECT \`D\`.\`ID\` as \`DIARY_ID\`, \`G\`.\`ID\` AS \`GROUP_ID\`, \`UG\`.\`USER_ID\`, \`D\`.\`TITLE\`, \`D\`.\`CONTENT\`, \`D\`.\`UPDATED_AT\`, \`D\`.\`HASHTAG\`, \`G\`.\`NAME\`
-      FROM \`DIARY_GROUPS\` AS \`DG\` LEFT OUTER JOIN \`USER_GROUPS\` AS \`UG\` ON \`DG\`.\`GROUP_ID\` = \`UG\`.\`GROUP_ID\`
-      LEFT OUTER JOIN \`DIARIES\` AS \`D\` ON \`D\`.\`ID\`= \`DG\`.\`DIARY_ID\` 
-      LEFT OUTER JOIN \`GROUPS\` AS \`G\` ON \`G\`.\`ID\` = \`DG\`.\`GROUP_ID\`
-      WHERE \`UG\`.\`USER_ID\` = ${userId};
-    `);
+    try {
+      const diaryGroups = await this.diaryGroupRepository
+        .createQueryBuilder('DG')
+        .select([
+          'D.ID as diaryId',
+          'G.ID as groupId',
+          'UG.USER_ID as userId',
+          'D.TITLE as title',
+          'D.CONTENT as content',
+          'D.UPDATED_AT as updatedAt',
+          'D.HASHTAG as hashtag',
+          'G.NAME as name',
+        ])
+        .innerJoin('DG.group', 'G')
+        .innerJoin('DG.diary', 'D')
+        .innerJoin(UserGroups, 'UG', 'DG.GROUP_ID = UG.GROUP_ID')
+        .where(`UG.USER_ID = ${userId}`)
+        .getRawMany();
 
-    return diary;
+      console.log(diaryGroups);
+    } catch (error) {
+      console.error(error);
+      queryRunner.rollbackTransaction();
+    } finally {
+      queryRunner.release();
+    }
+
+    // const diary = await connection.manager.query(`
+    // SELECT \`D\`.\`ID\` as \`DIARY_ID\`, \`G\`.\`ID\` AS \`GROUP_ID\`, \`UG\`.\`USER_ID\`, \`D\`.\`TITLE\`, \`D\`.\`CONTENT\`, \`D\`.\`UPDATED_AT\`, \`D\`.\`HASHTAG\`, \`G\`.\`NAME\`
+    //   FROM \`DIARY_GROUPS\` AS \`DG\` LEFT OUTER JOIN \`USER_GROUPS\` AS \`UG\` ON \`DG\`.\`GROUP_ID\` = \`UG\`.\`GROUP_ID\`
+    //   LEFT OUTER JOIN \`DIARIES\` AS \`D\` ON \`D\`.\`ID\`= \`DG\`.\`DIARY_ID\`
+    //   LEFT OUTER JOIN \`GROUPS\` AS \`G\` ON \`G\`.\`ID\` = \`DG\`.\`GROUP_ID\`
+    //   WHERE \`UG\`.\`USER_ID\` = ${userId};
+    // `);
+
+    // return diary;
   }
 
   async findOne(id: number) {
