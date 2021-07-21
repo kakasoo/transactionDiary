@@ -6,6 +6,7 @@ import {
   Entity,
   Index,
   ManyToMany,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -19,10 +20,12 @@ import {
   IsString,
   Length,
 } from 'class-validator';
+import { UserGroups } from '../../userGroup/entites/userGroup.entity';
+import { DiaryGroups } from '../../diaryGroup/entites/diaryGroup.entity.ts';
 
 @Index('ID_UNIQUE', ['id'], { unique: true })
 @Entity('GROUPS', { schema: 'mydb' })
-export class Groups extends BaseEntity {
+export class Groups {
   @PrimaryGeneratedColumn({ type: 'int', name: 'ID' })
   id: number;
 
@@ -82,9 +85,14 @@ export class Groups extends BaseEntity {
   @DeleteDateColumn({ name: 'DELETED_AT' })
   deletedAt: Date | null;
 
+  @OneToMany(() => UserGroups, (userGroup) => userGroup.groupId)
+  userGroup: UserGroups[];
+
   @ManyToMany(() => Users, (users) => users.groups)
   users: Users[];
 
-  @ManyToMany(() => Diaries, (diaries) => diaries.groups)
+  @OneToMany(() => DiaryGroups, (diaryGroup) => diaryGroup.groupId)
+  diaryGroup: DiaryGroups[];
+
   diaries: Diaries[];
 }

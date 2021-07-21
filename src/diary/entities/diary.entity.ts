@@ -1,4 +1,5 @@
 import {
+  BaseEntity,
   Column,
   Entity,
   Index,
@@ -14,10 +15,11 @@ import { Comments } from '../../comment/entities/comment.entity';
 import { Groups } from '../../group/entities/group.entity';
 import { ApiProperty } from '@nestjs/swagger';
 import { IsInt, IsOptional, IsString, Length } from 'class-validator';
+import { DiaryGroups } from '../../diaryGroup/entites/diaryGroup.entity.ts';
 
 @Index('fk_diaries_users_idx', ['userId'], {})
 @Entity('DIARIES', { schema: 'mydb' })
-export class Diaries {
+export class Diaries extends BaseEntity {
   @PrimaryGeneratedColumn({ type: 'int', name: 'ID' })
   id: number;
 
@@ -80,17 +82,20 @@ export class Diaries {
     onDelete: 'NO ACTION',
     onUpdate: 'NO ACTION',
   })
-  @JoinColumn([{ name: 'USER_ID', referencedColumnName: 'id' }])
+  @JoinColumn([{ name: 'USER_ID' }])
   user: Users;
 
   @OneToMany(() => Comments, (comments) => comments.diary)
   comments: Comments[];
 
+  @OneToMany(() => DiaryGroups, (diaryGroup) => diaryGroup.groupId)
+  diaryGroup: DiaryGroups[];
+
   @ManyToMany(() => Groups, (groups) => groups.diaries)
   @JoinTable({
     name: 'DIARY_GROUPS',
-    joinColumns: [{ name: 'DIARY_ID', referencedColumnName: 'id' }],
-    inverseJoinColumns: [{ name: 'GROUP_ID', referencedColumnName: 'id' }],
+    joinColumns: [{ name: 'DIARY_ID' }],
+    inverseJoinColumns: [{ name: 'GROUP_ID' }],
     schema: 'mydb',
   })
   groups: Groups[];

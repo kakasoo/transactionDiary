@@ -1,5 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsOptional, IsString, Length } from 'class-validator';
+import { UserGroups } from '../../userGroup/entites/userGroup.entity';
 import {
   BaseEntity,
   Column,
@@ -84,9 +85,12 @@ export class Users extends BaseEntity {
   @ManyToMany(() => Groups, (groups) => groups.users)
   @JoinTable({
     name: 'USER_GROUPS',
-    joinColumns: [{ name: 'USER_ID', referencedColumnName: 'id' }],
-    inverseJoinColumns: [{ name: 'GROUP_ID', referencedColumnName: 'id' }],
+    joinColumn: { name: 'USER_ID' },
+    inverseJoinColumn: { name: 'GROUP_ID' },
     schema: 'mydb',
   })
   groups: Groups[];
+
+  @OneToMany(() => UserGroups, (userGroup) => userGroup.userId)
+  userGroup: UserGroups[];
 }

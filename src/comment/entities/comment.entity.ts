@@ -1,4 +1,5 @@
 import {
+  BaseEntity,
   Column,
   Entity,
   Index,
@@ -13,7 +14,7 @@ import { Diaries } from '../../diary/entities/diary.entity';
 @Index('fk_COMMENTS_DIARIES1_idx', ['diaryId'], {})
 @Index('fk_COMMENTS_COMMENTS1_idx', ['parent'], {})
 @Entity('COMMENTS', { schema: 'mydb' })
-export class Comments {
+export class Comments extends BaseEntity {
   @PrimaryGeneratedColumn({ type: 'int', name: 'ID' })
   id: number;
 
@@ -51,16 +52,16 @@ export class Comments {
     onDelete: 'NO ACTION',
     onUpdate: 'NO ACTION',
   })
-  @JoinColumn([{ name: 'PARENT', referencedColumnName: 'id' }])
+  @JoinColumn([{ name: 'PARENT' }])
   parent2: Comments;
 
   @OneToOne(() => Comments, (comments) => comments.parent2)
   comments: Comments;
 
   @ManyToOne(() => Diaries, (diaries) => diaries.comments, {
-    onDelete: 'NO ACTION',
-    onUpdate: 'NO ACTION',
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
   })
-  @JoinColumn([{ name: 'DIARY_ID', referencedColumnName: 'id' }])
+  @JoinColumn([{ name: 'DIARY_ID' }])
   diary: Diaries;
 }

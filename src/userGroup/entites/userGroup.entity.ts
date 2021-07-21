@@ -1,6 +1,12 @@
 import { Groups } from '../../group/entities/group.entity';
 import { Users } from '../../user/entities/user.entity';
-import { BaseEntity, Entity, ManyToOne, PrimaryColumn } from 'typeorm';
+import {
+  BaseEntity,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryColumn,
+} from 'typeorm';
 
 @Entity('USER_GROUPS', { schema: 'mydb' })
 export class UserGroups extends BaseEntity {
@@ -11,8 +17,12 @@ export class UserGroups extends BaseEntity {
   groupId: number;
 
   @ManyToOne(() => Users, (user) => user.id)
+  @JoinColumn([{ name: 'USER_ID' }])
   user: Users;
 
-  @ManyToOne(() => Groups, (group) => group.id)
+  @ManyToOne(() => Groups, (group) => group.id, {
+    onDelete: 'CASCADE',
+  })
+  @JoinColumn([{ name: 'GROUP_ID' }])
   group: Groups;
 }
