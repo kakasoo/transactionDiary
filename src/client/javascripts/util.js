@@ -11,7 +11,7 @@ function CE(tag, id) {
 }
 
 function deduplicate(acc, current) {
-  if (acc.findIndex(({ DIARY_ID }) => DIARY_ID === current.DIARY_ID) === -1) {
+  if (acc.findIndex(({ diaryId }) => diaryId === current.diaryId) === -1) {
     acc.push(current);
   }
   return acc;

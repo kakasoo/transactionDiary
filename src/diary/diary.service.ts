@@ -83,23 +83,13 @@ export class DiaryService {
         .where(`UG.USER_ID = ${userId}`)
         .getRawMany();
 
-      console.log(diaryGroups);
+      return diaryGroups;
     } catch (error) {
       console.error(error);
       queryRunner.rollbackTransaction();
     } finally {
       queryRunner.release();
     }
-
-    // const diary = await connection.manager.query(`
-    // SELECT \`D\`.\`ID\` as \`DIARY_ID\`, \`G\`.\`ID\` AS \`GROUP_ID\`, \`UG\`.\`USER_ID\`, \`D\`.\`TITLE\`, \`D\`.\`CONTENT\`, \`D\`.\`UPDATED_AT\`, \`D\`.\`HASHTAG\`, \`G\`.\`NAME\`
-    //   FROM \`DIARY_GROUPS\` AS \`DG\` LEFT OUTER JOIN \`USER_GROUPS\` AS \`UG\` ON \`DG\`.\`GROUP_ID\` = \`UG\`.\`GROUP_ID\`
-    //   LEFT OUTER JOIN \`DIARIES\` AS \`D\` ON \`D\`.\`ID\`= \`DG\`.\`DIARY_ID\`
-    //   LEFT OUTER JOIN \`GROUPS\` AS \`G\` ON \`G\`.\`ID\` = \`DG\`.\`GROUP_ID\`
-    //   WHERE \`UG\`.\`USER_ID\` = ${userId};
-    // `);
-
-    // return diary;
   }
 
   async findOne(id: number) {

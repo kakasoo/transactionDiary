@@ -35,24 +35,24 @@ class Diary {
   }
 
   makeCard(diary) {
-    const { DIARY_ID, GROUP_ID, TITLE, CONTENT, UPDATED_AT } = diary;
+    const { diaryId, groupId, title, content, updatedAt } = diary;
 
     const card = CE('div');
-    card.id = `card${DIARY_ID}`;
+    card.id = `card${diaryId}`;
     card.className = 'diaryCard';
 
-    if (!DIARY_ID) {
+    if (!diaryId) {
       card.style.boxShadow = '';
       return card;
     }
 
     // function of detailDiary.js
     card.onclick = this.detailDiaryModal.getDetailDiaryModal(
-      DIARY_ID,
-      GROUP_ID,
-      TITLE,
-      CONTENT,
-      UPDATED_AT,
+      diaryId,
+      groupId,
+      title,
+      content,
+      updatedAt,
     );
 
     const cardHead = CE('div');
@@ -60,8 +60,8 @@ class Diary {
 
     const cardBody = CE('div');
     cardBody.className = 'diaryCardBody';
-    cardBody.innerHTML = `<h2 class ="diaryName" style= "font-size : 20px; font-weight : 300;">${TITLE}</h2>
-    <span>${CONTENT}</span>`;
+    cardBody.innerHTML = `<h2 class ="diaryName" style= "font-size : 20px; font-weight : 300;">${title}</h2>
+    <span>${content}</span>`;
 
     card.append(cardHead, cardBody);
 
@@ -74,10 +74,10 @@ class Diary {
 
     while (partOfDiaries.length < 5) {
       partOfDiaries.push({
-        DIARY_ID: '',
-        TITLE: '',
-        CONTENT: '',
-        UPDATED_AT: '',
+        diaryId: '',
+        title: '',
+        content: '',
+        updatedAt: '',
       });
     }
 
