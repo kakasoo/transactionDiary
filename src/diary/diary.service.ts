@@ -61,35 +61,25 @@ export class DiaryService {
 
   async findAll(userId) {
     // NOTE : 유저가 가입한 그룹을 보고, 그 그룹의 다이어리를 불러온다.
-    const queryRunner = this.connection.createQueryRunner();
-    await queryRunner.startTransaction();
+    const diaryGroups = await this.diaryGroupRepository
+      .createQueryBuilder('DG')
+      .select([
+        'D.ID as diaryId',
+        'G.ID as groupId',
+        'UG.USER_ID as userId',
+        'D.TITLE as title',
+        'D.CONTENT as content',
+        'D.UPDATED_AT as updatedAt',
+        'D.HASHTAG as hashtag',
+        'G.NAME as name',
+      ])
+      .innerJoin('DG.group', 'G')
+      .innerJoin('DG.diary', 'D')
+      .innerJoin(UserGroups, 'UG', 'DG.GROUP_ID = UG.GROUP_ID')
+      .where(`UG.USER_ID = ${userId}`)
+      .getRawMany();
 
-    try {
-      const diaryGroups = await this.diaryGroupRepository
-        .createQueryBuilder('DG')
-        .select([
-          'D.ID as diaryId',
-          'G.ID as groupId',
-          'UG.USER_ID as userId',
-          'D.TITLE as title',
-          'D.CONTENT as content',
-          'D.UPDATED_AT as updatedAt',
-          'D.HASHTAG as hashtag',
-          'G.NAME as name',
-        ])
-        .innerJoin('DG.group', 'G')
-        .innerJoin('DG.diary', 'D')
-        .innerJoin(UserGroups, 'UG', 'DG.GROUP_ID = UG.GROUP_ID')
-        .where(`UG.USER_ID = ${userId}`)
-        .getRawMany();
-
-      return diaryGroups;
-    } catch (error) {
-      console.error(error);
-      queryRunner.rollbackTransaction();
-    } finally {
-      queryRunner.release();
-    }
+    return diaryGroups;
   }
 
   async findOne(id: number) {
