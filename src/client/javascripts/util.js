@@ -74,6 +74,20 @@ async function postDataByUrl(url, data, cookie = true) {
   return response;
 }
 
+async function deleteData(url) {
+  const headers = { 'Content-type': 'application/json' };
+
+  const authCookie = getAuthCookie();
+  headers['Authorization'] = `bearer ${authCookie.value}`;
+
+  const response = await fetch(url, {
+    method: 'DELETE',
+    headers: headers,
+  });
+
+  return response;
+}
+
 function changeOpacity(element) {
   const opacity = element.style.opacity;
   element.style.opacity = opacity ? '' : 1;

@@ -1,6 +1,7 @@
 import {
   BaseEntity,
   Column,
+  DeleteDateColumn,
   Entity,
   Index,
   JoinColumn,
@@ -75,7 +76,7 @@ export class Diaries extends BaseEntity {
   })
   updatedAt: Date;
 
-  @Column('datetime', { name: 'DELETED_AT', nullable: true })
+  @DeleteDateColumn({ name: 'DELETED_AT', nullable: true })
   deletedAt: Date | null;
 
   @ManyToOne(() => Users, (users) => users.diaries, {

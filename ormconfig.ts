@@ -25,6 +25,4 @@ const ORMConfig: any & ConnectionOptions = {
   keepConnectionAlive: true,
 };
 
-console.log(ORMConfig);
-
 export = ORMConfig;
