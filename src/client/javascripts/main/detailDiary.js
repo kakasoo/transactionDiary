@@ -36,9 +36,13 @@ class DetailDiary {
         modalBackground.style.zIndex = -10;
       }
 
+      const diaryDate = new Date(updatedAt);
+
       $('diaryTitle').innerText = title;
       $('diaryContent').innerText = content;
-      $('diaryDate').innerText = updatedAt;
+      $('diaryDate').innerText = `${diaryDate.getFullYear()}년 ${
+        diaryDate.getMonth() + 1
+      }월 ${diaryDate.getDay()}일`;
       $('diaryId').value = diaryId;
 
       return;
