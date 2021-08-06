@@ -11,8 +11,12 @@ class DetailDiary {
   deleteThisDiary() {
     return function () {
       const diaryId = $('diaryId').value;
-      deleteData(`/api/diaries/${diaryId}`);
-      // window.location.reload();
+      const returned = confirm('정말로 삭제하시겠습니까?');
+
+      if (returned) {
+        deleteData(`/api/diaries/${diaryId}`);
+        window.location.reload();
+      }
     };
   }
 
