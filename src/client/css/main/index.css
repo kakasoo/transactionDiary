@@ -1,6 +1,7 @@
 body {
   margin: 0px 0px 0px 0px;
   padding: 0px 20% 0px 20%;
+  min-width: 672px;
   max-height: 100%;
 
   overflow: hidden;
@@ -9,12 +10,8 @@ body {
 #searchSection {
   width: 100%;
   margin: 10px 0px 10px 0px;
-  min-width: 560px;
+  min-width: 672px;
   height: 60px;
-}
-
-.mainAppName {
-  margin-left: 15px;
 }
 
 .inputLabel {
@@ -24,24 +21,46 @@ body {
   display: inline-block;
 }
 
+#searchBox {
+  display: flex;
+  width: 100%;
+  max-width: 100%;
+
+  margin-bottom: 30px;
+}
+
+#searchContainer {
+  width: calc(100% - 140px);
+  margin-right: 20px;
+}
+
 #search {
-  margin-left: 15px;
-  width: calc(100% - 75px);
+  width: 100%;
   height: 26px;
+
+  margin: 0px;
+  border: 0px;
+  background-color: #eeeeee;
+  border: 1px solid #aaaaaa;
 }
 
 #searchButton {
-  width: 50px;
+  width: 120px;
   height: 26px;
 
   padding: 0px;
   border: 0px;
-  background-color: transparent;
+
+  background-color: aquamarine;
+  border-radius: 15px;
+  margin: 0px;
 }
 
 #sortButtons {
   float: right;
-  width: 260px;
+  margin-top: 15px;
+
+  /* width: 260px; */
   height: 26px;
 }
 
@@ -49,6 +68,10 @@ body {
   border: 0px;
   background-color: transparent;
   height: 26px;
+  width: 120px;
+
+  background-color: aquamarine;
+  border-radius: 15px;
 }
 
 .sortButton:hover {
@@ -59,7 +82,8 @@ body {
 main#note {
   min-width: 560px;
   max-height: 800px;
-  overflow-y: scroll;
+  overflow-y: hidden;
+  overflow-x: hidden;
 }
 
 .diaryModal {
@@ -76,52 +100,4 @@ main#note {
   height: 100%;
 
   border: 1px solid red;
-}
-
-/*
-** writeDiaryModal
-*/
-
-#writeDiaryForm {
-  padding: 30px;
-}
-
-.writeInput {
-  width: calc(100% - 210px);
-}
-
-#writeContent {
-  min-height: 80%;
-}
-
-.diaryCard {
-  margin: 20px 15px;
-
-  width: 25%;
-  height: 350px;
-
-  min-width: 100px;
-  min-height: 100px;
-
-  box-shadow: wheat 4px 4px 5px;
-}
-
-/* 시각화되지 않도록 box-shadow를 지운다. */
-#card {
-  box-shadow: none;
-}
-
-.diaryCardHead {
-  background-image: url('../../images/rock.jpg');
-  background-size: cover;
-  width: 100%;
-  height: 30%;
-}
-
-.diaryCardBody {
-  width: calc(100% - 40px);
-  margin: 0px 20px;
-  height: auto;
-
-  overflow-y: hidden;
 }

@@ -1,0 +1,41 @@
+.diaryCard {
+  margin: 20px 15px;
+
+  width: 20%;
+  height: 350px;
+
+  /* min-width: 100px; */
+  min-height: 100px;
+
+  box-shadow: wheat 4px 4px 5px;
+}
+
+.noteSection > .diaryCard:first-child {
+  margin-left: 0px;
+}
+
+.noteSection > .diaryCard:last-child {
+  margin-right: 5px;
+}
+
+/* 시각화되지 않도록 box-shadow를 지운다. */
+#card {
+  box-shadow: none;
+}
+
+.diaryCardHead {
+  background-image: url('../../images/rock.jpg');
+  background-size: cover;
+  width: 100%;
+  height: 30%;
+}
+
+.diaryCardBody {
+  width: calc(100% - 40px);
+  min-height: 70%;
+  max-height: 70%;
+  margin: 0px 20px;
+  height: auto;
+
+  overflow: hidden;
+}

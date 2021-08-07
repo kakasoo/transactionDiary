@@ -1,0 +1,15 @@
+/*
+** writeDiaryModal
+*/
+
+#writeDiaryForm {
+  padding: 30px;
+}
+
+.writeInput {
+  width: calc(100% - 210px);
+}
+
+#writeContent {
+  min-height: 80%;
+}

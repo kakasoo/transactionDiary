@@ -22,13 +22,13 @@ class Diary {
 
   // NOTE : 형식을 고민하다 보니 이렇게 됐는데, HTML을 head, body로 구분짓는 것은 좋은 생각 같다.
   makeCardsGroup(name) {
-    const cardGroup = CE('div');
+    const cardGroup = CE({ tag: 'div' });
     cardGroup.id = name;
 
-    const cardHead = CE('h2');
+    const cardHead = CE({ tag: 'h2' });
     cardHead.innerText = name;
 
-    const cardBody = CE('div');
+    const cardBody = CE({ tag: 'div' });
 
     cardGroup.append(cardHead, cardBody);
     return cardGroup;
@@ -37,7 +37,7 @@ class Diary {
   makeCard(diary) {
     const { diaryId, groupId, title, content, updatedAt } = diary;
 
-    const card = CE('div');
+    const card = CE({ tag: 'div' });
     card.id = `card${diaryId}`;
     card.className = 'diaryCard';
 
@@ -55,10 +55,10 @@ class Diary {
       updatedAt,
     );
 
-    const cardHead = CE('div');
+    const cardHead = CE({ tag: 'div' });
     cardHead.className = 'diaryCardHead';
 
-    const cardBody = CE('div');
+    const cardBody = CE({ tag: 'div' });
     cardBody.className = 'diaryCardBody';
     cardBody.innerHTML = `<h2 class ="diaryName" style= "font-size : 20px; font-weight : 300;">${title}</h2>
     <span>${content}</span>`;
@@ -69,7 +69,7 @@ class Diary {
   }
 
   makeCardLine(partOfDiaries) {
-    const cardLine = CE('section');
+    const cardLine = CE({ tag: 'section', className: 'noteSection' });
     cardLine.style.display = 'flex';
 
     while (partOfDiaries.length < 5) {
@@ -137,7 +137,7 @@ class Diary {
       this.sortDiariesByTime();
     } else {
       // NOTE : get 요청에 실패한 경우.
-      const noDataView = CE('div', 'noData');
+      const noDataView = CE({ tag: 'div', id: 'noData' });
       noDataView.innerText = 'Sorry.';
       note.appendChild(noDataView);
     }
