@@ -18,28 +18,30 @@ class WriteDiary {
   async getUserGroups() {
     const userGroups = await getResourceByUrl('/api/groups');
 
-    userGroups.forEach((el) => {
-      const button = CE({ tag: 'button', className: 'groupSelectButton' });
-      button.textContent = el.name;
-      button.onclick = () => {
-        if (this.selectedGroups.includes(el.groupId)) {
-          button.style.border = 'none';
-          button.style.background = 'aquamarine';
-          this.selectedGroups = [
-            ...this.selectedGroups.filter(
-              (selectGroup) => selectGroup !== el.groupId,
-            ),
-          ];
-          return;
-        }
+    userGroups
+      .filter((el) => el.name !== '내게쓰기')
+      .forEach((el) => {
+        const button = CE({ tag: 'button', className: 'groupSelectButton' });
+        button.textContent = el.name;
+        button.onclick = () => {
+          if (this.selectedGroups.includes(el.groupId)) {
+            button.style.border = 'none';
+            button.style.background = 'aquamarine';
+            this.selectedGroups = [
+              ...this.selectedGroups.filter(
+                (selectGroup) => selectGroup !== el.groupId,
+              ),
+            ];
+            return;
+          }
 
-        button.style.border = '1px solid red';
-        button.style.background = 'pink';
-        this.selectedGroups.push(el.groupId);
-      };
+          button.style.border = '1px solid red';
+          button.style.background = 'pink';
+          this.selectedGroups.push(el.groupId);
+        };
 
-      this.selectGroup.appendChild(button);
-    });
+        this.selectGroup.appendChild(button);
+      });
   }
 
   getWriteDiaryModal() {
@@ -64,10 +66,11 @@ class WriteDiary {
   }
 
   postDiary() {
-    return async function () {
+    return async () => {
       const title = $('writeTitle').value;
       const createdAt = $('writeDate').value;
       const content = $('writeContent').value;
+      const selectedGroups = this.selectedGroups || [];
 
       if (!title && !createdAt && !content) {
         alert('빈칸을 모두 채워주세요!');
@@ -87,7 +90,7 @@ class WriteDiary {
           createdAt: createdAt,
           content: content,
           hashtag: '',
-          groupIds: [],
+          groupIds: selectedGroups,
         }),
       });
 

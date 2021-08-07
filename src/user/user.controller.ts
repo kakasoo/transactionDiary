@@ -17,11 +17,6 @@ import { LocalAuthGuard } from 'src/auth/local-auth.guard';
 import { LoginUserDto } from './dto/login-user.dto';
 import { AuthService } from 'src/auth/auth.service';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
-import { Users } from './entities/user.entity';
-import { Groups } from 'src/group/entities/group.entity';
-import * as bcrypt from 'bcrypt';
-import { getManager } from 'typeorm';
-import { Diaries } from 'src/diary/entities/diary.entity';
 
 @ApiTags('USERS')
 @Controller('api/users')

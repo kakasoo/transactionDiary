@@ -4,6 +4,9 @@
     <title>함께 만드는 교환 일기</title>
     <link href='/css/common.css' rel='stylesheet' />
     <link href='/css/main/index.css' rel='stylesheet' />
+    <link href='/css/main/detailDiary.css' rel='stylesheet' />
+    <link href='/css/main/diaryCard.css' rel='stylesheet' />
+    <link href='/css/main/writeDiary.css' rel='stylesheet' />
     <script src='/javascripts/util.js'></script>
     <script src='/javascripts/main/detailDiary.js'></script>
     <script src='/javascripts/main/diary.js'></script>
@@ -25,14 +28,17 @@
         <button id='write' class='sortButton'>일기 쓰기</button>
       </div>
     </div>
-    <div>
-      <input
-        id='search'
-        name='search'
-        placeholder='일기 내용을 검색해보세요!'
-      />
+    <div id='searchBox'>
+      <div id='searchContainer'>
+        <input
+          id='search'
+          name='search'
+          placeholder='일기 내용을 검색해보세요!'
+        />
+      </div>
       <button id='searchButton'>검색</button>
     </div>
+    <span>원하는 일기를 클릭하면 상세 보기가 가능합니다.</span>
 
     <main id='note'></main>
 
@@ -49,6 +55,8 @@
     </div>
 
     <div id='writeDiaryModal' class='diaryModal modalOuter'>
+      <button id='closeWriteDiaryModal' class='closeButton'>x</button>
+
       <div id='innerDiaryModal' class='modalInner'>
         <div id='writeDiaryForm'>
           <div>
@@ -79,12 +87,8 @@
             />
           </div>
           <div>
-            <label class='inputLabel' for='selectGroup'>공개 그룹 : </label>
-            <select
-              id='selectGroup'
-              class='writeInput'
-              name='selectGroup'
-            ></select>
+            <div id='selectGroup' class='writeInput' name='selectGroup'>
+            </div>
           </div>
 
           <button id='completeWriting'>작성 완료</button>
