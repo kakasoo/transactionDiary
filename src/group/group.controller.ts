@@ -38,10 +38,12 @@ export class GroupController {
     return this.groupService.join(userId, groupId);
   }
 
-  @ApiOperation({ summary: '모든 그룹 조회' })
+  @ApiOperation({ summary: '유저가 가입한 모든 그룹 조회' })
   @Get()
-  findAll() {
-    return this.groupService.findAll();
+  @UseGuards(JwtAuthGuard)
+  findAll(@Req() req) {
+    const userId = req.user.id;
+    return this.groupService.findAll(userId);
   }
 
   @ApiOperation({ summary: '공개로 되어 있는 모든 그룹 조회' })

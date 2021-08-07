@@ -43,7 +43,6 @@ export class GroupService {
       .getOne();
 
     if (joined) {
-      console.log('이미 가입된 그룹입니다.');
       return;
     }
 
@@ -53,9 +52,15 @@ export class GroupService {
     });
   }
 
-  async findAll() {
-    const groups = await this.groupRepository.find();
-    return groups;
+  async findAll(userId) {
+    const userGroup = await this.userGroupRepository
+      .createQueryBuilder('userGroup')
+      .select(['GROUP_ID as groupId', 'NAME as name'])
+      .innerJoin('userGroup.group', 'group')
+      .andWhere(`userGroup.USER_ID = ${userId}`)
+      .getRawMany();
+
+    return userGroup;
   }
 
   async findAllVisibleGroups() {
