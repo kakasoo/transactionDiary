@@ -20,7 +20,7 @@ class SearchBar {
           return true;
         }
       });
-      diaryInstance.sortDiariesByTime(newArr);
+      diaryInstance.sortDiariesByTime(diaryInstance, { diaryList: newArr });
     };
   }
 }

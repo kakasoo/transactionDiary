@@ -3,6 +3,9 @@ class WriteDiary {
     this.writeButton = $('write');
     this.completeButton = $('completeWriting');
 
+    this.closebutton = $('closeWriteDiaryModal');
+    this.closebutton.onclick = this.getWriteDiaryModal();
+
     this.writeButton.onclick = this.getWriteDiaryModal();
     this.completeButton.onclick = this.postDiary();
   }
