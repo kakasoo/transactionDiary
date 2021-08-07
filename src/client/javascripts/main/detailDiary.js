@@ -3,11 +3,39 @@ class DetailDiary {
     this.detailDiaryModal = $('diaryModal');
     this.closebutton = $('closeDetailDiaryModal');
     this.deleteButton = $('deleteDiary');
+    this.updateButton = $('updateDiary');
+    this.detailModalBackground = $('detailModalBackground');
+    this.cancelUpdateButton = $('cancelUpdate');
+    this.completeUpdateButton = $('completeUpdateDiary');
 
     this.closebutton.onclick = this.getDetailDiaryModal();
     this.deleteButton.onclick = this.deleteThisDiary();
+    this.detailModalBackground.onclick = this.getDetailDiaryModal();
+    this.updateButton.onclick = this.updateThisDiary();
+    this.cancelUpdateButton.onclick = this.updateThisDiary();
+    this.completeUpdateButton = this.completeUpdateThisDiary();
+  }
 
-    $('detailModalBackground').onclick = this.getDetailDiaryModal();
+  completeUpdateThisDiary() {
+    return function () {};
+  }
+
+  updateThisDiary() {
+    return function () {
+      // const diaryTitleElement = $('diaryTitle');
+      // const diaryDateElement = $('diaryDate');
+      // const diaryContentElement = $('diaryContent');
+      const detailDiaryInfos = document.querySelectorAll('.detailDiaryInfo');
+      const updateDiaryInputs = document.querySelectorAll('.updateDiaryInput');
+
+      detailDiaryInfos.forEach((el) => {
+        el.hidden = !el.hidden;
+      });
+
+      updateDiaryInputs.forEach((el) => {
+        el.hidden = !el.hidden;
+      });
+    };
   }
 
   deleteThisDiary() {
@@ -48,8 +76,9 @@ class DetailDiary {
       $('diaryDate').innerText = `${diaryDate.getFullYear()}년 ${
         diaryDate.getMonth() + 1
       }월 ${diaryDate.getDay()}일`;
-      $('diaryId').value = diaryId;
 
+      // NOTE : return function 바깥 쪽에 값을 저장해서 클로저를 만들어두면 굳이 hidden input을 이용할 필요가 없다.
+      $('diaryId').value = diaryId;
       return;
     };
   }

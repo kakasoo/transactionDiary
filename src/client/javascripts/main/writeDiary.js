@@ -1,19 +1,18 @@
 class WriteDiary {
   constructor() {
+    this.closebutton = $('closeWriteDiaryModal');
     this.writeButton = $('write');
     this.completeButton = $('completeWriting');
-
-    this.closebutton = $('closeWriteDiaryModal');
+    this.writeModalBackground = $('writeModalBackground');
     this.selectGroup = $('selectGroup');
-    this.closebutton.onclick = this.getWriteDiaryModal();
 
+    this.closebutton.onclick = this.getWriteDiaryModal();
     this.writeButton.onclick = this.getWriteDiaryModal();
     this.completeButton.onclick = this.postDiary();
-
+    this.writeModalBackground.onclick = this.getWriteDiaryModal();
     this.getUserGroups();
 
     this.selectedGroups = [];
-    $('writeModalBackground').onclick = this.getWriteDiaryModal();
   }
 
   async getUserGroups() {

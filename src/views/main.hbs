@@ -43,21 +43,43 @@
     <main id='note'></main>
 
     <div id='diaryModal' class='diaryModal modalOuter'>
-      <button id='closeDetailDiaryModal' class='closeButton'>x</button>
       <div id='innerDiaryModal' class='modalInner'>
+        <button id='closeDetailDiaryModal' class='closeButton'>x</button>
         <input type='hidden' id='diaryId' />
         <div class='detailInnerModal'>
-          <div>제목 : </div><span id='diaryTitle'></span>
+          <div>제목 : </div>
+          <span id='diaryTitle' class='detailDiaryInfo'></span>
+          <input id='updateTitle' class='updateDiaryInput' hidden />
         </div>
         <div class='detailInnerModal'>
-          <div>날짜 : </div><span id='diaryDate'></span>
+          <div>날짜 : </div>
+          <span id='diaryDate' class='detailDiaryInfo'></span>
+          <input id='updateDate' class='updateDiaryInput' hidden />
         </div>
         <div class='detailInnerModal detailDiaryContent'>
-          <div>내용 : </div><span id='diaryContent'></span>
+          <div>내용 : </div>
+          <span id='diaryContent' class='detailDiaryInfo'></span>
+          <input id='updateContent' class='updateDiaryInput' hidden />
         </div>
         <div id='diaryControllButtons'>
-          <button id='deleteDiary' class='controllButton'>삭제</button>
-          <button id='updateDiary' class='controllButton'>수정</button>
+          <button
+            id='deleteDiary'
+            class='controllButton detailDiaryInfo'
+          >삭제</button>
+          <button
+            id='cancelUpdate'
+            class='controllButton updateDiaryInput'
+            hidden
+          >취소</button>
+          <button
+            id='updateDiary'
+            class='controllButton detailDiaryInfo rightFloatingButton'
+          >수정</button>
+          <button
+            id='completeUpdateDiary'
+            class='controllButton updateDiaryInput rightFloatingButton'
+            hidden
+          >완료</button>
         </div>
 
       </div>

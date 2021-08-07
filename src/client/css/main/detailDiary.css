@@ -1,3 +1,8 @@
+#closeDetailDiaryModal {
+  position: absolute;
+  right: 20px;
+}
+
 .detailInnerModal {
   display: flex;
   padding: 10px 20px;
@@ -7,7 +12,7 @@
   width: 10%;
 }
 
-.detailInnerModal :last-child {
+.detailInnerModal > .detailDiaryInfo {
   width: calc(90% - 40px);
 }
 
@@ -20,6 +25,10 @@
   padding: 10px;
 }
 
+.updateDiaryInput {
+  width: calc(90% - 40px);
+}
+
 .controllButton {
   width: 80px;
   border-radius: 15px;
@@ -30,7 +39,23 @@
   background-color: pink;
 }
 
-#updateDiary {
+#cancelUpdate {
+  background-color: pink;
+}
+
+/* #updateDiary {
+  float: right;
+  right: 100px;
+  background-color: aquamarine;
+}
+
+#completeUpdateDiary {
+  float: right;
+  right: 100px;
+  background-color: aquamarine;
+} */
+
+.rightFloatingButton {
   float: right;
   right: 100px;
   background-color: aquamarine;
