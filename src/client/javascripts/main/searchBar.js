@@ -10,21 +10,18 @@ class SearchBar {
     return function () {
       const searched = $('search').value;
       const newArr = diaryInstance.diaryList.filter((diary) => {
-        const { TITLE, CONTENT } = diary;
+        const { title, content } = diary;
 
-        if (TITLE.includes(searched)) {
+        if (title.includes(searched)) {
           return true;
         }
 
-        if (CONTENT.includes(search)) {
+        if (content.includes(search)) {
           return true;
         }
       });
 
-      const note = $('note');
-      while (note.firstChild) {
-        note.removeChild(note.firstChild);
-      }
+      console.log('here');
       diaryInstance.sortDiariesByTime(newArr);
     };
   }

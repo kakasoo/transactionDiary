@@ -88,14 +88,15 @@ class Diary {
     return cardLine;
   }
 
-  sortDiariesByGroups() {
+  sortDiariesByGroups(diaryList) {
     // NOTE : 그룹 별로 가져온 경우에는 중복을 제거하지 않는다.
+    const curDiaryList = diaryList || this.diaryList;
     const note = $('note');
     while (note.firstChild) {
       note.removeChild(note.firstChild);
     }
 
-    for (const a of this.diaryList) {
+    for (const a of curDiaryList) {
       if (!this.diaryGroupNameCache.includes(a.NAME)) {
         const cardsGroup = this.makeCardsGroup(a.NAME);
         note.appendChild(cardsGroup);
@@ -106,14 +107,16 @@ class Diary {
     }
   }
 
-  sortDiariesByTime() {
+  sortDiariesByTime(diaryList) {
     const note = $('note');
     while (note.firstChild) {
       note.removeChild(note.firstChild);
     }
 
+    const curDiaryList = diaryList || this.diaryList;
+
     // NOTE : 그룹 별로 가져온 다이어리를 시간 순으로 정렬하기 위해, 중복된 일기를 제거한다.
-    const diariesData = this.diaryList.reduce(deduplicate, []);
+    const diariesData = curDiaryList.reduce(deduplicate, []);
     const CARD_NUM = 5;
 
     while (diariesData.length) {
