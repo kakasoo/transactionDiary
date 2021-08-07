@@ -13,3 +13,20 @@
 #writeContent {
   min-height: 80%;
 }
+
+#selectGroup {
+  margin-left: 152px;
+  padding: 10px;
+}
+
+#selectGroup > button {
+  border-radius: 15px;
+  background-color: aquamarine;
+  border: none;
+
+  margin: 0px 10px;
+}
+
+#selectGroup > button:first-child {
+  margin-left: 0px;
+}

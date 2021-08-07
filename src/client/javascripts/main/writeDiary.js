@@ -4,16 +4,48 @@ class WriteDiary {
     this.completeButton = $('completeWriting');
 
     this.closebutton = $('closeWriteDiaryModal');
+    this.selectGroup = $('selectGroup');
     this.closebutton.onclick = this.getWriteDiaryModal();
 
     this.writeButton.onclick = this.getWriteDiaryModal();
     this.completeButton.onclick = this.postDiary();
+
+    this.getUserGroups();
+
+    this.selectedGroups = [];
+  }
+
+  async getUserGroups() {
+    const userGroups = await getResourceByUrl('/api/groups');
+
+    userGroups.forEach((el) => {
+      const button = CE({ tag: 'button', className: 'groupSelectButton' });
+      button.textContent = el.name;
+      button.onclick = () => {
+        if (this.selectedGroups.includes(el.groupId)) {
+          button.style.border = 'none';
+          button.style.background = 'aquamarine';
+          this.selectedGroups = [
+            ...this.selectedGroups.filter(
+              (selectGroup) => selectGroup !== el.groupId,
+            ),
+          ];
+          return;
+        }
+
+        button.style.border = '1px solid red';
+        button.style.background = 'pink';
+        this.selectedGroups.push(el.groupId);
+      };
+
+      this.selectGroup.appendChild(button);
+    });
   }
 
   getWriteDiaryModal() {
     return function () {
       const writeDiaryModal = $('writeDiaryModal');
-      const zIndex = writeDiaryModal.style.zIndex;
+      // const zIndex = writeDiaryModal.style.zIndex;
 
       // functions of util.js
       changeOpacity(writeDiaryModal);
