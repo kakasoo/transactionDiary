@@ -1,0 +1,1 @@
+const modalBackground = $('modalBackground');

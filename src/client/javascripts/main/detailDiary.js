@@ -6,6 +6,8 @@ class DetailDiary {
 
     this.closebutton.onclick = this.getDetailDiaryModal();
     this.deleteButton.onclick = this.deleteThisDiary();
+
+    $('detailModalBackground').onclick = this.getDetailDiaryModal();
   }
 
   deleteThisDiary() {
@@ -23,21 +25,20 @@ class DetailDiary {
   getDetailDiaryModal(diaryId, groupId, title, content, updatedAt) {
     return function () {
       const diaryModal = $('diaryModal');
-
-      // modalBackground.style.
+      // detailModalBackground.style.
 
       // functions of util.js
       changeOpacity(diaryModal);
       changeZIndex(diaryModal);
 
-      const modalBackground = $('modalBackground');
-      const modalBackgroundColor = modalBackground.style.background;
+      const detailModalBackground = $('detailModalBackground');
+      const modalBackgroundColor = detailModalBackground.style.background;
       if (modalBackgroundColor === 'transparent' || !modalBackgroundColor) {
-        modalBackground.style.background = 'black';
-        modalBackground.style.zIndex = 5;
+        detailModalBackground.style.background = 'black';
+        detailModalBackground.style.zIndex = 5;
       } else {
-        modalBackground.style.background = 'transparent';
-        modalBackground.style.zIndex = -10;
+        detailModalBackground.style.background = 'transparent';
+        detailModalBackground.style.zIndex = -10;
       }
 
       const diaryDate = new Date(updatedAt);

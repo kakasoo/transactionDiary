@@ -7,6 +7,7 @@ class SignUpModal {
     this.signUpButton.onclick = this.getSignUpModal;
     this.localSignUpButton.onclick = this.localSignUp;
     this.closeButton.onclick = this.getSignUpModal;
+    $('signUpModalBackground').onclick = this.getSignUpModal;
   }
 
   getSignUpModal() {
@@ -16,14 +17,14 @@ class SignUpModal {
     changeOpacity(signUpModal);
     changeZIndex(signUpModal);
 
-    const modalBackground = $('modalBackground');
-    const modalBackgroundColor = modalBackground.style.background;
+    const signUpModalBackground = $('signUpModalBackground');
+    const modalBackgroundColor = signUpModalBackground.style.background;
     if (modalBackgroundColor === 'transparent' || !modalBackgroundColor) {
-      modalBackground.style.background = 'black';
-      modalBackground.style.zIndex = 5;
+      signUpModalBackground.style.background = 'black';
+      signUpModalBackground.style.zIndex = 5;
     } else {
-      modalBackground.style.background = 'transparent';
-      modalBackground.style.zIndex = -10;
+      signUpModalBackground.style.background = 'transparent';
+      signUpModalBackground.style.zIndex = -10;
     }
   }
 

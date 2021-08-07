@@ -13,6 +13,7 @@ class WriteDiary {
     this.getUserGroups();
 
     this.selectedGroups = [];
+    $('writeModalBackground').onclick = this.getWriteDiaryModal();
   }
 
   async getUserGroups() {
@@ -53,14 +54,14 @@ class WriteDiary {
       changeOpacity(writeDiaryModal);
       changeZIndex(writeDiaryModal);
 
-      const modalBackground = $('modalBackground');
-      const modalBackgroundColor = modalBackground.style.background;
+      const writeModalBackground = $('writeModalBackground');
+      const modalBackgroundColor = writeModalBackground.style.background;
       if (modalBackgroundColor === 'transparent' || !modalBackgroundColor) {
-        modalBackground.style.background = 'black';
-        modalBackground.style.zIndex = 5;
+        writeModalBackground.style.background = 'black';
+        writeModalBackground.style.zIndex = 5;
       } else {
-        modalBackground.style.background = 'transparent';
-        modalBackground.style.zIndex = -10;
+        writeModalBackground.style.background = 'transparent';
+        writeModalBackground.style.zIndex = -10;
       }
     };
   }

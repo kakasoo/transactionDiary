@@ -9,6 +9,11 @@
   box-shadow: wheat 4px 4px 5px;
 }
 
+.groupName {
+  margin-top: 10px;
+  margin-bottom: -10px;
+}
+
 .noteSection {
   display: flex;
 }
@@ -45,10 +50,32 @@
 
 .diaryCardBody {
   width: calc(100% - 40px);
-  min-height: 70%;
-  max-height: 70%;
+  min-height: 60%;
+  max-height: 60%;
   margin: 0px 20px;
   height: auto;
 
   overflow: hidden;
+}
+
+.diaryCardBody > .diaryName {
+  font-weight: 300;
+  font-size: 20px;
+  text-shadow: 0.5px 0.5px 0.5px gray;
+}
+
+.diaryCardBody > span {
+  font-size: 12px;
+  text-overflow: ellipsis;
+}
+
+.diaryCardFooter {
+  min-height: 10%;
+  max-height: 10%;
+  margin: 0px 20px;
+  overflow: hidden;
+}
+
+.diaryCardFooter > span {
+  font-size: 13px;
 }

@@ -17,7 +17,7 @@
   border-radius: 20px;
 }
 
-#modalBackground {
+.modalBackground {
   position: fixed;
   top: 0px;
   left: 0px;
@@ -76,4 +76,30 @@ div.card {
 
 .strongText2 {
   text-shadow: steelblue 3px 1px 1px;
+}
+
+.closeButton {
+  border-radius: 50%;
+  border: none;
+  margin-top: 10px;
+  margin-right: 10px;
+
+  text-align: center;
+  align-items: center;
+
+  padding: 0;
+
+  font-size: large;
+  width: 30px;
+  height: 20px;
+
+  background-color: pink;
+}
+
+button :focus {
+  outline: none;
+}
+
+input :focus {
+  outline: none;
 }

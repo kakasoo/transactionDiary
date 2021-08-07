@@ -25,7 +25,7 @@ class Diary {
     const cardGroup = CE({ tag: 'div', className: 'noteGroupSection' });
     cardGroup.id = name;
 
-    const cardHead = CE({ tag: 'h2' });
+    const cardHead = CE({ tag: 'h2', className: 'groupName' });
     cardHead.innerText = name;
 
     const cardBody = CE({ tag: 'div', className: 'noteSection' });
@@ -60,10 +60,23 @@ class Diary {
 
     const cardBody = CE({ tag: 'div' });
     cardBody.className = 'diaryCardBody';
-    cardBody.innerHTML = `<h2 class ="diaryName" style= "font-size : 20px; font-weight : 300;">${title}</h2>
+    cardBody.innerHTML = `<h2 class ="diaryName">${title}</h2>
     <span>${content}</span>`;
 
-    card.append(cardHead, cardBody);
+    const standardTime = new Date(updatedAt);
+    const wroteTime =
+      standardTime.getTime() + standardTime.getTimezoneOffset() + 60 * 1000;
+    const koreanTime = new Date(wroteTime + 9 * 60 * 60 * 1000);
+
+    const cardFooter = CE({ tag: 'div' });
+    cardFooter.className = 'diaryCardFooter';
+    cardFooter.innerHTML = `<span>${koreanTime.getFullYear()}년 ${
+      koreanTime.getMonth() + 1
+    }월 ${
+      koreanTime.getDay() + 1
+    }일 ${koreanTime.getHours()}시 ${koreanTime.getMinutes()}분</span>`;
+
+    card.append(cardHead, cardBody, cardFooter);
 
     return card;
   }

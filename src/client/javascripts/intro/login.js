@@ -14,6 +14,8 @@ class LoginModal {
 
     this.localLoginButton.onclick = this.localLogin;
     this.closeButton.onclick = this.getLoginModal;
+
+    $('loginModalBackground').onclick = this.getLoginModal;
   }
 
   getLoginModal() {
@@ -29,14 +31,14 @@ class LoginModal {
     changeOpacity(loginModal);
     changeZIndex(loginModal);
 
-    const modalBackground = $('modalBackground');
-    const modalBackgroundColor = modalBackground.style.background;
+    const loginModalBackground = $('loginModalBackground');
+    const modalBackgroundColor = loginModalBackground.style.background;
     if (modalBackgroundColor === 'transparent' || !modalBackgroundColor) {
-      modalBackground.style.background = 'black';
-      modalBackground.style.zIndex = 5;
+      loginModalBackground.style.background = 'black';
+      loginModalBackground.style.zIndex = 5;
     } else {
-      modalBackground.style.background = 'transparent';
-      modalBackground.style.zIndex = -10;
+      loginModalBackground.style.background = 'transparent';
+      loginModalBackground.style.zIndex = -10;
     }
   }
 

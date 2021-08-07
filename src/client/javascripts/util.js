@@ -1,3 +1,12 @@
+function* getAllChildNodes(parent) {
+  for (const a of parent.childNodes) {
+    yield a;
+    for (const b of getAllChildNodes(a)) {
+      yield b;
+    }
+  }
+}
+
 function $(id) {
   return document.getElementById(id);
 }
