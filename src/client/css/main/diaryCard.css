@@ -4,10 +4,22 @@
   width: 20%;
   height: 350px;
 
-  /* min-width: 100px; */
   min-height: 100px;
 
   box-shadow: wheat 4px 4px 5px;
+}
+
+.noteSection {
+  display: flex;
+}
+
+.noteGroupSection > .noteSection > .diaryCard {
+  min-width: 150px;
+}
+
+.noteGroupSection > .noteSection {
+  width: 100%;
+  overflow-x: scroll;
 }
 
 .noteSection > .diaryCard:first-child {

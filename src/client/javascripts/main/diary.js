@@ -22,13 +22,13 @@ class Diary {
 
   // NOTE : 형식을 고민하다 보니 이렇게 됐는데, HTML을 head, body로 구분짓는 것은 좋은 생각 같다.
   makeCardsGroup(name) {
-    const cardGroup = CE({ tag: 'div' });
+    const cardGroup = CE({ tag: 'div', className: 'noteGroupSection' });
     cardGroup.id = name;
 
     const cardHead = CE({ tag: 'h2' });
     cardHead.innerText = name;
 
-    const cardBody = CE({ tag: 'div' });
+    const cardBody = CE({ tag: 'div', className: 'noteSection' });
 
     cardGroup.append(cardHead, cardBody);
     return cardGroup;
@@ -70,7 +70,6 @@ class Diary {
 
   makeCardLine(partOfDiaries) {
     const cardLine = CE({ tag: 'section', className: 'noteSection' });
-    cardLine.style.display = 'flex';
 
     while (partOfDiaries.length < 5) {
       partOfDiaries.push({
@@ -97,14 +96,15 @@ class Diary {
     }
 
     for (const a of curDiaryList) {
-      if (!this.diaryGroupNameCache.includes(a.NAME)) {
-        const cardsGroup = this.makeCardsGroup(a.NAME);
+      if (!this.diaryGroupNameCache.includes(a.name)) {
+        this.diaryGroupNameCache.push(a.name);
+        const cardsGroup = this.makeCardsGroup(a.name);
         note.appendChild(cardsGroup);
       }
-
       const card = this.makeCard(a);
-      $(a.NAME).appendChild(card);
+      $(a.name).lastChild.appendChild(card);
     }
+    this.diaryGroupNameCache = [];
   }
 
   sortDiariesByTime(event, options) {

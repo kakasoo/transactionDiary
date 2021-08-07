@@ -4,7 +4,7 @@ body {
   min-width: 672px;
   max-height: 100%;
 
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 #searchSection {
@@ -82,7 +82,7 @@ body {
 main#note {
   min-width: 560px;
   max-height: 800px;
-  overflow-y: hidden;
+  /* overflow-y: hidden; */
   overflow-x: hidden;
 }
 
