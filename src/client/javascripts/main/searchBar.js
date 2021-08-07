@@ -16,12 +16,10 @@ class SearchBar {
           return true;
         }
 
-        if (content.includes(search)) {
+        if (content.includes(searched)) {
           return true;
         }
       });
-
-      console.log('here');
       diaryInstance.sortDiariesByTime(newArr);
     };
   }
