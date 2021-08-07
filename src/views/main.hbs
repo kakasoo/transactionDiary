@@ -45,12 +45,21 @@
     <div id='diaryModal' class='diaryModal modalOuter'>
       <button id='closeDetailDiaryModal' class='closeButton'>x</button>
       <div id='innerDiaryModal' class='modalInner'>
-        <button id='deleteDiary'>삭제</button>
         <input type='hidden' id='diaryId' />
-        <h2>제목 : <span id='diaryTitle'></span></h2>
-        <h2>날짜 : <span id='diaryDate'></span></h2>
-        <h2>내용 : </h2>
-        <span id='diaryContent'></span>
+        <div class='detailInnerModal'>
+          <div>제목 : </div><span id='diaryTitle'></span>
+        </div>
+        <div class='detailInnerModal'>
+          <div>날짜 : </div><span id='diaryDate'></span>
+        </div>
+        <div class='detailInnerModal detailDiaryContent'>
+          <div>내용 : </div><span id='diaryContent'></span>
+        </div>
+        <div id='diaryControllButtons'>
+          <button id='deleteDiary' class='controllButton'>삭제</button>
+          <button id='updateDiary' class='controllButton'>수정</button>
+        </div>
+
       </div>
     </div>
 

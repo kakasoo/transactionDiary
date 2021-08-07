@@ -104,3 +104,15 @@ main#note {
   height: 100%;
   box-shadow: 1px 1px 5px black;
 }
+
+button:focus {
+  outline: none;
+}
+
+input:focus {
+  outline: none;
+}
+
+textarea:focus {
+  outline: none;
+}

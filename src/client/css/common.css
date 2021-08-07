@@ -95,11 +95,3 @@ div.card {
 
   background-color: pink;
 }
-
-button :focus {
-  outline: none;
-}
-
-input :focus {
-  outline: none;
-}

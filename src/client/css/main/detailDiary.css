@@ -1,0 +1,37 @@
+.detailInnerModal {
+  display: flex;
+  padding: 10px 20px;
+}
+
+.detailInnerModal :first-child {
+  width: 10%;
+}
+
+.detailInnerModal :last-child {
+  width: calc(90% - 40px);
+}
+
+.detailDiaryContent {
+  height: 80%;
+}
+
+#diaryControllButtons {
+  width: calc(100% - 20px);
+  padding: 10px;
+}
+
+.controllButton {
+  width: 80px;
+  border-radius: 15px;
+  border: none;
+}
+
+#deleteDiary {
+  background-color: pink;
+}
+
+#updateDiary {
+  float: right;
+  right: 100px;
+  background-color: aquamarine;
+}
