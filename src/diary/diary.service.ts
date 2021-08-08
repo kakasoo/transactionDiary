@@ -24,7 +24,6 @@ export class DiaryService {
     await queryRunner.startTransaction();
 
     try {
-      console.log(createDiaryDto);
       const { groupIds } = createDiaryDto;
       delete createDiaryDto.groupIds;
       createDiaryDto.userId = userId;
@@ -47,9 +46,6 @@ export class DiaryService {
           diaryId: diary.id,
         };
       });
-
-      console.log(groupIds);
-      console.log(values);
 
       const manager = this.connection.manager;
       await manager.insert(DiaryGroups, values);

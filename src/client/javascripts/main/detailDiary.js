@@ -13,18 +13,19 @@ class DetailDiary {
     this.detailModalBackground.onclick = this.getDetailDiaryModal();
     this.updateButton.onclick = this.updateThisDiary();
     this.cancelUpdateButton.onclick = this.updateThisDiary();
-    this.completeUpdateButton = this.completeUpdateThisDiary();
+    this.completeUpdateButton.onclick = this.completeUpdateThisDiary();
   }
 
   completeUpdateThisDiary() {
-    return function () {
+    return async function () {
+      const diaryId = $('diaryId').value;
       const titleToUpdate = $('updateTitle').value;
       const dateToUpdate = $('updateDate').value;
       const contentToUpdate = $('updateContent').value;
 
-      putDataByUrl('/api/diary', {
+      const response = await putDataByUrl(`/api/diaries/${diaryId}`, {
         title: titleToUpdate,
-        date: dateToUpdate,
+        updatedAt: dateToUpdate,
         content: contentToUpdate,
       });
 
@@ -34,9 +35,6 @@ class DetailDiary {
 
   updateThisDiary() {
     return function () {
-      // const diaryTitleElement = $('diaryTitle');
-      // const diaryDateElement = $('diaryDate');
-      // const diaryContentElement = $('diaryContent');
       const detailDiaryInfos = document.querySelectorAll('.detailDiaryInfo');
       const updateDiaryInputs = document.querySelectorAll('.updateDiaryInput');
 

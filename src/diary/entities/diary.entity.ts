@@ -1,6 +1,7 @@
 import {
   BaseEntity,
   Column,
+  CreateDateColumn,
   DeleteDateColumn,
   Entity,
   Index,
@@ -10,6 +11,7 @@ import {
   ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
+  UpdateDateColumn,
 } from 'typeorm';
 import { Users } from '../../user/entities/user.entity';
 import { Comments } from '../../comment/entities/comment.entity';
@@ -67,10 +69,10 @@ export class Diaries extends BaseEntity {
   @Column('longtext', { name: 'HASHTAG', nullable: true })
   hashtag: string | null;
 
-  @Column('datetime', { name: 'CREATE_AT', default: () => 'CURRENT_TIMESTAMP' })
+  @CreateDateColumn({ name: 'CREATE_AT', default: () => 'CURRENT_TIMESTAMP' })
   createAt: Date;
 
-  @Column('datetime', {
+  @UpdateDateColumn({
     name: 'UPDATED_AT',
     default: () => 'CURRENT_TIMESTAMP',
   })

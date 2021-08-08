@@ -3,11 +3,11 @@ import {
   Get,
   Post,
   Body,
-  Patch,
   Param,
   Delete,
   Req,
   UseGuards,
+  Put,
 } from '@nestjs/common';
 import { ApiOperation, ApiParam, ApiProperty, ApiTags } from '@nestjs/swagger';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
@@ -60,7 +60,8 @@ export class DiaryController {
     description: '일기의 index ( ID )',
     example: 1,
   })
-  @Patch(':id')
+  @UseGuards(JwtAuthGuard)
+  @Put(':id')
   update(@Param('id') id: string, @Body() updateDiaryDto: UpdateDiaryDto) {
     return this.diaryService.update(+id, updateDiaryDto);
   }

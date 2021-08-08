@@ -14,6 +14,8 @@ import { Diaries } from './diary/entities/diary.entity';
 import { Groups } from './group/entities/group.entity';
 import { UserGroups } from './userGroup/entites/userGroup.entity';
 import { DiaryGroups } from './diaryGroup/entites/diaryGroup.entity.ts';
+import { MorganInterceptor, MorganModule } from 'nest-morgan';
+import { APP_INTERCEPTOR } from '@nestjs/core';
 
 @Module({
   imports: [
@@ -35,8 +37,15 @@ import { DiaryGroups } from './diaryGroup/entites/diaryGroup.entity.ts';
       logging: true, // NOTE : 개발 시에는 logging을 켜놓는 것이 좋다. ( hot-reloading 으로 인한 지연 방지 )
       keepConnectionAlive: true,
     }),
+    MorganModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    AppService,
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: MorganInterceptor('dev'),
+    },
+  ],
 })
 export class AppModule {}
