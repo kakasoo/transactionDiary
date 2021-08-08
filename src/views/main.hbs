@@ -54,12 +54,16 @@
         <div class='detailInnerModal'>
           <div>날짜 : </div>
           <span id='diaryDate' class='detailDiaryInfo'></span>
-          <input id='updateDate' class='updateDiaryInput' hidden />
+          <input type='date' id='updateDate' class='updateDiaryInput' hidden />
         </div>
         <div class='detailInnerModal detailDiaryContent'>
           <div>내용 : </div>
           <span id='diaryContent' class='detailDiaryInfo'></span>
-          <input id='updateContent' class='updateDiaryInput' hidden />
+          <textarea
+            id='updateContent'
+            class='updateDiaryInput'
+            hidden
+          ></textarea>
         </div>
         <div id='diaryControllButtons'>
           <button

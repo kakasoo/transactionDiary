@@ -87,6 +87,23 @@ async function postDataByUrl(url, data, cookie = true) {
   return response;
 }
 
+async function putDataByUrl(url, data, cookie = true) {
+  const headers = { 'Content-type': 'application/json' };
+
+  if (cookie) {
+    const authCookie = getAuthCookie();
+    headers['Authorization'] = `bearer ${authCookie.value}`;
+  }
+
+  const response = await fetch(url, {
+    method: 'PUT',
+    headers: headers,
+    body: JSON.stringify(data),
+  });
+
+  return response;
+}
+
 async function deleteData(url) {
   const headers = { 'Content-type': 'application/json' };
 

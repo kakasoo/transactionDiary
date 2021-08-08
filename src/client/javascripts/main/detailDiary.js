@@ -17,7 +17,19 @@ class DetailDiary {
   }
 
   completeUpdateThisDiary() {
-    return function () {};
+    return function () {
+      const titleToUpdate = $('updateTitle').value;
+      const dateToUpdate = $('updateDate').value;
+      const contentToUpdate = $('updateContent').value;
+
+      putDataByUrl('/api/diary', {
+        title: titleToUpdate,
+        date: dateToUpdate,
+        content: contentToUpdate,
+      });
+
+      window.location.reload();
+    };
   }
 
   updateThisDiary() {
@@ -71,11 +83,15 @@ class DetailDiary {
 
       const diaryDate = new Date(updatedAt);
 
-      $('diaryTitle').innerText = title;
-      $('diaryContent').innerText = content;
+      $('diaryTitle').innerText = $('updateTitle').value = title;
+      $('diaryContent').innerText = $('updateContent').value = content;
       $('diaryDate').innerText = `${diaryDate.getFullYear()}년 ${
         diaryDate.getMonth() + 1
-      }월 ${diaryDate.getDay()}일`;
+      }월 ${diaryDate.getDay() + 1}일`;
+      $('updateDate').value = `${diaryDate.getFullYear()}-${(
+        '0' +
+        (diaryDate.getMonth() + 1)
+      ).slice(-2)}-${('0' + (diaryDate.getDay() + 1)).slice(-2)}`;
 
       // NOTE : return function 바깥 쪽에 값을 저장해서 클로저를 만들어두면 굳이 hidden input을 이용할 필요가 없다.
       $('diaryId').value = diaryId;
