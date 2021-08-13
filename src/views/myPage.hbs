@@ -4,6 +4,9 @@
     <title>함께 만드는 교환 일기</title>
     <link href='/css/common.css' rel='stylesheet' />
     <link href='/css/home/index.css' rel='stylesheet' />
+    <link href='/css/home/userSection.css' rel='stylesheet' />
+    <link href='/css/home/historySection.css' rel='stylesheet' />
+    <link href='/css/home/groupSection.css' rel='stylesheet' />
     <script src='/javascripts/util.js'></script>
   </head>
   <body>
@@ -11,13 +14,15 @@
     <main>
       <div id='userProfile'>
         <section id='user'>
-          <div>
+          <div id='userPicContainer'>
             <img id='userPic' />
           </div>
-          <div>
+          <div id='userInfo'>
             <span>이름 : </span>
-            <span> kakasoo </span>
-            <button>edit</button>
+            <span id='username'> kakasoo </span>
+          </div>
+          <div id='userProfileEditContainer'>
+            <button id='editProfile'>edit</button>
           </div>
         </section>
 

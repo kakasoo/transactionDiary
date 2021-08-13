@@ -24,23 +24,14 @@ main {
   margin: 20px 0px;
 }
 
-#user {
-  border: 1px solid black;
-
-  width: 50%;
-  height: 300px;
-}
-
 #history {
   border: 1px solid black;
 
   width: 50%;
-  height: 300px;
 }
 
 #groups {
   border: 1px solid black;
-  height: 300px;
 }
 
 footer {

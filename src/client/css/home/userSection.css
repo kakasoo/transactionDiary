@@ -1,0 +1,46 @@
+#user {
+  display: flex;
+  border: 1px solid black;
+
+  width: 50%;
+
+  min-height: 200px;
+
+  overflow: hidden;
+}
+
+#userPicContainer {
+  padding: 20px;
+  width: 180px;
+  height: 180px;
+}
+
+#userPic {
+  border: 1px solid black;
+
+  width: 100%;
+  height: 100%;
+
+  border-radius: 50%;
+}
+
+#userInfo {
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
+
+  width: calc(90% - 180px);
+  text-align: left;
+  font-size: 18px;
+}
+
+#username {
+  margin: 0px 20px;
+}
+
+#userProfileEditContainer {
+  width: 10%;
+}
+
+#editProfile {
+}
