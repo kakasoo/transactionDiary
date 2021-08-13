@@ -14,8 +14,9 @@ async function bootstrap() {
     logger: ['debug'],
   });
 
-  app.useStaticAssets(join(__dirname, '..', 'src', 'client'));
-  app.setBaseViewsDir(join(__dirname, '..', 'src', 'views'));
+  // app.useStaticAssets(join(__dirname, '..', 'src', 'client'));
+  app.useStaticAssets(join(__dirname, '..', 'client'));
+  app.setBaseViewsDir(join(__dirname, '..', 'views'));
   app.setViewEngine('hbs');
 
   app.useGlobalPipes(new ValidationPipe());
