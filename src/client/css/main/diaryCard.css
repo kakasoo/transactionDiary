@@ -2,6 +2,7 @@
   margin: 20px 15px;
 
   width: 20%;
+  max-width: 20%;
   height: 350px;
 
   min-height: 100px;
@@ -67,6 +68,7 @@
 .diaryCardBody > span {
   font-size: 12px;
   text-overflow: ellipsis;
+  word-wrap: break-all;
 }
 
 .diaryCardFooter {

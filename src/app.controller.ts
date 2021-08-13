@@ -16,4 +16,10 @@ export class AppController {
   main() {
     // return {message : 'hi' };
   }
+
+  @Get('home')
+  @Render('myPage')
+  myPage() {
+    // return {message : 'hi' };
+  }
 }

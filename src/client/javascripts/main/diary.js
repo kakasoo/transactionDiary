@@ -149,9 +149,8 @@ class Diary {
       this.sortDiariesByTime();
     } else {
       // NOTE : get 요청에 실패한 경우.
-      const noDataView = CE({ tag: 'div', id: 'noData' });
-      noDataView.innerText = 'Sorry.';
-      note.appendChild(noDataView);
+      document.cookie['auth'] = '';
+      window.location.href = '/';
     }
   }
 }

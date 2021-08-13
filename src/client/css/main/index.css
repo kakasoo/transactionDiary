@@ -116,3 +116,21 @@ input:focus {
 textarea:focus {
   outline: none;
 }
+
+#myPage {
+  background-image: url('../../images/home.png');
+  background-size: 100%;
+  width: 70px;
+  height: 70px;
+
+  border-radius: 50%;
+  border: 0px;
+
+  position: fixed;
+  left: 1800px;
+
+  overflow: hidden;
+}
+#myPage:hover {
+  background-color: aquamarine;
+}
