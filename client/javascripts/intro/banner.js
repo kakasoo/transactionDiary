@@ -32,7 +32,7 @@ class Banner {
   }
 
   setText(textContent) {
-    const text = CE({ tag: 'h1' });
+    const text = createElement({ tag: 'h1' });
     text.innerText = textContent;
     text.style.height = '300px';
     text.style.lineHeight = '300px';

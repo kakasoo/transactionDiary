@@ -22,13 +22,16 @@ class Diary {
 
   // NOTE : 형식을 고민하다 보니 이렇게 됐는데, HTML을 head, body로 구분짓는 것은 좋은 생각 같다.
   makeCardsGroup(name) {
-    const cardGroup = CE({ tag: 'div', className: 'noteGroupSection' });
+    const cardGroup = createElement({
+      tag: 'div',
+      className: 'noteGroupSection',
+    });
     cardGroup.id = name;
 
-    const cardHead = CE({ tag: 'h2', className: 'groupName' });
+    const cardHead = createElement({ tag: 'h2', className: 'groupName' });
     cardHead.innerText = name;
 
-    const cardBody = CE({ tag: 'div', className: 'noteSection' });
+    const cardBody = createElement({ tag: 'div', className: 'noteSection' });
 
     cardGroup.append(cardHead, cardBody);
     return cardGroup;
@@ -37,7 +40,7 @@ class Diary {
   makeCard(diary) {
     const { diaryId, groupId, title, content, updatedAt } = diary;
 
-    const card = CE({ tag: 'div' });
+    const card = createElement({ tag: 'div' });
     card.id = `card${diaryId}`;
     card.className = 'diaryCard';
 
@@ -55,10 +58,10 @@ class Diary {
       updatedAt,
     );
 
-    const cardHead = CE({ tag: 'div' });
+    const cardHead = createElement({ tag: 'div' });
     cardHead.className = 'diaryCardHead';
 
-    const cardBody = CE({ tag: 'div' });
+    const cardBody = createElement({ tag: 'div' });
     cardBody.className = 'diaryCardBody';
     cardBody.innerHTML = `<h2 class ="diaryName">${title}</h2>
     <span>${content}</span>`;
@@ -68,7 +71,7 @@ class Diary {
       standardTime.getTime() + standardTime.getTimezoneOffset() + 60 * 1000;
     const koreanTime = new Date(wroteTime + 9 * 60 * 60 * 1000);
 
-    const cardFooter = CE({ tag: 'div' });
+    const cardFooter = createElement({ tag: 'div' });
     cardFooter.className = 'diaryCardFooter';
     cardFooter.innerHTML = `<span>${koreanTime.getFullYear()}년 ${
       koreanTime.getMonth() + 1
@@ -82,7 +85,10 @@ class Diary {
   }
 
   makeCardLine(partOfDiaries) {
-    const cardLine = CE({ tag: 'section', className: 'noteSection' });
+    const cardLine = createElement({
+      tag: 'section',
+      className: 'noteSection',
+    });
 
     while (partOfDiaries.length < 5) {
       partOfDiaries.push({

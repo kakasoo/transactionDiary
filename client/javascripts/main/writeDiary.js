@@ -21,7 +21,10 @@ class WriteDiary {
     userGroups
       .filter((el) => el.name !== '내게쓰기')
       .forEach((el) => {
-        const button = CE({ tag: 'button', className: 'groupSelectButton' });
+        const button = createElement({
+          tag: 'button',
+          className: 'groupSelectButton',
+        });
         button.textContent = el.name;
         button.onclick = () => {
           if (this.selectedGroups.includes(el.groupId)) {

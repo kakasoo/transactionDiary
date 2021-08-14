@@ -25,7 +25,7 @@ class GroupSection {
   }
 
   makeGroupLine(groups) {
-    const cardLine = CE({ tag: 'section' });
+    const cardLine = createElement({ tag: 'section' });
     cardLine.style.display = 'flex';
     cardLine.style.width = '100%';
 
@@ -38,15 +38,15 @@ class GroupSection {
 
     for (const group of groups) {
       const { id, name } = group;
-      const card = CE({ tag: 'div' });
+      const card = createElement({ tag: 'div' });
 
       if (id) {
         card.onclick = this.joinGroup(id);
 
-        const cardHead = CE({ tag: 'div' });
+        const cardHead = createElement({ tag: 'div' });
         cardHead.className = 'groupCardHead';
 
-        const cardBody = CE({ tag: 'div' });
+        const cardBody = createElement({ tag: 'div' });
         cardBody.className = 'groupCardBody';
         cardBody.innerHTML = `<h2 class ="groupName" style= "font-size : 20px; font-weight : 300;">${name}</h2>`;
 

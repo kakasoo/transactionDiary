@@ -11,7 +11,7 @@ function $(id) {
   return document.getElementById(id);
 }
 
-function CE({ tag, id, className }) {
+function createElement({ tag, id, className }) {
   const element = document.createElement(tag);
   if (id) {
     element.id = id;
@@ -130,4 +130,8 @@ function changeZIndex(element) {
   const invisible = (value) => !value || value < 0;
 
   element.style.zIndex = invisible(zIndex) ? VISIBLE : INVISIBLE;
+}
+
+function numPad(num) {
+  return ('0' + num).slice(-2);
 }
