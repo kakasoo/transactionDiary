@@ -1,14 +1,30 @@
 class HistorySection {
   constructor() {
-    this.body = $('history');
+    this.body = $('userHistory');
     this.history = [];
     this.render();
     this.setColor();
   }
 
-  getUserDiaryHistory() {}
+  async getMyDiary() {
+    // function of util.js
+    const diaries = await getResourceByUrl('/api/diaries');
+    return diaries;
+  }
 
-  setColor() {}
+  async setColor() {
+    const diaries = await this.getMyDiary();
+    for (const a of diaries) {
+      const date = new Date(a.createdAt);
+
+      const className = `${date.getFullYear()}${numPad(
+        date.getMonth() + 1,
+      )}${numPad(date.getDate())}`;
+
+      const element = document.getElementById(`${className}`);
+      element.style.backgroundColor = 'yellowgreen';
+    }
+  }
 
   /**
    *
@@ -39,8 +55,13 @@ class HistorySection {
           className: 'date',
           id: thatDay,
         });
+
+        if (i === 51 && j === 6) {
+          date.className += ' today';
+        }
         week.appendChild(date);
       }
+
       this.body.appendChild(week);
     }
   };

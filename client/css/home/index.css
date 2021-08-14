@@ -4,34 +4,53 @@ body {
   max-height: 100%;
 
   overflow: hidden;
-
-  border: 1px solid black;
 }
 
 section {
   margin: 5px;
+  border-radius: 15px;
+  background-color: white;
+
+  box-shadow: 0.1px 0.1px 3px black;
 }
 
 header {
-  width: 100%;
-  height: 100px;
-  background: red;
+  position: relative;
+  display: flex;
+  width: calc(100% - 20vw);
+  padding: 0px 10vw;
+  margin: 10px 0px 10px 0px;
+  height: 60px;
 }
 
 main {
-  padding: 0px 15% 0px 15%;
+  padding: 15px 10vw 0px 10vw;
+  height: 100%;
+  background: #eeeeee;
 }
 
 #userProfile {
   display: flex;
   width: 100%;
-  /* margin: 20px 0px; */
 }
 
 #groups {
-  border: 1px solid black;
+  /* border: 1px solid black; */
 }
 
 footer {
-  border: 1px solid black;
+  /* border: 1px solid black; */
+}
+
+.rightFloatingButton {
+  position: absolute;
+  right: 10vw;
+  font-weight: bold;
+
+  height: 26px;
+  width: 120px;
+
+  margin-top: 15px;
+  background-color: aquamarine;
+  border-radius: 15px;
 }

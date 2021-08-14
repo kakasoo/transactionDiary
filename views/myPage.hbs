@@ -13,7 +13,20 @@
     <script src='/javascripts/home/index.js'></script>
   </head>
   <body>
-    <header></header>
+    <header>
+      <h1 id='appName' class='mainAppName' onclick="window.location.href='/'">
+        <span class='strongText1'>T</span>ransaction
+        <span class='strongText2'>D</span>iary
+      </h1>
+
+      <button class='bannerTopButtons rightFloatingButton'>
+        <span
+          class='buttonText'
+          onclick="window.location.href = '/main'"
+        >Diary</span>
+      </button>
+
+    </header>
     <main>
       <div id='userProfile'>
         <section id='user'>
@@ -28,7 +41,10 @@
           </div>
         </section>
 
-        <section id='history'></section>
+        <section id='history'>
+          <h2 id='historyText'>History</h2>
+          <div id='userHistory'></div>
+        </section>
       </div>
 
       <section id='groups'>

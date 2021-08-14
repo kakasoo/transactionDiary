@@ -1,3 +1,15 @@
+body {
+  font-family: 'Cafe24SsurroundAir';
+}
+
+button {
+  font-family: 'Cafe24SsurroundAir';
+}
+
+input {
+  font-family: 'Cafe24SsurroundAir';
+}
+
 .modalOuter {
   position: fixed;
 
@@ -15,6 +27,21 @@
   /* margin: 20px 20px 20px 20px; */
 
   border-radius: 20px;
+}
+
+.bannerTopButtons {
+  border: 0px;
+  background: transparent;
+  width: 80px;
+
+  font-size: 18px;
+  text-align: center;
+
+  cursor: pointer;
+}
+
+.buttonText {
+  font-weight: 100;
 }
 
 .modalBackground {
@@ -94,4 +121,12 @@ div.card {
   height: 20px;
 
   background-color: pink;
+}
+
+@font-face {
+  font-family: 'Cafe24SsurroundAir';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2105_2@1.0/Cafe24SsurroundAir.woff')
+    format('woff');
+  font-weight: normal;
+  font-style: normal;
 }

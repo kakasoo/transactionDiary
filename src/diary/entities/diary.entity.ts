@@ -69,8 +69,9 @@ export class Diaries extends BaseEntity {
   @Column('longtext', { name: 'HASHTAG', nullable: true })
   hashtag: string | null;
 
-  @CreateDateColumn({ name: 'CREATE_AT', default: () => 'CURRENT_TIMESTAMP' })
-  createAt: Date;
+  @IsOptional()
+  @CreateDateColumn({ name: 'CREATED_AT', default: () => 'CURRENT_TIMESTAMP' })
+  createdAt: Date;
 
   @UpdateDateColumn({
     name: 'UPDATED_AT',

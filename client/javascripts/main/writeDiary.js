@@ -70,8 +70,14 @@ class WriteDiary {
 
   postDiary() {
     return async () => {
+      const today = new Date();
+      const curYear = today.getFullYear();
+      const curMonth = today.getMonth() + 1;
+      const curDate = today.getDate();
       const title = $('writeTitle').value;
-      const createdAt = $('writeDate').value;
+      const createdAt =
+        $('writeDate').value || `${curYear}-${curMonth}-${curDate}`;
+
       const content = $('writeContent').value;
       const selectedGroups = this.selectedGroups || [];
 

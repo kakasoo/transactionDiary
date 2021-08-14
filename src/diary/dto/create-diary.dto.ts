@@ -5,8 +5,7 @@ export class CreateDiaryDto extends PickType(Diaries, [
   'title',
   'content',
   'hashtag',
-  'createAt',
+  'createdAt',
 ] as const) {
   groupIds?: number[];
-  userId?: number;
 }

@@ -26,9 +26,12 @@ export class DiaryService {
     try {
       const { groupIds } = createDiaryDto;
       delete createDiaryDto.groupIds;
-      createDiaryDto.userId = userId;
+      // createDiaryDto.userId = userId;
 
-      const diary = await this.diaryRepository.save(createDiaryDto);
+      const diary = await this.diaryRepository.save({
+        ...createDiaryDto,
+        userId,
+      });
 
       const { groupId: myselfGroupId } = await this.userGroupRepository
         .createQueryBuilder('userGroup')
@@ -70,6 +73,7 @@ export class DiaryService {
         'D.TITLE as title',
         'D.CONTENT as content',
         'D.UPDATED_AT as updatedAt',
+        'D.CREATED_AT as createdAt',
         'D.HASHTAG as hashtag',
         'G.NAME as name',
       ])

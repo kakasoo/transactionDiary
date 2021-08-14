@@ -20,21 +20,6 @@ body {
   /* margin-right: 100px; */
 }
 
-.bannerTopButtons {
-  border: 0px;
-  background: transparent;
-  width: 80px;
-
-  font-size: 18px;
-  text-align: center;
-
-  cursor: pointer;
-}
-
-.buttonText {
-  font-weight: 100;
-}
-
 #bannerImgFrame {
   margin: 0px 0px 0px 0px;
 }
