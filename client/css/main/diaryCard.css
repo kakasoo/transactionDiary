@@ -18,6 +18,9 @@
 .noteSection {
   display: flex;
 }
+.noteSection::-webkit-scrollbar {
+  display: none;
+}
 
 .noteGroupSection > .noteSection > .diaryCard {
   min-width: 200px;

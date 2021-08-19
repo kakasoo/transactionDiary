@@ -63,9 +63,7 @@ class DetailDiary {
   getDetailDiaryModal(diaryId, groupId, title, content, updatedAt) {
     return function () {
       const diaryModal = $('diaryModal');
-      // detailModalBackground.style.
 
-      // functions of util.js
       changeOpacity(diaryModal);
       changeZIndex(diaryModal);
 

@@ -1,6 +1,12 @@
 body {
   font-family: 'Cafe24SsurroundAir';
 }
+body::-webkit-scrollbar {
+  width: 12px;
+}
+body::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, skyblue, aquamarine, blueviolet);
+}
 
 button {
   font-family: 'Cafe24SsurroundAir';

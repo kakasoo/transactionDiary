@@ -3,8 +3,6 @@ body {
   padding: 0px 20% 0px 20%;
   min-width: 672px;
   max-height: 100%;
-
-  overflow: hidden;
 }
 
 #searchSection {
@@ -63,8 +61,6 @@ body {
 #sortButtons {
   float: right;
   margin-top: 15px;
-
-  /* width: 260px; */
   height: 26px;
 }
 
@@ -86,8 +82,11 @@ body {
 main#note {
   min-width: 560px;
   max-height: 800px;
-  /* overflow-y: hidden; */
-  overflow-x: hidden;
+
+  -ms-overflow-style: none;
+}
+main#note::-webkit-scrollbar {
+  display: none;
 }
 
 .diaryModal {
