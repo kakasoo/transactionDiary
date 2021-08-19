@@ -4,12 +4,14 @@ import { UserGroups } from '../../userGroup/entites/userGroup.entity';
 import {
   BaseEntity,
   Column,
+  CreateDateColumn,
   Entity,
   Index,
   JoinTable,
   ManyToMany,
   OneToMany,
   PrimaryGeneratedColumn,
+  UpdateDateColumn,
 } from 'typeorm';
 import { Diaries } from '../../diary/entities/diary.entity';
 import { Groups } from '../../group/entities/group.entity';
@@ -64,16 +66,13 @@ export class Users extends BaseEntity {
   @Column('longtext', { name: 'USER_PIC', nullable: true })
   userPic: string | null;
 
-  @Column('datetime', {
+  @CreateDateColumn({
     name: 'CREATED_AT',
-    default: () => 'CURRENT_TIMESTAMP',
+    default: () => 'CURRENT_TIMESTAMP(6)',
   })
   createdAt: Date;
 
-  @Column('datetime', {
-    name: 'UPDATED_AT',
-    default: () => 'CURRENT_TIMESTAMP',
-  })
+  @UpdateDateColumn({ name: 'UPDATED_AT', onUpdate: 'CURRENT_TIMESTAMP(6)' })
   updatedAt: Date;
 
   @Column('datetime', { name: 'DELETED_AT', nullable: true })

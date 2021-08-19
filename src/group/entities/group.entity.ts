@@ -76,13 +76,16 @@ export class Groups {
   @Column('tinyint', { name: 'READONLY', default: () => "'0'" })
   readonly: number;
 
-  @CreateDateColumn({ name: 'CREATED_AT' })
+  @CreateDateColumn({
+    name: 'CREATED_AT',
+    default: () => 'CURRENT_TIMESTAMP(6)',
+  })
   createdAt: Date;
 
   @UpdateDateColumn({ name: 'UPDATED_AT' })
   updatedAt: Date;
 
-  @DeleteDateColumn({ name: 'DELETED_AT' })
+  @DeleteDateColumn({ name: 'DELETED_AT', nullable: true })
   deletedAt: Date | null;
 
   @OneToMany(() => UserGroups, (userGroup) => userGroup.groupId)

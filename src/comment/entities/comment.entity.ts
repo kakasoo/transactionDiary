@@ -1,12 +1,15 @@
 import {
   BaseEntity,
   Column,
+  CreateDateColumn,
+  DeleteDateColumn,
   Entity,
   Index,
   JoinColumn,
   ManyToOne,
   OneToOne,
   PrimaryGeneratedColumn,
+  UpdateDateColumn,
 } from 'typeorm';
 import { Diaries } from '../../diary/entities/diary.entity';
 
@@ -27,24 +30,23 @@ export class Comments extends BaseEntity {
   @Column('int', { name: 'PARENT', nullable: true, unique: true })
   parent: number | null;
 
-  @Column('datetime', {
+  @CreateDateColumn({
     name: 'CREATED_AT',
-    nullable: true,
-    default: () => 'CURRENT_TIMESTAMP',
+    default: () => 'CURRENT_TIMESTAMP(6)',
   })
   createdAt: Date | null;
 
-  @Column('datetime', {
+  @UpdateDateColumn({
     name: 'UPDATED_AT',
     nullable: true,
-    default: () => 'CURRENT_TIMESTAMP',
+    default: () => 'CURRENT_TIMESTAMP(6)',
   })
   updatedAt: Date | null;
 
-  @Column('datetime', {
+  @DeleteDateColumn({
     name: 'DELETED_AT',
     nullable: true,
-    default: () => 'CURRENT_TIMESTAMP',
+    default: () => 'CURRENT_TIMESTAMP(6)',
   })
   deletedAt: Date | null;
 

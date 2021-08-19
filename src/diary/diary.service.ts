@@ -26,7 +26,6 @@ export class DiaryService {
     try {
       const { groupIds } = createDiaryDto;
       delete createDiaryDto.groupIds;
-      // createDiaryDto.userId = userId;
 
       const diary = await this.diaryRepository.save({
         ...createDiaryDto,

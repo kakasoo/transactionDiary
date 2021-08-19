@@ -70,17 +70,17 @@ export class Diaries extends BaseEntity {
   hashtag: string | null;
 
   @IsOptional()
-  @CreateDateColumn({ name: 'CREATED_AT', default: () => 'CURRENT_TIMESTAMP' })
-  createdAt: Date;
-
-  @UpdateDateColumn({
-    name: 'UPDATED_AT',
-    default: () => 'CURRENT_TIMESTAMP',
+  @CreateDateColumn({
+    name: 'CREATED_AT',
+    default: () => 'CURRENT_TIMESTAMP(6)',
   })
-  updatedAt: Date;
+  createdAt?: Date;
+
+  @UpdateDateColumn({ name: 'UPDATED_AT', onUpdate: 'CURRENT_TIMESTAMP(6)' })
+  updatedAt?: Date;
 
   @DeleteDateColumn({ name: 'DELETED_AT', nullable: true })
-  deletedAt: Date | null;
+  deletedAt?: Date | null;
 
   @ManyToOne(() => Users, (users) => users.diaries, {
     onDelete: 'NO ACTION',
