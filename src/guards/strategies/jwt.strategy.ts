@@ -11,13 +11,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
       ignoreExpiration: false,
-      secretOrKey: (function () {
-        const key = process.env.JWT_SECRET;
-        if (!key) {
-          throw new Error('JWT private Key가 없습니다.');
-        }
-        return key;
-      })(),
+      secretOrKey: process.env.JWT_SECRET,
     });
   }
 

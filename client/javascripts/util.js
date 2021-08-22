@@ -57,8 +57,8 @@ async function getResourceByUrl(url) {
       Authorization: `Bearer ${authCookie.value}`,
     },
   });
-  const resource = await response.json();
-  return resource;
+  const { data } = await response.json();
+  return data;
 }
 
 async function getResourceByUrlWithoutAuth(url) {
@@ -66,8 +66,8 @@ async function getResourceByUrlWithoutAuth(url) {
     method: 'GET',
     credentials: 'same-origin',
   });
-  const resource = await response.json();
-  return resource;
+  const { data } = await response.json();
+  return data;
 }
 
 async function postDataByUrl(url, data, cookie = true) {

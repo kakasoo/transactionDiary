@@ -1,25 +1,21 @@
-import { Controller, Get, Render, Req, UseGuards } from '@nestjs/common';
+/* eslint-disable @typescript-eslint/no-empty-function */
+import { Controller, Get, Render } from '@nestjs/common';
 import { AppService } from './app.service';
 
+// @UseInterceptors(MorganInterceptor('dev'))
 @Controller()
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
   @Get()
   @Render('intro')
-  root() {
-    // return { message: 'hi' };
-  }
+  root() {}
 
   @Get('main')
   @Render('main')
-  main() {
-    // return {message : 'hi' };
-  }
+  main() {}
 
   @Get('home')
   @Render('myPage')
-  myPage() {
-    // return {message : 'hi' };
-  }
+  myPage() {}
 }

@@ -59,7 +59,8 @@ class LoginModal {
     );
 
     if (loginResponse.ok) {
-      const { access_token } = await loginResponse.json();
+      const { data } = await loginResponse.json();
+      const { access_token } = data;
       document.cookie = `auth=${access_token}`;
       window.location.href = '/main';
       return true;
