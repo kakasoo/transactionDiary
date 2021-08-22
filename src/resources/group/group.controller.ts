@@ -13,7 +13,7 @@ import { GroupService } from './group.service';
 import { CreateGroupDto } from './dto/create-group.dto';
 import { UpdateGroupDto } from './dto/update-group.dto';
 import { ApiBody, ApiOperation, ApiParam, ApiTags } from '@nestjs/swagger';
-import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
+import { JwtAuthGuard } from 'src/guards/jwt-auth.guard';
 
 @ApiTags('GROUPS')
 @Controller('api/groups')

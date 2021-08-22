@@ -5,7 +5,7 @@ import { CreateGroupDto } from './dto/create-group.dto';
 import { UpdateGroupDto } from './dto/update-group.dto';
 import { Groups } from './entities/group.entity';
 import * as bcrypt from 'bcrypt';
-import { UserGroups } from 'src/userGroup/entites/userGroup.entity';
+import { UserGroups } from '../userGroup/entities/userGroup.entity';
 
 @Injectable()
 export class GroupService {

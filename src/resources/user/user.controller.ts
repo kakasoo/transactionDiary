@@ -12,11 +12,11 @@ import {
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { ApiBody, ApiOperation, ApiParam, ApiTags } from '@nestjs/swagger';
-import { LocalAuthGuard } from 'src/auth/local-auth.guard';
+import { LocalAuthGuard } from '../../guards/local-auth.guard';
 import { LoginUserDto } from './dto/login-user.dto';
-import { AuthService } from 'src/auth/auth.service';
-import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
+import { AuthService } from '../auth/auth.service';
+import { JwtAuthGuard } from '../../guards/jwt-auth.guard';
+import { ApiBody, ApiOperation, ApiParam, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('USERS')
 @Controller('api/users')
@@ -27,18 +27,14 @@ export class UserController {
   ) {}
 
   @ApiOperation({ summary: '회원가입' })
-  @ApiBody({
-    type: CreateUserDto,
-  })
+  @ApiBody({ type: CreateUserDto })
   @Post('sign-up')
   async signUp(@Body() createUserDto: CreateUserDto) {
     return this.userService.create(createUserDto);
   }
 
   @ApiOperation({ summary: '로그인' })
-  @ApiBody({
-    type: LoginUserDto,
-  })
+  @ApiBody({ type: LoginUserDto })
   @UseGuards(LocalAuthGuard)
   @Post('login')
   logIn(@Request() req: Request & { user: any }) {

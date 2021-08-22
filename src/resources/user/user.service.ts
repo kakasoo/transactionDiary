@@ -1,14 +1,17 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Users } from '../user/entities/user.entity';
 import { Connection, Repository } from 'typeorm';
+
 import { CreateUserDto } from '../user/dto/create-user.dto';
 import { UpdateUserDto } from '../user/dto/update-user.dto';
+
+import { Users } from '../user/entities/user.entity';
+import { Groups } from '../group/entities/group.entity';
+import { Diaries } from '../diary/entities/diary.entity';
+import { DiaryGroups } from '../diaryGroup/entities/diaryGroup.entity';
+import { UserGroups } from '../userGroup/entities/userGroup.entity';
+
 import * as bcrypt from 'bcrypt';
-import { Groups } from 'src/group/entities/group.entity';
-import { Diaries } from 'src/diary/entities/diary.entity';
-import { UserGroups } from 'src/userGroup/entites/userGroup.entity';
-import { DiaryGroups } from 'src/diaryGroup/entites/diaryGroup.entity.ts';
 
 @Injectable()
 export class UserService {

@@ -1,6 +1,3 @@
-import { ApiProperty } from '@nestjs/swagger';
-import { IsOptional, IsString, Length } from 'class-validator';
-import { UserGroups } from '../../userGroup/entites/userGroup.entity';
 import {
   BaseEntity,
   Column,
@@ -13,8 +10,13 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+
+import { ApiProperty } from '@nestjs/swagger';
+import { IsOptional, IsString, Length } from 'class-validator';
+
 import { Diaries } from '../../diary/entities/diary.entity';
 import { Groups } from '../../group/entities/group.entity';
+import { UserGroups } from '../../userGroup/entities/userGroup.entity';
 
 @Index('USER_ID_UNIQUE', ['adress'], { unique: true })
 @Entity('USERS', { schema: 'mydb' })

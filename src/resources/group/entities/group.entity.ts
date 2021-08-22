@@ -1,5 +1,4 @@
 import {
-  BaseEntity,
   Column,
   CreateDateColumn,
   DeleteDateColumn,
@@ -10,9 +9,6 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { Users } from '../../user/entities/user.entity';
-import { Diaries } from '../../diary/entities/diary.entity';
-import { ApiProperty } from '@nestjs/swagger';
 import {
   IsInt,
   IsNotEmpty,
@@ -20,8 +16,11 @@ import {
   IsString,
   Length,
 } from 'class-validator';
-import { UserGroups } from '../../userGroup/entites/userGroup.entity';
-import { DiaryGroups } from '../../diaryGroup/entites/diaryGroup.entity.ts';
+import { Users } from '../../user/entities/user.entity';
+import { Diaries } from '../../diary/entities/diary.entity';
+import { DiaryGroups } from '../../diaryGroup/entities/diaryGroup.entity';
+import { UserGroups } from '../../userGroup/entities/userGroup.entity';
+import { ApiProperty } from '@nestjs/swagger';
 
 @Index('ID_UNIQUE', ['id'], { unique: true })
 @Entity('GROUPS', { schema: 'mydb' })

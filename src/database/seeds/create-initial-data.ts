@@ -1,13 +1,16 @@
-import * as dotenv from 'dotenv';
 import * as bcrypt from 'bcrypt';
 
-import { Groups } from '../../group/entities/group.entity';
-import { Users } from '../../user/entities/user.entity';
 import { Connection } from 'typeorm';
 import { Factory, Seeder } from 'typeorm-seeding';
-import { UserGroups } from '../../userGroup/entites/userGroup.entity';
-import { DiaryGroups } from '../../diaryGroup/entites/diaryGroup.entity.ts';
-import { Diaries } from '../../diary/entities/diary.entity';
+
+import { Groups } from 'src/resources/group/entities/group.entity';
+import { Users } from 'src/resources/user/entities/user.entity';
+import { Diaries } from 'src/resources/diary/entities/diary.entity';
+import { DiaryGroups } from 'src/resources/diaryGroup/entities/diaryGroup.entity';
+import { UserGroups } from 'src/resources/userGroup/entities/userGroup.entity';
+
+import * as dotenv from 'dotenv';
+dotenv.config();
 
 export class CreateInitialData implements Seeder {
   public async run(factory: Factory, connection: Connection): Promise<any> {

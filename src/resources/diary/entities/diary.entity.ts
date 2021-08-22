@@ -18,7 +18,7 @@ import { Comments } from '../../comment/entities/comment.entity';
 import { Groups } from '../../group/entities/group.entity';
 import { ApiProperty } from '@nestjs/swagger';
 import { IsInt, IsOptional, IsString, Length } from 'class-validator';
-import { DiaryGroups } from '../../diaryGroup/entites/diaryGroup.entity.ts';
+import { DiaryGroups } from '../../diaryGroup/entities/diaryGroup.entity';
 
 @Index('fk_diaries_users_idx', ['userId'], {})
 @Entity('DIARIES', { schema: 'mydb' })

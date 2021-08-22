@@ -1,21 +1,23 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-import { UserModule } from './user/user.module';
-import { DiaryModule } from './diary/diary.module';
-import { GroupModule } from './group/group.module';
-import { CommentModule } from './comment/comment.module';
-import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
-
-import { Users } from './user/entities/user.entity';
-import { Comments } from './comment/entities/comment.entity';
-import { Diaries } from './diary/entities/diary.entity';
-import { Groups } from './group/entities/group.entity';
-import { UserGroups } from './userGroup/entites/userGroup.entity';
-import { DiaryGroups } from './diaryGroup/entites/diaryGroup.entity.ts';
 import { MorganInterceptor, MorganModule } from 'nest-morgan';
 import { APP_INTERCEPTOR } from '@nestjs/core';
+
+import { AppController } from './app.controller';
+import { AppService } from './app.service';
+
+import { DiaryModule } from './resources/diary/diary.module';
+import { CommentModule } from './resources/comment/comment.module';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { UserModule } from './resources/user/user.module';
+import { GroupModule } from './resources/group/group.module';
+
+import { Users } from './resources/user/entities/user.entity';
+import { DiaryGroups } from './resources/diaryGroup/entities/diaryGroup.entity';
+import { Groups } from './resources/group/entities/group.entity';
+import { Comments } from './resources/comment/entities/comment.entity';
+import { Diaries } from './resources/diary/entities/diary.entity';
+import { UserGroups } from './resources/userGroup/entities/userGroup.entity';
 
 @Module({
   imports: [

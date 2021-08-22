@@ -1,11 +1,12 @@
-import { Get, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { DiaryGroups } from 'src/diaryGroup/entites/diaryGroup.entity.ts';
-import { UserGroups } from 'src/userGroup/entites/userGroup.entity';
-import { Connection, getConnection, Repository } from 'typeorm';
+import { Connection, Repository } from 'typeorm';
 import { CreateDiaryDto } from './dto/create-diary.dto';
 import { UpdateDiaryDto } from './dto/update-diary.dto';
 import { Diaries } from './entities/diary.entity';
+
+import { DiaryGroups } from '../diaryGroup/entities/diaryGroup.entity';
+import { UserGroups } from '../userGroup/entities/userGroup.entity';
 
 @Injectable()
 export class DiaryService {

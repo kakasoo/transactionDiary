@@ -3,11 +3,11 @@ import { UserService } from './user.service';
 import { UserController } from './user.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Users } from './entities/user.entity';
-import { AuthModule } from 'src/auth/auth.module';
-import { Groups } from 'src/group/entities/group.entity';
-import { UserGroups } from 'src/userGroup/entites/userGroup.entity';
-import { DiaryGroups } from 'src/diaryGroup/entites/diaryGroup.entity.ts';
-import { Diaries } from 'src/diary/entities/diary.entity';
+import { AuthModule } from 'src/resources/auth/auth.module';
+import { Groups } from '../group/entities/group.entity';
+import { Diaries } from '../diary/entities/diary.entity';
+import { DiaryGroups } from '../diaryGroup/entities/diaryGroup.entity';
+import { UserGroups } from '../userGroup/entities/userGroup.entity';
 
 @Module({
   imports: [

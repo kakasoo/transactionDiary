@@ -1,12 +1,12 @@
 import { ConnectionOptions } from 'typeorm';
-import * as dotenv from 'dotenv';
-import { Diaries } from './src/diary/entities/diary.entity';
-import { DiaryGroups } from './src/diaryGroup/entites/diaryGroup.entity.ts';
-import { Groups } from './src/group/entities/group.entity';
-import { Users } from './src/user/entities/user.entity';
-import { UserGroups } from './src/userGroup/entites/userGroup.entity';
-import { Comments } from './src/comment/entities/comment.entity';
+import { Diaries } from './src/resources/diary/entities/diary.entity';
+import { Comments } from './src/resources/comment/entities/comment.entity';
+import { Users } from 'src/resources/user/entities/user.entity';
+import { Groups } from 'src/resources/group/entities/group.entity';
+import { DiaryGroups } from 'src/resources/diaryGroup/entities/diaryGroup.entity';
+import { UserGroups } from 'src/resources/userGroup/entities/userGroup.entity';
 
+import * as dotenv from 'dotenv';
 dotenv.config();
 
 const ORMConfig: any & ConnectionOptions = {

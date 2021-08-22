@@ -10,7 +10,7 @@ import {
   Put,
 } from '@nestjs/common';
 import { ApiOperation, ApiParam, ApiProperty, ApiTags } from '@nestjs/swagger';
-import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
+import { JwtAuthGuard } from 'src/guards/jwt-auth.guard';
 import { DiaryService } from './diary.service';
 import { CreateDiaryDto } from './dto/create-diary.dto';
 import { UpdateDiaryDto } from './dto/update-diary.dto';
