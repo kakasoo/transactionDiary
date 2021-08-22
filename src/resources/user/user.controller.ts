@@ -17,13 +17,14 @@ import { LoginUserDto } from './dto/login-user.dto';
 import { AuthService } from '../auth/auth.service';
 import { JwtAuthGuard } from '../../guards/jwt-auth.guard';
 import { ApiBody, ApiOperation, ApiParam, ApiTags } from '@nestjs/swagger';
+import { User } from 'src/decorators/user.decorator';
 
 @ApiTags('USERS')
 @Controller('api/users')
 export class UserController {
   constructor(
     private readonly userService: UserService,
-    private readonly authService: AuthService, // private readonly userGroupService: UserGroupService,
+    private readonly authService: AuthService,
   ) {}
 
   @ApiOperation({ summary: '회원가입' })
@@ -37,9 +38,8 @@ export class UserController {
   @ApiBody({ type: LoginUserDto })
   @UseGuards(LocalAuthGuard)
   @Post('login')
-  logIn(@Request() req: Request & { user: any }) {
-    // return req.user;
-    return this.authService.login(req.user);
+  logIn(@User() user) {
+    return this.authService.login(user);
   }
 
   @ApiOperation({ summary: '모든 유저 조회' })
@@ -50,8 +50,8 @@ export class UserController {
 
   @UseGuards(JwtAuthGuard)
   @Get('profile')
-  getMyPage(@Request() req) {
-    return req.user;
+  getMyPage(@User() user) {
+    return user;
   }
 
   @ApiOperation({ summary: '단일 유저 조회' })

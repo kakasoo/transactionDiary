@@ -6,7 +6,6 @@ import {
   Patch,
   Param,
   Delete,
-  Req,
   UseGuards,
 } from '@nestjs/common';
 import { GroupService } from './group.service';
@@ -14,6 +13,7 @@ import { CreateGroupDto } from './dto/create-group.dto';
 import { UpdateGroupDto } from './dto/update-group.dto';
 import { ApiBody, ApiOperation, ApiParam, ApiTags } from '@nestjs/swagger';
 import { JwtAuthGuard } from 'src/guards/jwt-auth.guard';
+import { UserId } from 'src/decorators/userId.decorator';
 
 @ApiTags('GROUPS')
 @Controller('api/groups')
@@ -32,17 +32,15 @@ export class GroupController {
   @ApiOperation({ summary: '그룹 가입' })
   @UseGuards(JwtAuthGuard)
   @Post('join')
-  join(@Body() joinGroupDto, @Req() req) {
+  join(@Body() joinGroupDto, @UserId() userId) {
     const { groupId } = joinGroupDto;
-    const userId = req.user.id;
     return this.groupService.join(userId, groupId);
   }
 
   @ApiOperation({ summary: '유저가 가입한 모든 그룹 조회' })
   @Get()
   @UseGuards(JwtAuthGuard)
-  findAll(@Req() req) {
-    const userId = req.user.id;
+  findAll(@UserId() userId) {
     return this.groupService.findAll(userId);
   }
 

@@ -5,11 +5,11 @@ import {
   Body,
   Param,
   Delete,
-  Req,
   UseGuards,
   Put,
 } from '@nestjs/common';
 import { ApiOperation, ApiParam, ApiProperty, ApiTags } from '@nestjs/swagger';
+import { UserId } from 'src/decorators/userId.decorator';
 import { JwtAuthGuard } from 'src/guards/jwt-auth.guard';
 import { DiaryService } from './diary.service';
 import { CreateDiaryDto } from './dto/create-diary.dto';
@@ -26,8 +26,7 @@ export class DiaryController {
   })
   @UseGuards(JwtAuthGuard)
   @Post()
-  create(@Body() createDiaryDto: CreateDiaryDto, @Req() req) {
-    const userId = req.user.id;
+  create(@UserId() userId, @Body() createDiaryDto: CreateDiaryDto) {
     return this.diaryService.create(createDiaryDto, userId);
   }
 
@@ -35,8 +34,7 @@ export class DiaryController {
   @ApiOperation({ summary: '모든 일기 조회' })
   @UseGuards(JwtAuthGuard)
   @Get()
-  findAll(@Req() req) {
-    const userId = req.user.id;
+  findAll(@UserId() userId) {
     return this.diaryService.findAll(userId);
   }
 
