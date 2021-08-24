@@ -65,6 +65,11 @@ export class UserController {
     return this.userService.findOne(+id);
   }
 
+  @Get('/profile/:id')
+  findOneUserProfile(@Param('id') id: string) {
+    return this.userService.findOneUserProfile(+id);
+  }
+
   @Get(':id/groups')
   findGroupsOfUser(@Param('id') id: string) {
     return this.userService.findGroupsOfUser(+id);

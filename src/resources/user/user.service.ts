@@ -79,17 +79,38 @@ export class UserService {
   }
 
   async findOne(id: number) {
-    const users = await this.userRepository.findOne({
+    const user = await this.userRepository.findOne({
       where: { id },
     });
-    return users;
+    return user;
+  }
+
+  // NOTE : 프로필 페이지를 위한 별도의 서비스 로직이 필요.
+  async findOneUserProfile(id: number) {
+    // const user = await this.userRepository
+    //   .createQueryBuilder('user')
+    //   .leftJoinAndSelect('user.groups', 'groups')
+    //   .where(`user.id = ${id}`)
+    //   .getRawOne();
+    // return user;
+
+    const groups = await this.userGroupRepository
+      .createQueryBuilder('userGroups')
+      // .leftJoinAndSelect('userGroups.user', 'u')
+      .leftJoinAndSelect('userGroups.group', 'g')
+      .where({ userId: id })
+      .getMany();
+
+    const user = await this.userRepository.findOne(id);
+    delete user.password;
+    return { user, groups };
   }
 
   async findGroupsOfUser(id: number) {
     // NOTE : 특정 데이터를 받아올 때에는 getMany 대신 getRawMany로 한다.
     return await this.userGroupRepository
       .createQueryBuilder('userGroups')
-      .select(['GROUP_ID as groupId'])
+      .addSelect(['GROUP_ID as groupId'])
       .where({ userId: id })
       .getRawMany();
   }
